@@ -1,0 +1,119 @@
+/**
+ * HEARTICLES - High-Fashion Magazine Design Tokens
+ * Class 6 - Group 1 - Term 127
+ * Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU)
+ * Fashion Editorial Suite (High Contrast, Razor-Sharp Typography, Vogue / Kinfolk Aesthetic)
+ */
+
+:root {
+  /* ===================================================================
+     LAYER 1: PRIMITIVES (High Contrast Editorial Scale)
+     =================================================================== */
+  /* Fashion Palette Primitives */
+  --primitive-burgundy-950: #2E070D;
+  --primitive-burgundy-900: #420A13;
+  --primitive-burgundy-800: #54111E; /* Primary Deep Wine / Oxblood */
+  --primitive-burgundy-700: #6B1727;
+  --primitive-burgundy-600: #7D1728; /* High-contrast Berry Kicker */
+  
+  --primitive-rose-600: #8C1D33;
+  --primitive-rose-500: #7D1728; /* High-contrast Carmine/Rose Accent (was #BA6975) */
+  --primitive-rose-400: #B8384E;
+  --primitive-rose-300: #D8687B;
+  --primitive-rose-200: #F0CCD1;
+  --primitive-rose-100: #F7E4E7;
+  --primitive-rose-50:  #FCF4F6;
+
+  --primitive-canvas-base: #FAF7F4; /* Ultra-clean warm ivory paper, eliminates muddiness */
+  --primitive-surface-card: #FFFFFF;
+  --primitive-surface-blush: #FBF2F4;
+
+  /* True High-Contrast Ink Values */
+  --primitive-charcoal-900: #151011; /* Deepest Obsidian Headline Ink */
+  --primitive-charcoal-800: #221B1C; /* Sharp, Crisp Body Text Ink */
+  --primitive-charcoal-700: #2E2526; /* Primary Subtitles & Sapo */
+  --primitive-charcoal-600: #3E3432; /* Secondary Excerpts & Descriptions */
+  --primitive-charcoal-500: #4C413E; /* High-Contrast Metadata & Read Times (contrast ratio > 7.5:1) */
+  --primitive-charcoal-300: #A89D98;
+
+  --primitive-border-hairline: #E8DDD7; /* Clean, defined border hairline */
+  --primitive-border-strong:   #D2C2B9;
+
+  /* Modern Minimalist Typography System (Inter & Plus Jakarta Sans) */
+  --primitive-font-editorial: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primitive-font-headline: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primitive-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primitive-font-ui: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primitive-font-mono: 'SFMono-Regular', Consolas, Menlo, monospace;
+
+  /* Spacing Scale (8pt Grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ===================================================================
+     LAYER 2: SEMANTIC TOKENS
+     =================================================================== */
+  --color-canvas: var(--primitive-canvas-base);
+  --color-surface: var(--primitive-surface-card);
+  --color-surface-subtle: var(--primitive-rose-50);
+  --color-surface-blush: var(--primitive-surface-blush);
+  --color-surface-hover: #FFF9FA;
+  --color-surface-dark: #1A1012;
+
+  --color-text-headline: var(--primitive-charcoal-900); /* #151011 */
+  --color-text-body: var(--primitive-charcoal-800);     /* #221B1C */
+  --color-text-muted: var(--primitive-charcoal-500);    /* #4C413E */
+  --color-text-inverse: #FFFFFF;
+
+  --color-brand-primary: var(--primitive-burgundy-800); /* #54111E */
+  --color-brand-hover: var(--primitive-burgundy-900);   /* #420A13 */
+  --color-brand-accent: var(--primitive-rose-500);      /* #7D1728 */
+  --color-brand-tint: var(--primitive-rose-200);
+
+  --color-border-hairline: var(--primitive-border-hairline);
+  --color-border-subtle: var(--primitive-border-hairline);
+  --color-border-strong: var(--primitive-border-strong);
+
+  --color-status-live: #D92338;
+  --color-status-accent: var(--primitive-rose-500);
+
+  --font-editorial: var(--primitive-font-editorial);
+  --font-serif: var(--primitive-font-headline);
+  --font-body: var(--primitive-font-body);
+  --font-sans: var(--primitive-font-ui);
+  --font-mono: var(--primitive-font-mono);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(46, 7, 13, 0.04);
+  --shadow-md: 0 4px 16px rgba(46, 7, 13, 0.07);
+  --shadow-lg: 0 8px 30px rgba(46, 7, 13, 0.10);
+  --shadow-modal: 0 24px 60px rgba(42, 10, 19, 0.28);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Motion */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 160ms;
+  --duration-normal: 240ms;
+  --duration-slow: 400ms;
+
+  /* ===================================================================
+     LAYER 3: COMPONENT SCOPED TOKENS
+     =================================================================== */
+  --header-height: 72px;
+  --reading-measure: 72ch;
+  --bento-gap: 1.5rem;
+  --container-max: 1280px;
+}

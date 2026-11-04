@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us — HEARTICLES. | Tôn chỉ hoạt động & Ban Biên tập ULIS - VNU</title>
+  <title>Class6group1term127 — HEARTICLES. | About Us</title>
   <meta name="description" content="Giới thiệu tòa soạn HEARTICLES., Khoa Ngôn ngữ & Truyền thông, ULIS - VNU">
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/heart-logo.svg">
   
-  <!-- Modern Minimalist Editorial Typography: Plus Jakarta Sans (Headlines/Display) & Inter (Body/UI) -->
+  <!-- Modern Minimalist Editorial Typography: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
@@ -16,6 +16,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Main Stylesheet -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script>
+    function handleImageError(img) {
+      img.onerror = null;
+      img.src = 'assets/images/trending/image8.jpg';
+    }
+  </script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-category="about">
@@ -29,17 +36,14 @@
   </div>
 
   <!-- =================================================================
-       1. ACADEMIC ATTRIBUTION & UTILITY BAR (ULIS - VNU)
+       1. HEADER LEADERBOARD ADVERTISEMENT (IELTS BANNER AS REQUIRED)
        ================================================================= -->
-  <div class="fashion-academic-bar">
-    <div class="container fashion-academic-container">
-      <div class="academic-tag-pill" data-i18n="academic_text">
-        <i class="fas fa-graduation-cap"></i>
-        <span>Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU) • Lớp 6 - Nhóm 1 - Khóa 127 • BCTT</span>
-      </div>
-      <div class="top-utility-right">
-        <span class="date-widget" id="liveDateWidget"><i class="far fa-calendar-alt"></i> Loading date...</span>
-      </div>
+  <div class="header-ad-leaderboard-wrap">
+    <div class="container" style="display:flex; flex-direction:column; align-items:center;">
+      <span class="ad-label-strip" data-i18n="ad_label">ADVERTISEMENT • QUẢNG CÁO</span>
+      <a href="https://ielts-fighter.com" target="_blank" rel="noopener noreferrer" class="header-ad-link" title="IELTS Fighter - Đột phá điểm số">
+        <img src="assets/images/ads/header_ad_banner.png" alt="IELTS Fighter Leaderboard Ad" class="header-ad-banner-img">
+      </a>
     </div>
   </div>
 
@@ -48,12 +52,13 @@
        ================================================================= -->
   <header class="fashion-header">
     <div class="container fashion-header-container">
-      <!-- 1. Brand Logo: HEARTICLES. with Didone Italic & Dot -->
-      <a href="index.html" class="fashion-brand-logo">
-        HEARTICLES<span class="fashion-brand-period">.</span>
+      <!-- Brand Logo: High-Fashion Didone Logo from image1.png -->
+      <a href="index.html" class="fashion-brand-logo" aria-label="HEARTICLES. Homepage">
+        <img src="assets/images/logo/brand_logo_updated.png" alt="HEARTICLES." class="fashion-brand-logo-img" onerror="this.style.display='none'; document.getElementById('brandLogoTextFallback').style.display='inline';">
+        <span id="brandLogoTextFallback" style="display:none; font-family:var(--font-editorial); font-style:italic; font-weight:900; font-size:1.85rem; color:var(--color-brand-primary);">HEARTICLES<span style="color:var(--color-brand-accent);">.</span></span>
       </a>
 
-      <!-- 2. Minimalist Fashion Navigation with Active Burgundy Underline -->
+      <!-- Minimalist Navigation with About Us Dropdown -->
       <nav class="fashion-nav" aria-label="Thanh điều hướng tạp chí">
         <a href="index.html" class="nav-item " data-i18n="nav_home">Home</a>
         <a href="trending.html" class="nav-item " data-i18n="nav_trending">Trending</a>
@@ -61,23 +66,42 @@
         <a href="human-stories.html" class="nav-item " data-i18n="nav_human_stories">Human Stories</a>
         <a href="mind-soul.html" class="nav-item " data-i18n="nav_mind_soul">Mind & Soul</a>
         <a href="in-depth.html" class="nav-item " data-i18n="nav_indepth">In-depth</a>
-        <a href="about.html" class="nav-item active" data-i18n="nav_about">About Us</a>
+        <div class="nav-item-dropdown">
+          <a href="about.html" class="nav-item active" data-i18n="nav_about" style="display:inline-flex; align-items:center; gap:0.35rem;">
+            About Us <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i>
+          </a>
+          <div class="about-dropdown-menu">
+            <a href="about.html#profiles" class="about-dropdown-item"><i class="fas fa-users"></i> <span data-i18n="about_opt_profiles">Profiles</span></a>
+            <a href="about.html#photo" class="about-dropdown-item"><i class="fas fa-camera"></i> <span data-i18n="about_opt_photo">Photo</span></a>
+            <a href="about.html#subscribe" class="about-dropdown-item"><i class="fas fa-paper-plane"></i> <span data-i18n="about_opt_subscribe">Subscribe</span></a>
+            <a href="about.html#mission" class="about-dropdown-item"><i class="fas fa-bullseye"></i> <span data-i18n="about_opt_mission">Mission</span></a>
+          </div>
+        </div>
       </nav>
 
-      <!-- 3. Actions: Language Switcher, Search, Subscribe Pill, Mobile Drawer Toggle -->
+      <!-- Actions: Email Pill, Bilingual Switcher, Search, Drawer -->
       <div class="fashion-header-actions">
-        <!-- Primary language toggle button on the bar (Default: EN) -->
-        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+        <!-- Email Pill as requested -->
+        <a href="mailto:class6group1term127@gmail.com" class="header-email-pill" title="Email: class6group1term127@gmail.com">
+          <i class="fas fa-envelope"></i>
+          <span>class6group1term127@gmail.com</span>
+        </a>
+
+        <!-- Primary language toggle pill (Default: EN) -->
+        <div class="lang-switch-pill" style="display:none !important;" role="group" aria-label="Language Selector">
           <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
           <span class="lang-pill-divider">/</span>
           <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
         </div>
+
         <button class="fashion-search-btn" onclick="openSearchModal()" title="Tìm kiếm bài viết (/)" aria-label="Tìm kiếm" data-i18n-title="search_tooltip">
           <i class="fas fa-search"></i>
         </button>
+
         <button class="fashion-subscribe-btn" onclick="openSubscribeModal()" title="Đăng ký nhận bản tin" data-i18n="btn_subscribe">
           Subscribe
         </button>
+
         <button class="fashion-hamburger-btn" onclick="openDrawer()" aria-label="Mở menu chuyển trang">
           <i class="fas fa-bars"></i>
         </button>
@@ -96,6 +120,7 @@
       </p>
     </section>
 
+    <!-- Structured 4-Tab Container dynamically populated by renderAboutUsSection() -->
     <div id="aboutUsSection"></div>
 
   </main>
@@ -194,6 +219,19 @@
       <div class="search-results-list" id="searchResults">
         <p style="color:var(--color-text-body); font-size:0.95rem; font-weight:500;">Nhập từ khóa để tìm kiếm trong 34 bài viết gốc...</p>
       </div>
+    </div>
+  </div>
+
+  <!-- SUBSCRIBE MODAL -->
+  <div class="onboard-modal-backdrop" id="subscribeModal" onclick="if(event.target === this) closeSubscribeModal()">
+    <div class="onboard-card" style="text-align:center;">
+      <div style="font-size:2.5rem; color:var(--color-brand-primary); margin-bottom:0.5rem;"><i class="fas fa-envelope-open-text"></i></div>
+      <h3 style="font-family:var(--font-editorial); font-size:1.5rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="subscribe_modal_title">Đăng Ký Nhận Bản Tin HEARTICLES.</h3>
+      <p style="font-size:0.875rem; color:var(--color-text-body); margin:0.75rem 0 1.25rem 0;" data-i18n="subscribe_modal_desc">Nhận tuyển tập những bài viết nhân văn sâu sắc và ký sự chạm đến trái tim vào mỗi sáng Chủ nhật.</p>
+      <form onsubmit="event.preventDefault(); showToast('Cảm ơn bạn đã đăng ký nhận bản tin!', 'subscribe'); closeSubscribeModal();" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <input type="email" required placeholder="name@example.com" style="padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none;">
+        <button type="submit" class="fashion-btn-pill" style="padding:0.75rem;">Đăng Ký Ngay</button>
+      </form>
     </div>
   </div>
 

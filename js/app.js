@@ -27,6 +27,7 @@ function initApp() {
   renderFashionJournal('all');
   renderCategoryPageArticles();
   renderAboutUsSection();
+  syncHomepageCardsWithData(lang);
   setupPoll();
   setupHeartTapWidget();
   initOnboarding();
@@ -55,6 +56,36 @@ function toggleLanguage() {
   setLanguage(nextLang);
 }
 window.toggleLanguage = toggleLanguage;
+
+
+function syncHomepageCardsWithData(lang) {
+  if (typeof ARTICLES_DATA === 'undefined') return;
+  const isEn = (lang === 'en');
+
+  document.querySelectorAll('[onclick*="openArticleModal"]').forEach(el => {
+    const match = el.getAttribute('onclick').match(/openArticleModal\(['"]([^'"]+)['"]\)/);
+    if (!match) return;
+    const aid = match[1];
+    const art = ARTICLES_DATA.find(a => a.id === aid);
+    if (!art) return;
+
+    // 1. Sync Image src if present
+    const img = el.querySelector('img');
+    if (img && art.image && !img.src.endsWith(art.image)) {
+      img.src = art.image;
+    }
+
+    // 2. Sync title if present and not overridden by data-i18n
+    const titleEl = el.querySelector('.stream-mini-headline, .center-post-title, .widget-card-headline, .mosaic-small-title, .culture-item-title, .related-text');
+    if (titleEl && !titleEl.hasAttribute('data-i18n')) {
+      const chosenTitle = isEn ? (art.title_en || art.title) : (art.title || art.title_en);
+      if (chosenTitle) {
+        titleEl.textContent = chosenTitle;
+      }
+    }
+  });
+}
+window.syncHomepageCardsWithData = syncHomepageCardsWithData;
 
 function applyLanguage(lang) {
   document.documentElement.lang = lang;
@@ -94,6 +125,7 @@ function applyLanguage(lang) {
   renderVideoHub();
   renderCategoryPageArticles();
   renderAboutUsSection();
+  syncHomepageCardsWithData(lang);
 
   // Re-render open article modal if active
   const modal = document.getElementById('articleReaderModal');
@@ -146,7 +178,7 @@ const VIDEO_CLIPS = [
     watchUrl: "https://vietnamtoday.vtv.vn/ao-dai-celebrates-vietnamese-culture-in-finland-100261028101457215.htm",
     embedUrl: "",
     duration: "4:15",
-    thumb: "assets/images/society/image5.jpg",
+    thumb: "assets/images/society/image13.png",
     articleId: "video-1",
     sourceType: "vtv"
   },
@@ -162,7 +194,7 @@ const VIDEO_CLIPS = [
     watchUrl: "https://vietnamtoday.vtv.vn/viet-nam-tackles-gaps-in-child-online-safety-100261101165727007.htm",
     embedUrl: "",
     duration: "3:50",
-    thumb: "assets/images/society/image3.jpg",
+    thumb: "assets/images/society/image14.png",
     articleId: "video-2",
     sourceType: "vtv"
   },
@@ -194,7 +226,7 @@ const VIDEO_CLIPS = [
     watchUrl: "https://www.youtube.com/watch?v=KDXNK3brzG0",
     embedUrl: "https://www.youtube.com/embed/KDXNK3brzG0",
     duration: "8:45",
-    thumb: "assets/images/human_stories/image17.jpg",
+    thumb: "assets/images/trending/image1.jpg",
     articleId: "trending-5",
     sourceType: "youtube"
   },
@@ -210,7 +242,7 @@ const VIDEO_CLIPS = [
     watchUrl: "https://vietnamtoday.vtv.vn/a-stage-for-every-voice-100261029064303631.htm",
     embedUrl: "",
     duration: "5:10",
-    thumb: "assets/images/mind_&_soul/image3.jpg",
+    thumb: "assets/images/mind_&_soul/image6.jpg",
     articleId: "video-5",
     sourceType: "vtv"
   },
@@ -242,7 +274,7 @@ const VIDEO_CLIPS = [
     watchUrl: "https://vietnamtoday.vtv.vn/thai-nguyen-tea-culture-boosts-tourism-100261101042721506.htm",
     embedUrl: "",
     duration: "4:25",
-    thumb: "assets/images/human_stories/image14.jpg",
+    thumb: "assets/images/society/image34.jpg",
     articleId: "video-7",
     sourceType: "vtv"
   },
@@ -274,7 +306,7 @@ const VIDEO_CLIPS = [
     watchUrl: "https://vietnamtoday.vtv.vn/a-healing-oasis-in-ho-chi-minh-city-100260910032153068.htm",
     embedUrl: "",
     duration: "5:05",
-    thumb: "assets/images/mind_&_soul/image8.jpg",
+    thumb: "assets/images/mind_&_soul/image18.png",
     articleId: "video-9",
     sourceType: "vtv"
   },
@@ -290,7 +322,7 @@ const VIDEO_CLIPS = [
     watchUrl: "https://vietnamtoday.vtv.vn/community-facilities-promote-healthier-lifestyles-100261019013046705.htm",
     embedUrl: "",
     duration: "4:30",
-    thumb: "assets/images/human_stories/image19.jpg",
+    thumb: "assets/images/society/image30.jpg",
     articleId: "video-10",
     sourceType: "vtv"
   },
@@ -322,7 +354,7 @@ const VIDEO_CLIPS = [
     watchUrl: "https://vietnamtoday.vtv.vn/youth-caring-for-the-elderly-100260226123528559.htm",
     embedUrl: "",
     duration: "4:10",
-    thumb: "assets/images/human_stories/image11.jpg",
+    thumb: "assets/images/society/image18.png",
     articleId: "video-12",
     sourceType: "vtv"
   }
@@ -351,7 +383,12 @@ function renderVideoHub() {
   const mainDesc = (isEn && mainClip.desc_en) ? mainClip.desc_en : mainClip.desc;
   const mainCat = (isEn && mainClip.category_en) ? mainClip.category_en : mainClip.category;
 
-  const isFileProtocol = (window.location.protocol === 'file:');
+  const isLocalEnv = (
+    window.location.protocol === 'file:' || 
+    window.location.hostname === 'localhost' || 
+    window.location.hostname === '127.0.0.1' || 
+    !window.location.hostname
+  );
   const isYouTube = (mainClip.sourceType === 'youtube' && mainClip.embedUrl);
 
   const playBtnText = isEn ? 'Play Video' : 'Phát Video';
@@ -370,15 +407,37 @@ function renderVideoHub() {
     : `<span class="video-badge-pill"><i class="fas fa-broadcast-tower"></i> VTV VIETNAM TODAY • MULTIMEDIA</span>`;
 
   const playerStageHtml = (isYouTube && isVideoPlaying)
-    ? `<div class="video-responsive-embed">
-         <iframe id="activeVideoFrame" 
-           src="${mainClip.embedUrl}?autoplay=1&rel=0&modestbranding=1" 
-           title="${mainTitle}" 
-           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-           referrerpolicy="strict-origin-when-cross-origin" 
-           allowfullscreen>
-         </iframe>
-       </div>`
+    ? (isLocalEnv
+        ? `<div class="video-poster-stage" style="cursor:default;">
+             <img src="${mainClip.thumb}" alt="${mainTitle}" class="video-poster-img" onerror="handleImageError(this)">
+             <div class="video-poster-overlay" style="background:rgba(20, 16, 17, 0.85);"></div>
+             <div class="video-play-center" style="max-width:480px; text-align:center; padding:1.5rem;">
+               <div style="font-size:2.8rem; color:#FF0000; margin-bottom:0.75rem;"><i class="fab fa-youtube"></i></div>
+               <h3 style="font-family:var(--font-editorial); font-size:1.25rem; color:#FFF; margin-bottom:0.5rem;">${mainTitle}</h3>
+               <p style="font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5; margin-bottom:1.25rem;">
+                 ${isEn 
+                   ? 'Opening via local file (file://): YouTube blocks inline embedding to protect origin headers (Error 153). Watch directly in crystal-clear 1080p Full HD on YouTube.' 
+                   : 'Do bạn đang mở tệp trực tiếp từ máy tính (file://): YouTube kích hoạt chính sách bảo mật chặn nhúng (Lỗi 153). Mời bạn bấm nút dưới để xem trực tiếp chuẩn Full HD trên YouTube.'}
+               </p>
+               <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+                 <a href="${mainClip.watchUrl}" target="_blank" rel="noopener noreferrer" class="fashion-btn-pill" style="background:#FF0000; color:#FFF; font-weight:700; padding:0.65rem 1.4rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; border-radius:30px; box-shadow:0 4px 14px rgba(255,0,0,0.4);">
+                   <i class="fab fa-youtube"></i> <span>${isEn ? 'Watch on YouTube ↗' : 'Xem ngay trên YouTube ↗'}</span>
+                 </a>
+                 <button onclick="isVideoPlaying=false; renderVideoHub();" class="fashion-btn-pill" style="background:rgba(255,255,255,0.15); color:#FFF; padding:0.65rem 1.2rem; border:1px solid rgba(255,255,255,0.3); border-radius:30px; cursor:pointer;">
+                   ${isEn ? 'Back to Poster' : 'Quay lại bìa'}
+                 </button>
+               </div>
+             </div>
+           </div>`
+        : `<div class="video-responsive-embed">
+             <iframe id="activeVideoFrame" 
+               src="${mainClip.embedUrl}?autoplay=1&rel=0&modestbranding=1" 
+               title="${mainTitle}" 
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+               referrerpolicy="strict-origin-when-cross-origin" 
+               allowfullscreen>
+             </iframe>
+           </div>`)
     : `<div class="video-poster-stage" onclick="${isYouTube ? `playActiveVideo('${mainClip.id}')` : `window.open('${mainClip.watchUrl}', '_blank')`}" title="${isEn ? (isYouTube ? 'Click to Play' : 'Click to Watch on VTV Today') : (isYouTube ? 'Nhấp để phát video' : 'Nhấp để xem trên VTV Today')}">
          <img src="${mainClip.thumb}" alt="${mainTitle}" class="video-poster-img" onerror="handleImageError(this)">
          <div class="video-poster-overlay"></div>
@@ -490,6 +549,33 @@ function renderVideoHub() {
 
 function playActiveVideo(clipId) {
   if (clipId) currentActiveClipId = clipId;
+  const clip = VIDEO_CLIPS.find(c => c.id === currentActiveClipId) || VIDEO_CLIPS[0];
+  const isLocalEnv = (
+    window.location.protocol === 'file:' || 
+    window.location.hostname === 'localhost' || 
+    window.location.hostname === '127.0.0.1' || 
+    !window.location.hostname
+  );
+
+  if (clip.sourceType === 'youtube') {
+    if (isLocalEnv) {
+      window.open(clip.watchUrl, '_blank');
+      if (typeof showToast === 'function') {
+        showToast(currentLanguage === 'en' 
+          ? 'Opening documentary in Full HD on YouTube' 
+          : 'Đang mở phóng sự chuẩn Full HD 1080p trên YouTube', 'info');
+      }
+      isVideoPlaying = true;
+      renderVideoHub();
+      return;
+    }
+  }
+  
+  if (clip.sourceType === 'vtv') {
+    window.open(clip.watchUrl, '_blank');
+    return;
+  }
+
   isVideoPlaying = true;
   renderVideoHub();
 }
@@ -728,7 +814,10 @@ function renderAboutUsSection() {
         <article class="profile-card">
           <div>
             <div class="profile-header-wrap">
-              <div class="profile-avatar-circle">NM</div>
+              <div class="profile-avatar-wrap">
+                <img src="assets/images/profiles/ngoc_mai.jpg" alt="Nguyễn Thị Ngọc Mai" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="profile-avatar-circle" style="display:none;">NM</div>
+              </div>
               <div>
                 <h3 class="profile-name-text">1. Nguyễn Thị Ngọc Mai</h3>
                 <span class="profile-title-pill" data-i18n="profile_mai_title">${isEn ? 'Editor-in-Chief' : 'Tổng Biên Tập'}</span>
@@ -749,7 +838,10 @@ function renderAboutUsSection() {
         <article class="profile-card">
           <div>
             <div class="profile-header-wrap">
-              <div class="profile-avatar-circle">HA</div>
+              <div class="profile-avatar-wrap">
+                <img src="assets/images/profiles/ha_anh.jpg" alt="Lê Hà Anh" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="profile-avatar-circle" style="display:none;">HA</div>
+              </div>
               <div>
                 <h3 class="profile-name-text">2. Lê Hà Anh</h3>
                 <span class="profile-title-pill" data-i18n="profile_haanh_title">${isEn ? 'Managing Editor' : 'Thư Ký Tòa Soạn'}</span>
@@ -770,7 +862,10 @@ function renderAboutUsSection() {
         <article class="profile-card">
           <div>
             <div class="profile-header-wrap">
-              <div class="profile-avatar-circle">PA</div>
+              <div class="profile-avatar-wrap">
+                <img src="assets/images/profiles/phuong_anh.jpg" alt="Bùi Phương Anh" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="profile-avatar-circle" style="display:none;">PA</div>
+              </div>
               <div>
                 <h3 class="profile-name-text">3. Bùi Phương Anh</h3>
                 <span class="profile-title-pill" data-i18n="profile_phuonganh_title">${isEn ? 'Senior Content Editor' : 'Biên Tập Viên Nội Dung'}</span>
@@ -791,7 +886,10 @@ function renderAboutUsSection() {
         <article class="profile-card">
           <div>
             <div class="profile-header-wrap">
-              <div class="profile-avatar-circle">BN</div>
+              <div class="profile-avatar-wrap">
+                <img src="assets/images/profiles/bao_ngan.jpg" alt="Bùi Bảo Ngân" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="profile-avatar-circle" style="display:none;">BN</div>
+              </div>
               <div>
                 <h3 class="profile-name-text">4. Bùi Bảo Ngân</h3>
                 <span class="profile-title-pill" data-i18n="profile_ngan_title">${isEn ? 'Multimedia Editor' : 'Biên Tập Viên Đa Phương Tiện'}</span>
@@ -812,7 +910,10 @@ function renderAboutUsSection() {
         <article class="profile-card">
           <div>
             <div class="profile-header-wrap">
-              <div class="profile-avatar-circle">NQ</div>
+              <div class="profile-avatar-wrap">
+                <img src="assets/images/profiles/nhu_quynh.jpg" alt="Nguyễn Như Quỳnh" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="profile-avatar-circle" style="display:none;">NQ</div>
+              </div>
               <div>
                 <h3 class="profile-name-text">5. Nguyễn Như Quỳnh</h3>
                 <span class="profile-title-pill" data-i18n="profile_quynh_title">${isEn ? 'Digital & Publishing Lead' : 'Trưởng Ban Kỹ Thuật Số'}</span>
@@ -934,6 +1035,61 @@ function renderAboutUsSection() {
 /* ===================================================================
    ARTICLE DETAIL MODAL & READING SUITE (Bilingual, TTS, Zoom, Like)
    =================================================================== */
+function formatArticleSource(article, isEn) {
+  if (!article) return '';
+
+  const rawTitle = isEn 
+    ? (article.title_en || article.title || '') 
+    : (article.title || article.title_en || '');
+  const cleanTitle = rawTitle.replace(/^["'“”‘’]|["'“”‘’]$/g, '').trim();
+
+  // Clean author name
+  let author = (article.author || '').split('•')[0].trim();
+  if (author.endsWith(' & NDO')) author = author.replace(' & NDO', '');
+  if (!author) author = isEn ? 'Editorial Staff' : 'Ban biên tập';
+
+  const sourceName = article.sourceName || (isEn ? 'HEARTICLES. Editorial' : 'Tòa soạn HEARTICLES.');
+
+  // Date formatting
+  let rawDate = (article.date || '').split(' - ')[0].trim();
+  rawDate = rawDate.replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s*/i, '');
+
+  const monthsMap = {
+    'January': 'tháng 1', 'February': 'tháng 2', 'March': 'tháng 3',
+    'April': 'tháng 4', 'May': 'tháng 5', 'June': 'tháng 6',
+    'July': 'tháng 7', 'August': 'tháng 8', 'September': 'tháng 9',
+    'October': 'tháng 10', 'November': 'tháng 11', 'December': 'tháng 12'
+  };
+
+  let formattedDate = rawDate;
+  if (!isEn) {
+    const match = rawDate.match(/([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/);
+    if (match) {
+      const monthVi = monthsMap[match[1]] || match[1];
+      formattedDate = `ngày ${match[2]} ${monthVi} năm ${match[3]}`;
+    }
+  }
+
+  const url = article.sourceUrl || '#';
+
+  if (isEn) {
+    return `
+      <div class="article-source-citation">
+        <span class="citation-label">Source:</span> "<em class="citation-title">${cleanTitle}</em>", ${sourceName}, by ${author}, ${formattedDate}, 
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="citation-url">${url}</a>
+      </div>
+    `;
+  } else {
+    return `
+      <div class="article-source-citation">
+        <span class="citation-label">Source:</span> "<em class="citation-title">${cleanTitle}</em>", ${sourceName}, viết bởi ${author}, ${formattedDate}, 
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="citation-url">${url}</a>
+      </div>
+    `;
+  }
+}
+window.formatArticleSource = formatArticleSource;
+
 function openArticleModal(articleId) {
   const article = ARTICLES_DATA.find(a => a.id === articleId);
   if (!article) return;
@@ -1014,15 +1170,7 @@ function openArticleModal(articleId) {
 
       <div class="article-body-text" id="articleBodyContent" style="font-family:var(--font-body); font-size:1.125rem; line-height:1.8; color:var(--color-text-body);">
         ${bodyHtml}
-      </div>
-
-      <div class="article-source-box" style="background:var(--color-surface-blush, #FBF3F4); border:1px solid rgba(84,17,30,0.12); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-top:2.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
-        <div class="source-credit-text" style="font-size:0.875rem;">
-          <strong>${isEn ? 'Source Attribution:' : 'Nguồn trích dẫn:'}</strong> ${article.sourceName}
-        </div>
-        <a href="${article.sourceUrl}" target="_blank" rel="noopener noreferrer" class="source-link-btn" style="color:var(--color-brand-primary); font-weight:700; font-size:0.875rem; text-decoration:none;">
-          ${isEn ? 'Original Article' : 'Xem nguồn gốc'} <i class="fas fa-external-link-alt"></i>
-        </a>
+        ${formatArticleSource(article, isEn)}
       </div>
 
       <!-- Comments Block -->

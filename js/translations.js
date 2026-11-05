@@ -181,6 +181,7 @@ const I18N_TRANSLATIONS = {
       // --- Update Giao Dien 2026 Additions ---
     ad_label: "QUẢNG CÁO • ADVERTISEMENT",
     stream_header_title: "TIN NỔI BẬT",
+    stream_curated_badge: "7 BÀI CHỌN LỌC",
     widget_trending_title: "TRENDING • THỊNH HÀNH",
     widget_more_trending: "Xem thêm Trending &rarr;",
     widget_read_title: "MOST READ • ĐỌC NHIỀU NHẤT",
@@ -396,6 +397,7 @@ const I18N_TRANSLATIONS = {
       // --- Update Giao Dien 2026 Additions ---
     ad_label: "ADVERTISEMENT • QUẢNG CÁO",
     stream_header_title: "CURATED STORIES",
+    stream_curated_badge: "7 CURATED STORIES",
     widget_trending_title: "TRENDING STORIES",
     widget_more_trending: "More Trending &rarr;",
     widget_read_title: "MOST READ STORIES",

@@ -89,11 +89,6 @@
 
 
         <!-- Primary language toggle pill (Default: EN) -->
-        <!-- Email Pill: class6group1term127@gmail.com (Matching Image 2) -->
-        <a href="mailto:class6group1term127@gmail.com" class="header-email-pill" title="Email: class6group1term127@gmail.com">
-          <i class="fas fa-envelope"></i>
-          <span>class6group1term127@gmail.com</span>
-        </a>
         <!-- Hidden pill placeholder for drawer reference -->
         <div class="lang-switch-pill" style="display:none !important;" role="group" aria-label="Language Selector">
           <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
@@ -129,7 +124,7 @@
       <aside class="hero-left-stream" aria-label="Curated Side Stories">
         <div class="stream-header-strip">
           <span class="stream-title-text" data-i18n="stream_header_title"><i class="fas fa-layer-group"></i> TIN NỔI BẬT</span>
-          <span style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;">6 BÀI CHỌN LỌC</span>
+          <span style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;" data-i18n="stream_curated_badge">7 BÀI CHỌN LỌC</span>
         </div>
 
         <!-- 1. Trending 4: Gánh mưu sinh Hội An -->
@@ -144,7 +139,7 @@
 
         <!-- 2. Trending 5: ADN Hài cốt liệt sĩ -->
         <article class="stream-card-mini" onclick="openArticleModal('trending-5')">
-          <img src="assets/images/human_stories/image17.jpg" alt="Chiến dịch 500 ngày đêm ADN" class="stream-thumb-img" onerror="handleImageError(this)">
+          <img src="assets/images/trending/image1.jpg" alt="Chiến dịch 500 ngày đêm ADN" class="stream-thumb-img" onerror="handleImageError(this)">
           <div class="stream-mini-body">
             <span class="stream-mini-cat">TRENDING</span>
             <h4 class="stream-mini-headline">Chiến dịch 500 ngày đêm ADN: Trả lại danh tính cho gần 800 hài cốt liệt sĩ</h4>
@@ -174,7 +169,7 @@
 
         <!-- 5. Human Stories 5: Thầy giáo Nam Trà My -->
         <article class="stream-card-mini" onclick="openArticleModal('human-5')">
-          <img src="assets/images/human_stories/image13.jpg" alt="Thầy giáo Nam Trà My" class="stream-thumb-img" onerror="handleImageError(this)">
+          <img src="assets/images/human_stories/mountain_teacher_trail.jpg" alt="Thầy giáo Nam Trà My" class="stream-thumb-img" onerror="handleImageError(this)">
           <div class="stream-mini-body">
             <span class="stream-mini-cat">HUMAN STORIES</span>
             <h4 class="stream-mini-headline">Thầy giáo cõng chữ lên đỉnh Ngọc Linh: 15 năm thắp sáng tương lai học trò</h4>
@@ -189,6 +184,16 @@
             <span class="stream-mini-cat">SOCIETY</span>
             <h4 class="stream-mini-headline">Cost of Living Crisis: Sáng kiến Vale Pantry bảo toàn phẩm giá người nhận</h4>
             <span class="stream-mini-time"><i class="far fa-clock"></i> 6 min read • The Guardian</span>
+          </div>
+        </article>
+
+        <!-- 7. In-depth 3: Dạy lòng trắc ẩn bằng khoa học -->
+        <article class="stream-card-mini" onclick="openArticleModal('indepth-3')">
+          <img src="assets/images/in-dept/image3.jpg" alt="Dạy lòng trắc ẩn bằng khoa học" class="stream-thumb-img" onerror="handleImageError(this)">
+          <div class="stream-mini-body">
+            <span class="stream-mini-cat">IN-DEPTH</span>
+            <h4 class="stream-mini-headline">Những nhà giáo dục dùng khoa học dạy lòng trắc ẩn: Khi sự tử tế là môn chính khóa</h4>
+            <span class="stream-mini-time"><i class="far fa-clock"></i> 7 min read • Positive News</span>
           </div>
         </article>
       </aside>
@@ -246,7 +251,7 @@
             </article>
 
             <article class="widget-card-item" onclick="openArticleModal('trending-3')">
-              <img src="assets/images/trending/image4.jpg" alt="Porsche 904FF" class="widget-card-thumb" onerror="handleImageError(this)">
+              <img src="assets/images/trending/image3.jpg" alt="Porsche 904FF" class="widget-card-thumb" onerror="handleImageError(this)">
               <div class="widget-card-content">
                 <span class="widget-card-cat">TRENDING</span>
                 <h4 class="widget-card-title">A new start after 60: Ở tuổi 26 mơ về Porsche, tuổi 68 tự tay chế tạo</h4>
@@ -459,7 +464,7 @@
           </article>
 
           <article class="mosaic-card-small" onclick="openArticleModal('human-2')">
-            <img src="assets/images/human_stories/image2.jpg" alt="Kindness Bag" class="mosaic-small-img" onerror="handleImageError(this)">
+            <img src="assets/images/human_stories/image11.jpg" alt="Kindness Bag" class="mosaic-small-img" onerror="handleImageError(this)">
             <div class="mosaic-small-overlay">
               <span class="mosaic-kicker"><i class="fas fa-hand-holding-heart"></i> NGHỊ LỰC</span>
               <h4 class="mosaic-small-title" data-i18n="photo_small_title_2">Kindness Bag cứu vớt cuộc đời cựu chiến binh và hành trình trao gửi yêu thương</h4>
@@ -566,7 +571,7 @@
         <div class="culture-list-col">
           <article class="culture-list-item" onclick="openArticleModal('indepth-1')">
             <div class="culture-item-thumb">
-              <img src="assets/images/human_stories/image20.jpg" alt="Hoa sữa Hà Nội" class="culture-thumb-img" onerror="handleImageError(this)">
+              <img src="assets/images/in-dept/image2.jpg" alt="Hoa sữa Hà Nội" class="culture-thumb-img" onerror="handleImageError(this)">
             </div>
             <div class="culture-item-content">
               <span class="culture-item-cat">KÝ SỰ VĂN HÓA</span>
@@ -588,7 +593,7 @@
 
           <article class="culture-list-item" onclick="openArticleModal('trending-3')">
             <div class="culture-item-thumb">
-              <img src="assets/images/trending/image4.jpg" alt="Porsche 904FF" class="culture-thumb-img" onerror="handleImageError(this)">
+              <img src="assets/images/trending/image3.jpg" alt="Porsche 904FF" class="culture-thumb-img" onerror="handleImageError(this)">
             </div>
             <div class="culture-item-content">
               <span class="culture-item-cat">KHỞI ĐẦU MỚI</span>
@@ -645,7 +650,6 @@
           <p class="fashion-footer-desc" data-i18n="footer_desc">Tòa soạn Tạp chí Báo điện tử Đa phương tiện • Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU)</p>
           <p class="fashion-footer-group" data-i18n="footer_group">Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ &amp; Truyền thông • Học phần Báo chí &amp; Truyền thông (BCTT)</p>
           <div style="display:flex; gap:1.25rem; margin-top:0.75rem; font-size:0.875rem;">
-            <a href="https://canva.link/mainguyen-ngoc-mai" target="_blank" rel="noopener noreferrer" style="color:var(--color-brand-primary); font-weight:700;"><i class="fas fa-palette"></i> Canva</a>
             <a href="https://www.facebook.com/share/1US9HuksEu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style="color:var(--color-brand-primary); font-weight:700;"><i class="fab fa-facebook"></i> Facebook</a>
             <a href="https://www.instagram.com/hearticles.news" target="_blank" rel="noopener noreferrer" style="color:var(--color-brand-primary); font-weight:700;"><i class="fab fa-instagram"></i> Instagram</a>
             <a href="https://x.com/hearticles_news?s=11" target="_blank" rel="noopener noreferrer" style="color:var(--color-brand-primary); font-weight:700;"><i class="fab fa-x-twitter"></i> X (Twitter)</a>

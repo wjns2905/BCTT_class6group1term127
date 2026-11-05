@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-import sys, re
+import sys
+
 sys.stdout.reconfigure(encoding='utf-8')
 
 with open('js/translations.js', 'r', encoding='utf-8') as f:
     text = f.read()
 
-vi_part = text[text.find('vi: {'):text.find('en: {')]
-keys = re.findall(r'([a-zA-Z0-9_\-]+)\s*:', vi_part)
-print(f"Total keys in vi: {len(keys)}")
-for k in keys:
-    print(k)
+# Check keys related to cat_feat
+for line in text.splitlines():
+    if 'cat_feat' in line or 'trending_desc' in line or 'society_desc' in line:
+        print(line[:100])

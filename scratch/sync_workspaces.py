@@ -2,11 +2,10 @@ import shutil, os, sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 src = r'C:\Users\camka\OneDrive\Desktop\BCTT_class6group1term127'
-dst = r'C:\Users\camka\OneDrive\Desktop\BCTT'
+dst = r'C:\Users\camka\OneDrive\Desktop\Class6group1term127'
 
 print(f"Syncing from {src} to {dst}...")
 
-# Ignore scratch and git
 def ignore_patterns(path, names):
     return [n for n in names if n in ['.git', 'scratch', '.vscode']]
 
@@ -24,4 +23,4 @@ for item in os.listdir(src):
         shutil.copy2(s, d)
         print(f"Copied file {item}")
 
-print("Sync completed successfully!")
+print("Sync completed successfully to Class6group1term127!")

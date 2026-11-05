@@ -4726,43 +4726,61 @@ body {
 
 
 /* ===================================================================
-   HEADER LEADERBOARD ADVERTISEMENT (IELTS BANNER)
+   HEADER LEADERBOARD ADVERTISEMENT (IELTS BANNER - CRISP & UN-CROPPED)
    =================================================================== */
 .header-ad-leaderboard-wrap {
-  background: #FDFBFB;
-  padding: 0.6rem 0;
+  background: #FAF7F4;
+  padding: 0.75rem 0 0.85rem 0;
   border-bottom: 1px solid var(--color-border-hairline);
   text-align: center;
 }
+
 .ad-label-strip {
   font-size: 0.625rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  margin-bottom: 0.3rem;
-}
-.header-ad-link {
-  display: inline-block;
-  max-width: 100%;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast);
-}
-.header-ad-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(84, 17, 30, 0.12);
-}
-.header-ad-banner-img {
-  width: 100%;
-  max-width: 980px;
-  height: auto;
-  max-height: 110px;
-  object-fit: cover;
+  margin-bottom: 0.45rem;
   display: block;
 }
 
+.header-ad-link {
+  display: inline-block;
+  width: 100%;
+  max-width: 970px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast);
+  line-height: 0;
+  border: 1px solid rgba(84, 17, 30, 0.08);
+  background: #E21837;
+}
+
+.header-ad-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(84, 17, 30, 0.16);
+}
+
+.header-ad-banner-img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  display: block;
+  aspect-ratio: 1444 / 378;
+}
+
+@media (max-width: 768px) {
+  .header-ad-leaderboard-wrap {
+    padding: 0.5rem 0.5rem 0.6rem 0.5rem;
+  }
+  .header-ad-link {
+    max-width: 100%;
+    border-radius: var(--radius-sm);
+  }
+}
 /* ===================================================================
    UPDATED BRAND LOGO (DIDONE HIGH-FASHION)
    =================================================================== */

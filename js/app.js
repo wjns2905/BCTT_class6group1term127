@@ -962,7 +962,7 @@ function renderAboutUsSection() {
         <div class="nhandan-sec-title-wrap">
           <span class="nhandan-sec-ribbon"></span>
           <h2 class="nhandan-sec-title" data-i18n="profiles_sec_title">${isEn ? 'EDITORIAL BOARD & NEWSROOM ROSTER' : 'BAN BIÊN TẬP & NHÂN SỰ TÒA SOẠN'}</h2>
-          <span class="nhandan-sec-sub" data-i18n="profiles_sec_sub">${isEn ? 'Class 6 - Group 1 - Term 127 • Faculty of Language & Communication, ULIS - VNU' : 'Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ & Truyền thông, Trường ĐH Ngoại ngữ - ĐHQGHN'}</span>
+          <span class="nhandan-sec-sub" data-i18n="profiles_sec_sub">${isEn ? 'Class 6 - Group 1 - Term 127 • Faculty of English Language and Culture • ULIS - VNU' : 'Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ và Văn hóa các nước nói tiếng Anh (Faculty of English Language and Culture) • Trường ĐH Ngoại ngữ - ĐHQGHN'}</span>
         </div>
       </div>
 

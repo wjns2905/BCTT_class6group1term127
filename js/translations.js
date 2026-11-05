@@ -118,7 +118,7 @@ const I18N_TRANSLATIONS = {
     // 8. Op-Ed & Civic Poll
     opinion_badge: '<i class="fas fa-feather-alt"></i> BÌNH LUẬN & XÃ LUẬN',
     opinion_edition: "Ấn phẩm Báo điện tử • ULIS - VNU",
-    opinion_author_name: "Cố vấn Học thuật Khoa Ngôn ngữ & Truyền thông",
+    opinion_author_name: "Cố vấn Học thuật Khoa Ngôn ngữ và Văn hóa các nước nói tiếng Anh (Faculty of English Language and Culture)",
     opinion_author_title: "Trường Đại học Ngoại ngữ - ĐHQGHN",
     opinion_quote: "“Báo chí chân chính trong kỷ nguyên số không đo lường sức ảnh hưởng bằng tốc độ giật gân, mà bằng chiều sâu nhân văn và khả năng thắp sáng lòng trắc ẩn trong tâm hồn công chúng.”",
     opinion_note: "Trích chuyên luận: <em>Đạo đức báo chí và sứ mệnh phụng sự xã hội của thế hệ người làm truyền thông mới</em>.",
@@ -224,7 +224,7 @@ const I18N_TRANSLATIONS = {
     about_tab_mission: "Tôn Chỉ Hoạt Động & Chuẩn Mực",
     // --- Member Profiles (from Editorial Profiles) ---
     profiles_sec_title: "BAN BIÊN TẬP & NHÂN SỰ TÒA SOẠN",
-    profiles_sec_sub: "Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ & Truyền thông • Trường Đại học Ngoại ngữ - ĐHQGHN",
+    profiles_sec_sub: "Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ và Văn hóa các nước nói tiếng Anh (Faculty of English Language and Culture) • Trường Đại học Ngoại ngữ - ĐHQGHN",
     profile_mai_title: "Tổng Biên Tập (Editor-in-Chief)",
     profile_mai_role: "Định hướng chiến lược nội dung tổng thể của tòa soạn, đảm bảo tính chuẩn mực của đạo đức báo chí và kiểm duyệt toàn diện các ấn phẩm xuất bản trên nền tảng.",
     profile_haanh_title: "Thư Ký Tòa Soạn (Managing Editor)",
@@ -347,7 +347,7 @@ const I18N_TRANSLATIONS = {
     // 8. Op-Ed & Civic Poll
     opinion_badge: '<i class="fas fa-feather-alt"></i> EDITORIAL OP-ED & COMMENTARY',
     opinion_edition: "Digital Journal • ULIS - VNU",
-    opinion_author_name: "Academic Advisor, Faculty of Linguistics & Communications",
+    opinion_author_name: "Academic Advisor, Faculty of English Language and Culture",
     opinion_author_title: "University of Languages & International Studies - VNU",
     opinion_quote: "“True journalism in the digital era is never measured by sensational speed, but by humanistic depth and the enduring power to illuminate compassion in society.”",
     opinion_note: "Excerpt from monograph: <em>Journalistic Ethics and Social Mission in Modern Communications</em>.",
@@ -453,7 +453,7 @@ const I18N_TRANSLATIONS = {
     about_tab_mission: "Mission, Ethics & Compliance",
     // --- Member Profiles (from Editorial Profiles) ---
     profiles_sec_title: "EDITORIAL BOARD & NEWSROOM ROSTER",
-    profiles_sec_sub: "Class 6 - Group 1 - Term 127 • Faculty of Linguistics & Communication • ULIS - VNU",
+    profiles_sec_sub: "Class 6 - Group 1 - Term 127 • Faculty of English Language and Culture • ULIS - VNU",
     profile_mai_title: "Editor-in-Chief",
     profile_mai_role: "Sets the overall editorial direction, ensures adherence to journalistic standards, and oversees all published content across the platform.",
     profile_haanh_title: "Managing Editor",

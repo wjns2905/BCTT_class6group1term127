@@ -23,6 +23,7 @@
       img.src = 'assets/images/trending/image8.jpg';
     }
   </script>
+  <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -35,28 +36,23 @@
     <span>Chế độ ngoại tuyến: Bạn đang đọc các bài viết đã lưu đệm. Hệ thống sẽ tự động cập nhật khi có mạng.</span>
   </div>
 
-  <!-- =================================================================
-       1. HEADER LEADERBOARD ADVERTISEMENT (IELTS BANNER AS REQUIRED)
+
+    <!-- =================================================================
+       2. BRAND MASTHEAD (FULL-SIZE CENTERED EDITORIAL LOGO BANNER)
        ================================================================= -->
-  <div class="header-ad-leaderboard-wrap">
-    <div class="container" style="display:flex; flex-direction:column; align-items:center;">
-      <span class="ad-label-strip" data-i18n="ad_label">ADVERTISEMENT • QUẢNG CÁO</span>
-      <a href="https://ielts-fighter.com" target="_blank" rel="noopener noreferrer" class="header-ad-link" title="IELTS Fighter - Đột phá điểm số">
-        <img src="assets/images/ads/header_ad_banner.png" alt="IELTS Fighter Leaderboard Ad" class="header-ad-banner-img">
+  <div class="fashion-masthead-hero">
+    <div class="container masthead-hero-inner">
+      <a href="index.html" class="fashion-brand-logo-masthead" aria-label="HEARTICLES. - Where News Begins with a Heartbeat">
+        <img src="assets/images/logo/brand_logo_updated.png" alt="HEARTICLES. - Where News Begins with a Heartbeat" class="fashion-brand-logo-fullsize">
       </a>
     </div>
   </div>
 
   <!-- =================================================================
-       2. BRAND MASTHEAD (HIGH-CONTRAST EDITORIAL HEADER)
+       3. STICKY EDITORIAL NAVIGATION (FULL-WIDTH CATEGORIES BAR)
        ================================================================= -->
   <header class="fashion-header">
     <div class="container fashion-header-container">
-      <!-- Brand Logo: High-Fashion Didone Logo from image1.png -->
-      <a href="index.html" class="fashion-brand-logo" aria-label="HEARTICLES. Homepage">
-        <img src="assets/images/logo/brand_logo_updated.png" alt="HEARTICLES." class="fashion-brand-logo-img" onerror="this.style.display='none'; document.getElementById('brandLogoTextFallback').style.display='inline';">
-        <span id="brandLogoTextFallback" style="display:none; font-family:var(--font-editorial); font-style:italic; font-weight:900; font-size:1.85rem; color:var(--color-brand-primary);">HEARTICLES<span style="color:var(--color-brand-accent);">.</span></span>
-      </a>
 
       <!-- Minimalist Navigation with About Us Dropdown -->
       <nav class="fashion-nav" aria-label="Thanh điều hướng tạp chí">
@@ -646,7 +642,9 @@
     <div class="container">
       <div class="fashion-footer-container">
         <div class="fashion-footer-brand">
-          <span class="fashion-footer-logo">HEARTICLES<span class="fashion-brand-period">.</span></span>
+          <a href="index.html" class="fashion-footer-logo-link" aria-label="HEARTICLES. - Trang chủ">
+            <img src="assets/images/logo/brand_logo_updated.png" alt="HEARTICLES." class="fashion-footer-logo-img">
+          </a>
           <p class="fashion-footer-desc" data-i18n="footer_desc">Tòa soạn Tạp chí Báo điện tử Đa phương tiện • Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU)</p>
           <p class="fashion-footer-group" data-i18n="footer_group">Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ &amp; Truyền thông • Học phần Báo chí &amp; Truyền thông (BCTT)</p>
           <div style="display:flex; gap:1.25rem; margin-top:0.75rem; font-size:0.875rem;">
@@ -662,9 +660,9 @@
           </p>
         </div>
         <div class="fashion-footer-slogan-wrap">
-          <svg class="fashion-slogan-heart" viewBox="0 0 100 80" fill="none">
-            <path d="M30 45 C15 32 8 20 22 10 C32 2 44 8 50 20 C56 8 68 2 78 10 C92 20 82 36 62 55 C54 62 50 67 48 68 C45 70 42 68 40 65 C34 58 26 48 30 45 Z" stroke="#54111E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M48 68 C56 72 70 75 80 70 C88 66 94 58 98 50" stroke="#7D1728" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 4"/>
+          <svg class="fashion-slogan-heart" viewBox="0 0 80 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 22 C35 12, 22 8, 14 16 C4 26, 6 42, 40 64 C74 42, 76 26, 66 16 C58 8, 45 12, 40 22 Z" stroke="#54111E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(84, 17, 30, 0.04)"/>
+            <path d="M26 40 L33 40 L36 32 L40 48 L44 34 L47 40 L54 40" stroke="#7D1728" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="fashion-slogan-text">Stories that speak to the heart.</span>
         </div>

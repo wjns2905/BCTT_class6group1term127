@@ -1,0 +1,15 @@
+import sys
+from PIL import Image, ImageDraw
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+# Let's test the bezier curve math or render SVG
+svg_heart = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 70" width="80" height="70" fill="none">
+  <path d="M40 22 C35 12, 22 8, 14 16 C4 26, 6 42, 40 64 C74 42, 76 26, 66 16 C58 8, 45 12, 40 22 Z" stroke="#54111E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(84, 17, 30, 0.05)"/>
+  <path d="M26 39 L33 39 L36 31 L40 47 L44 33 L47 39 L54 39" stroke="#7D1728" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>"""
+
+with open('scratch/test_heart.svg', 'w', encoding='utf-8') as f:
+    f.write(svg_heart)
+
+print("Saved scratch/test_heart.svg!")

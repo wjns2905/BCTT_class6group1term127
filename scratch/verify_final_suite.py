@@ -21,18 +21,18 @@ for page in pages:
         html = f.read()
 
     # Checks
-    has_ad = "header-ad-leaderboard-wrap" in html
+    no_ad = "header-ad-leaderboard-wrap" not in html
     has_logo = "brand_logo_updated.png" in html
     has_email = "class6group1term127@gmail.com" in html
     no_academic_bar = "fashion-academic-bar" not in html
     has_dropdown = "about-dropdown-menu" in html
     has_title_class = "Class6group1term127" in html
 
-    if not (has_ad and has_logo and has_email and no_academic_bar and has_dropdown and has_title_class):
-        print(f"WARN in {page}: ad={has_ad}, logo={has_logo}, email={has_email}, no_bar={no_academic_bar}, dropdown={has_dropdown}, title={has_title_class}")
+    if not (no_ad and has_logo and has_email and no_academic_bar and has_dropdown and has_title_class):
+        print(f"WARN in {page}: no_ad={no_ad}, logo={has_logo}, email={has_email}, no_bar={no_academic_bar}, dropdown={has_dropdown}, title={has_title_class}")
         all_ok = False
     else:
-        print(f"PASS: {page} headers & navigation fully verified.")
+        print(f"PASS: {page} headers & navigation fully verified (no ad, clean masthead).")
 
 # Check index.html specific elements
 with open(os.path.join(ROOT, "index.html"), 'r', encoding='utf-8') as f:
@@ -56,13 +56,8 @@ for js_file in ["app.js", "translations.js", "data.js"]:
     print(f"PASS: js/{js_file} loaded ({len(js_code)} chars).")
 
 # Check Assets
-ad_asset = os.path.join(ROOT, "assets", "images", "ads", "header_ad_banner.png")
 logo_asset = os.path.join(ROOT, "assets", "images", "logo", "brand_logo_updated.png")
-
-assert os.path.exists(ad_asset), f"Missing {ad_asset}"
 assert os.path.exists(logo_asset), f"Missing {logo_asset}"
-
-print(f"PASS: Header ad asset verified ({os.path.getsize(ad_asset)} bytes).")
 print(f"PASS: Brand logo asset verified ({os.path.getsize(logo_asset)} bytes).")
 
 print("\nALL SUITE AUDITS PASSED WITH ZERO ERRORS!")

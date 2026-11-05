@@ -1,6 +1,56 @@
 @import "tokens.css";
 
 /* ===================================================================
+   FULL-SIZE CENTERED BRAND MASTHEAD (EDITORIAL LOGO BANNER)
+   =================================================================== */
+.fashion-masthead-hero {
+  background: #FFFFFF;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border-hairline);
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+}
+.masthead-hero-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+.fashion-brand-logo-masthead {
+  display: block;
+  text-decoration: none;
+  line-height: 0;
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+.fashion-brand-logo-masthead:hover {
+  transform: scale(1.015);
+}
+.fashion-brand-logo-fullsize {
+  max-width: 580px;
+  width: 100%;
+  height: auto;
+  max-height: 145px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .fashion-brand-logo-fullsize {
+    max-width: 310px;
+    max-height: 145px;
+  }
+  .fashion-masthead-hero {
+    padding: 0;
+  }
+}
+
+/* ===================================================================
    HEART.ICLES - Official Journalism & News Platform
    Class 6 - Group 1 - Term 127
    Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU)
@@ -64,6 +114,8 @@ html {
 }
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: var(--font-sans);
   background-color: var(--bg-cream);
   color: var(--text-main);
@@ -1156,6 +1208,8 @@ ul, ol {
 }
 
 .news-card-body {
+  margin: 0;
+  padding: 0;
   padding: 1rem 1.15rem;
   display: flex;
   flex-direction: column;
@@ -1802,6 +1856,8 @@ ul, ol {
 }
 
 .comment-body {
+  margin: 0;
+  padding: 0;
   font-size: 0.9375rem;
   color: var(--text-secondary);
 }
@@ -2464,6 +2520,8 @@ ul, ol {
     display: flex;
   }
   body {
+  margin: 0;
+  padding: 0;
     padding-bottom: 60px;
   }
 }
@@ -2542,6 +2600,8 @@ ul, ol {
 
 /* Page Background & Base Typography */
 body {
+  margin: 0;
+  padding: 0;
   background-color: var(--color-canvas);
   color: var(--color-text-body);
   font-family: var(--font-sans);
@@ -2585,7 +2645,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 76px;
+  height: 54px;
 }
 .fashion-brand-logo {
   font-family: var(--font-editorial);
@@ -2675,17 +2735,21 @@ body {
   color: var(--color-brand-primary);
 }
 .fashion-subscribe-btn {
-  background-color: var(--color-brand-primary);
-  color: #FFFFFF;
+  background-color: #54111E;
+  background-color: var(--color-brand-primary, #54111E);
+  color: #FFFFFF !important;
   border: none;
-  border-radius: var(--radius-full);
-  font-family: var(--font-sans);
+  border-radius: var(--radius-full, 9999px);
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.55rem 1.45rem;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(89, 23, 36, 0.15);
-  transition: all var(--duration-fast) var(--ease-spring);
+  box-shadow: 0 2px 8px rgba(84, 17, 30, 0.25);
+  transition: all var(--duration-fast, 0.2s) var(--ease-spring, ease);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .fashion-subscribe-btn:hover {
   background-color: var(--color-brand-hover);
@@ -3150,6 +3214,8 @@ body {
   backdrop-filter: blur(4px);
 }
 .fashion-card-body {
+  margin: 0;
+  padding: 0;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -3210,6 +3276,25 @@ body {
 .fashion-footer-brand {
   max-width: 540px;
 }
+
+.fashion-footer-logo-link {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: opacity var(--duration-fast, 0.2s);
+}
+.fashion-footer-logo-link:hover {
+  opacity: 0.9;
+}
+.fashion-footer-logo-img {
+  max-width: 290px;
+  width: 100%;
+  height: auto;
+  max-height: 85px;
+  object-fit: contain;
+  display: block;
+}
+
 .fashion-footer-logo {
   font-family: var(--font-editorial);
   font-size: 2.25rem;
@@ -3238,9 +3323,13 @@ body {
   align-items: flex-end;
 }
 .fashion-slogan-heart {
-  width: 72px;
-  height: 54px;
+  width: 56px;
+  height: 50px;
   margin-bottom: 0.5rem;
+  transition: transform var(--duration-fast, 0.2s) ease;
+}
+.fashion-slogan-heart:hover {
+  transform: scale(1.08);
 }
 .fashion-slogan-text {
   font-family: var(--font-editorial);
@@ -3370,6 +3459,8 @@ body {
   box-shadow: var(--shadow-lg);
 }
 .category-featured-body {
+  margin: 0;
+  padding: 0;
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -3423,6 +3514,8 @@ body {
     order: -1;
   }
   .category-featured-body {
+  margin: 0;
+  padding: 0;
     padding: 1.75rem;
   }
 }
@@ -3490,6 +3583,8 @@ body {
   box-shadow: 0 2px 8px rgba(84, 17, 30, 0.3);
 }
 .lead-card-body {
+  margin: 0;
+  padding: 0;
   margin-bottom: 1.25rem;
 }
 .lead-main-headline {
@@ -3599,6 +3694,8 @@ body {
   border-radius: 3px;
 }
 .sublead-body {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -4287,6 +4384,8 @@ body {
   border-radius: var(--radius-full);
 }
 .culture-hero-body {
+  margin: 0;
+  padding: 0;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -4424,6 +4523,8 @@ body {
   display: block;
 }
 .category-stream-body {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
 }
@@ -4740,6 +4841,8 @@ body {
   flex-shrink: 0;
 }
 .stream-mini-body {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -4817,6 +4920,8 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 .center-post-body {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   flex-grow: 1;

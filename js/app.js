@@ -1008,25 +1008,47 @@ function renderAboutUsSection() {
       </div>
     </section>
 
-    <!-- SECTION 4: MISSION & COMPLIANCE (#mission) -->
+    <!-- SECTION 4: MISSION & EDITORIAL PHILOSOPHY (#mission) -->
     <section id="mission" style="margin-bottom: 2rem; scroll-margin-top: 100px;">
       <div class="nhandan-section-header">
         <div class="nhandan-sec-title-wrap">
           <span class="nhandan-sec-ribbon"></span>
-          <h2 class="nhandan-sec-title" data-i18n="about_mission_title">${isEn ? 'MISSION, JOURNALISTIC ETHICS & COMPLIANCE' : 'TÔN CHỈ HOẠT ĐỘNG, ĐẠO ĐỨC & CHUẨN MỰC BÁO CHÍ'}</h2>
+          <h2 class="nhandan-sec-title" data-i18n="about_mission_title">${isEn ? 'MISSION & EDITORIAL PHILOSOPHY' : 'TÔN CHỈ HOẠT ĐỘNG & TRIẾT LÝ TÒA SOẠN'}</h2>
         </div>
       </div>
-      <div style="background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-lg); padding:2rem; line-height:1.75; color:var(--color-text-body);">
-        <p style="margin-bottom:1rem;">
-          <strong>HEARTICLES.</strong> ${isEn ? 'is an academic multimedia journalism publication developed by Class 6 - Group 1 - Term 127 under the Faculty of Language & Communication, University of Languages and International Studies, Vietnam National University (ULIS - VNU).' : 'là ấn phẩm báo chí điện tử đa phương tiện học thuật được nghiên cứu và phát triển bởi tập thể sinh viên Lớp 6 - Nhóm 1 - Khóa 127, Khoa Ngôn ngữ & Truyền thông, Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU).'}
+      <div style="background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-lg); padding:2.5rem; color:var(--color-text-body); box-shadow:var(--shadow-card, 0 4px 20px rgba(0,0,0,0.03));">
+        <h3 style="font-family: var(--font-editorial, 'Playfair Display', serif); font-size: 1.65rem; font-weight: 700; color: var(--color-brand-primary, #54111E); margin-top: 0; margin-bottom: 1.25rem; letter-spacing: -0.01em;">
+          ${isEn ? 'Welcome to HEARTICLES' : 'Chào Mừng Đến Với HEARTICLES'}
+        </h3>
+        
+        <p style="margin-bottom:1.25rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
+          ${isEn 
+            ? 'Based in Hanoi, Vietnam, HEARTICLES is an academic multimedia journalism publication born out of a simple, unwavering belief: in a world driven by rapid headlines and digital noise, true journalism must never lose its soul. Every piece we publish is built upon rigorous, multi-source verification and authentic engagement with official, credible sources, ensuring that all our reporting stands as trustworthy, accurate, and deeply reliable.' 
+            : 'Đặt trụ sở tại Hà Nội, Việt Nam, HEARTICLES là ấn phẩm báo chí đa phương tiện học thuật ra đời từ một niềm tin giản dị nhưng kiên định: giữa một thế giới bị cuốn theo những dòng tít chóng vánh và sự ồn ào của kỷ nguyên số, báo chí chân chính không bao giờ được đánh mất linh hồn của mình. Mọi tác phẩm chúng tôi xuất bản đều được xây dựng trên quy trình kiểm chứng đa nguồn nghiêm ngặt và sự kết nối trực tiếp với các nguồn tin chính thống, uy tín, nhằm bảo đảm mỗi bài viết luôn trung thực, chính xác và đáng tin cậy sâu sắc.'}
         </p>
-        <p style="margin-bottom:1rem;">
-          ${isEn ? 'Our editorial philosophy is anchored in the belief that modern journalism must uphold humanistic values, strict multi-source verification, and empathetic storytelling that uplifts vulnerable communities.' : 'Tôn chỉ hoạt động của chúng tôi kiên định với sứ mệnh: báo chí hiện đại phải đặt lòng nhân ái và tính trung thực lên hàng đầu, kiểm chứng nguồn tin đa chiều nghiêm ngặt và lan tỏa những câu chuyện lay động trái tim hướng tới cộng đồng.'}
+
+        <p style="margin-bottom:1.25rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
+          ${isEn 
+            ? 'At HEARTICLES, our editorial heart beats for human-centric storytelling. We specialize in bringing forward stories of empathy, kindness, and unsung resilience—the quiet moments of human goodness that often go unnoticed, yet remind us of our shared humanity. Our perspective reaches far beyond borders: while we honor the timeless charm and spirit of Hanoi, our lens extends across the globe to cover diverse human experiences, vibrant cultures, local food traditions, and inspiring lifestyle narratives from every corner of the world.' 
+            : 'Tại HEARTICLES, trái tim biên tập của chúng tôi luôn đập cùng những câu chuyện lấy con người làm trung tâm. Chúng tôi chuyên chở những câu chuyện về sự đồng cảm, lòng trắc ẩn và sự kiên cường thầm lặng—những khoảnh khắc tốt đẹp bình dị thường bị lãng quên nhưng nhắc nhở chúng ta về sự gắn kết nhân văn. Góc nhìn của chúng tôi vươn xa khỏi mọi biên giới: vừa tôn vinh nét đẹp vượt thời gian và tinh thần của Hà Nội, ống kính của chúng tôi vừa mở rộng ra khắp thế giới để ghi lại những trải nghiệm đa dạng, các nền văn hóa sống động, nét ẩm thực bản địa cùng những câu chuyện phong cách sống đầy cảm hứng từ mọi phương trời.'}
         </p>
-        <p style="margin:0; font-size:0.875rem; color:var(--color-text-muted);">
-          <i class="fas fa-shield-alt" style="color:var(--color-brand-primary); margin-right:0.35rem;"></i>
-          ${isEn ? 'Strict compliance with the Press Law of the Socialist Republic of Vietnam, ULIS - VNU Academic Research Regulations, and Nielsen Norman Group UX Accessibility Guidelines.' : 'Tuân thủ nghiêm ngặt Luật Báo chí nước Cộng hòa Xã hội Chủ nghĩa Việt Nam, Quy chế Nghiên cứu Khoa học Sinh viên ĐHQGHN và tiêu chuẩn công nghệ khả năng tiếp cận Nielsen Norman UX.'}
+
+        <p style="margin-bottom:1.75rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
+          ${isEn 
+            ? 'While our storytelling is rooted in deep empathy, our reporting is firmly grounded in journalistic integrity and fully verified information. We write not just to report events, but to touch hearts, build global bridges, and foster a more thoughtful, compassionate world.' 
+            : 'Nếu như cách kể chuyện của chúng tôi bắt nguồn từ sự thấu cảm sâu sắc, thì phương pháp đưa tin luôn được đặt nền móng vững chắc trên đạo đức báo chí và thông tin đã được kiểm chứng tuyệt đối. Chúng tôi cầm bút không chỉ để đưa tin về các sự kiện, mà còn để chạm tới những trái tim, xây dựng những nhịp cầu kết nối toàn cầu và nuôi dưỡng một thế giới sâu lắng, giàu lòng trắc ẩn hơn.'}
         </p>
+
+        <div style="padding-top:1.25rem; border-top:1px dashed var(--color-border-hairline); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.75rem; font-size:0.875rem; color:var(--color-text-muted);">
+          <span>
+            <i class="fas fa-shield-alt" style="color:var(--color-brand-primary); margin-right:0.35rem;"></i>
+            ${isEn ? 'Academic Multimedia Journalism Project • ULIS - VNU • Class 6 - Group 1 - Term 127' : 'Đề án Báo chí Đa phương tiện Học thuật • ULIS - VNU • Lớp 6 - Nhóm 1 - Khóa 127'}
+          </span>
+          <span>
+            <i class="fas fa-check-circle" style="color:#2E7D32; margin-right:0.35rem;"></i>
+            ${isEn ? 'Multi-Source Fact-Checking & Journalistic Ethics Compliance' : 'Kiểm chứng đa nguồn & Tuân thủ Chuẩn mực Đạo đức Báo chí'}
+          </span>
+        </div>
       </div>
     </section>
   `;

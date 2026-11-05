@@ -173,11 +173,12 @@ const I18N_TRANSLATIONS = {
     
     // 13. About Page
     about_hero_sub: '"Where News Begins with a Heartbeat — Nơi tin tức khởi nguồn từ nhịp đập trái tim và lòng trắc ẩn."',
-    about_manifesto_title: "Tạp chí Báo điện tử HEARTICLES.",
+    about_mission_title: "TÔN CHỈ HOẠT ĐỘNG & TRIẾT LÝ TÒA SOẠN",
+    about_manifesto_title: "Chào Mừng Đến Với HEARTICLES",
     about_manifesto_sub: '"Stories that speak to the heart — Nơi tin tức khởi nguồn từ nhịp đập trái tim"',
-    about_text_p1: '<strong>HEARTICLES.</strong> được sáng lập và vận hành bởi nhóm sinh viên <strong>Lớp 6 - Nhóm 1 - Khóa 127</strong> thuộc <strong>Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU)</strong> trong khuôn khổ học phần Báo chí & Truyền thông (BCTT), với khát vọng kiến tạo một ấn phẩm báo chí đa phương tiện mang phong cách thời trang, chuẩn mực quốc tế và tràn đầy lòng trắc ẩn.',
-    about_text_p2: 'Lấy cảm hứng từ ngôn ngữ thẩm mỹ của các tạp chí danh tiếng và mô hình báo chí chính luận Báo Nhân Dân điện tử, chúng tôi tin rằng cái đẹp chân thực của báo chí không nằm ở những giật gân, câu khách, mà ở chiều sâu nhân văn, sự thanh lịch của con chữ và những câu chuyện tử tế chạm đến đáy lòng độc giả.',
-    about_text_p3: '<strong>Phương châm của tòa soạn:</strong> Trung thực trong sự thật, nhân ái trong góc nhìn, và chuẩn mực thẩm mỹ trong từng trang viết.',
+    about_text_p1: "Đặt trụ sở tại Hà Nội, Việt Nam, HEARTICLES là ấn phẩm báo chí đa phương tiện học thuật ra đời từ một niềm tin giản dị nhưng kiên định: giữa một thế giới bị cuốn theo những dòng tít chóng vánh và sự ồn ào của kỷ nguyên số, báo chí chân chính không bao giờ được đánh mất linh hồn của mình. Mọi tác phẩm chúng tôi xuất bản đều được xây dựng trên quy trình kiểm chứng đa nguồn nghiêm ngặt và sự kết nối trực tiếp với các nguồn tin chính thống, uy tín, nhằm bảo đảm mỗi bài viết luôn trung thực, chính xác và đáng tin cậy sâu sắc.",
+    about_text_p2: "Tại HEARTICLES, trái tim biên tập của chúng tôi luôn đập cùng những câu chuyện lấy con người làm trung tâm. Chúng tôi chuyên chở những câu chuyện về sự đồng cảm, lòng trắc ẩn và sự kiên cường thầm lặng—những khoảnh khắc tốt đẹp bình dị thường bị lãng quên nhưng nhắc nhở chúng ta về sự gắn kết nhân văn. Góc nhìn của chúng tôi vươn xa khỏi mọi biên giới: vừa tôn vinh nét đẹp vượt thời gian và tinh thần của Hà Nội, ống kính của chúng tôi vừa mở rộng ra khắp thế giới để ghi lại những trải nghiệm đa dạng, các nền văn hóa sống động, nét ẩm thực bản địa cùng những câu chuyện phong cách sống đầy cảm hứng từ mọi phương trời.",
+    about_text_p3: "Nếu như cách kể chuyện của chúng tôi bắt nguồn từ sự thấu cảm sâu sắc, thì phương pháp đưa tin luôn được đặt nền móng vững chắc trên đạo đức báo chí và thông tin đã được kiểm chứng tuyệt đối. Chúng tôi cầm bút không chỉ để đưa tin về các sự kiện, mà còn để chạm tới những trái tim, xây dựng những nhịp cầu kết nối toàn cầu và nuôi dưỡng một thế giới sâu lắng, giàu lòng trắc ẩn hơn.",
       // --- Update Giao Dien 2026 Additions ---
     ad_label: "QUẢNG CÁO • ADVERTISEMENT",
     stream_header_title: "TIN NỔI BẬT",
@@ -389,11 +390,12 @@ const I18N_TRANSLATIONS = {
   
 // 13. About Page
     about_hero_sub: '"Where News Begins with a Heartbeat — Journalistic truth rooted in empathy and human dignity."',
-    about_manifesto_title: "HEARTICLES. Digital Journal",
+    about_mission_title: "MISSION & EDITORIAL PHILOSOPHY",
+    about_manifesto_title: "Welcome to HEARTICLES",
     about_manifesto_sub: '"Stories that speak to the heart — Where journalism begins with empathy"',
-    about_text_p1: '<strong>HEARTICLES.</strong> is founded and operated by students of <strong>Class 6 - Group 1 - Term 127</strong> at the <strong>University of Languages and International Studies - VNU (ULIS - VNU)</strong> as part of the Journalism & Media Communications (BCTT) curriculum, striving to create a high-fashion, international-standard multimedia news portal dedicated to humanistic values.',
-    about_text_p2: 'Drawing inspiration from world-renowned minimalist publications and the authoritative editorial framework of Báo Nhân Dân online, we believe authentic journalistic beauty lies not in sensational clickbait, but in human depth, elegant prose, and inspiring stories of kindness.',
-    about_text_p3: '<strong>Editorial Creed:</strong> Truth in reporting, empathy in perspective, and aesthetic excellence in every published line.',
+    about_text_p1: "Based in Hanoi, Vietnam, HEARTICLES is an academic multimedia journalism publication born out of a simple, unwavering belief: in a world driven by rapid headlines and digital noise, true journalism must never lose its soul. Every piece we publish is built upon rigorous, multi-source verification and authentic engagement with official, credible sources, ensuring that all our reporting stands as trustworthy, accurate, and deeply reliable.",
+    about_text_p2: "At HEARTICLES, our editorial heart beats for human-centric storytelling. We specialize in bringing forward stories of empathy, kindness, and unsung resilience—the quiet moments of human goodness that often go unnoticed, yet remind us of our shared humanity. Our perspective reaches far beyond borders: while we honor the timeless charm and spirit of Hanoi, our lens extends across the globe to cover diverse human experiences, vibrant cultures, local food traditions, and inspiring lifestyle narratives from every corner of the world.",
+    about_text_p3: "While our storytelling is rooted in deep empathy, our reporting is firmly grounded in journalistic integrity and fully verified information. We write not just to report events, but to touch hearts, build global bridges, and foster a more thoughtful, compassionate world.",
       // --- Update Giao Dien 2026 Additions ---
     ad_label: "ADVERTISEMENT • QUẢNG CÁO",
     stream_header_title: "CURATED STORIES",

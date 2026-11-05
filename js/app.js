@@ -1817,20 +1817,84 @@ window.closeDrawer = closeDrawer;
 function openSubscribeModal() {
   const modal = document.getElementById('subscribeModal');
   if (modal) {
+    const card = modal.querySelector('.onboard-card');
+    const isEn = (typeof currentLanguage !== 'undefined' && currentLanguage === 'en');
+    if (card) {
+      card.innerHTML = `
+        <button onclick="closeSubscribeModal()" style="position:absolute; top:1.25rem; right:1.25rem; font-size:1.25rem; color:var(--color-text-muted); cursor:pointer; background:none; border:none;" aria-label="Đóng"><i class="fas fa-times"></i></button>
+        <div style="font-size:2.5rem; color:var(--color-brand-primary); margin-bottom:0.5rem;"><i class="fas fa-envelope-open-text"></i></div>
+        <h3 style="font-family:var(--font-editorial); font-size:1.5rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="subscribe_modal_title">${isEn ? 'Subscribe to HEARTICLES. Sunday Edition' : 'Đăng Ký Nhận Bản Tin HEARTICLES.'}</h3>
+        <p style="font-size:0.875rem; color:var(--color-text-body); margin:0.75rem 0 1.25rem 0;" data-i18n="subscribe_modal_desc">${isEn ? 'Receive curated humanistic stories and ethical journalism insights directly to your inbox every Sunday morning.' : 'Nhận tuyển tập những bài viết nhân văn sâu sắc và ký sự chạm đến trái tim vào mỗi sáng Chủ nhật.'}</p>
+        <form onsubmit="handleSubscribeSubmit(event)" style="display:flex; flex-direction:column; gap:0.75rem;">
+          <input type="email" id="subscribeEmailInput" required placeholder="name@example.com" style="padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+          <button type="submit" id="subscribeSubmitBtn" class="fashion-btn-pill" style="padding:0.75rem; cursor:pointer; font-weight:700;" data-i18n="btn_subscribe">${isEn ? 'Subscribe' : 'Đăng Ký Ngay'}</button>
+        </form>
+      `;
+    }
     modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      const input = document.getElementById('subscribeEmailInput');
+      if (input) input.focus();
+    }, 150);
     return;
-  }
-  const isEn = (currentLanguage === 'en');
-  const email = prompt(isEn ? 'Enter your email address to receive HEARTICLES. Sunday Edition:' : 'Nhập địa chỉ email của bạn để nhận bản tin thời trang & nhân văn HEARTICLES. mỗi sáng:');
-  if (email && email.includes('@')) {
-    localStorage.setItem('hearticles_subscribed_email', email);
-    showToast(isEn ? 'Subscribed successfully! Thank you.' : 'Cảm ơn bạn! Đã đăng ký nhận bản tin thành công.', 'check-circle');
-  } else if (email) {
-    alert(isEn ? 'Please enter a valid email address.' : 'Vui lòng nhập địa chỉ email hợp lệ.');
   }
 }
 window.openSubscribeModal = openSubscribeModal;
 
+function closeSubscribeModal() {
+  const modal = document.getElementById('subscribeModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+window.closeSubscribeModal = closeSubscribeModal;
+
+function handleSubscribeSubmit(e) {
+  if (e) e.preventDefault();
+  const form = e ? e.target : null;
+  const input = form ? form.querySelector('input[type="email"]') : document.getElementById('subscribeEmailInput');
+  const email = input ? input.value.trim() : '';
+
+  if (!email || !email.includes('@')) {
+    const isEn = (typeof currentLanguage !== 'undefined' && currentLanguage === 'en');
+    showToast(isEn ? 'Please enter a valid email address.' : 'Vui lòng nhập địa chỉ email hợp lệ.', 'exclamation-circle');
+    return;
+  }
+
+  // Save to localStorage
+  localStorage.setItem('hearticles_subscribed_email', email);
+
+  // Success screen inside modal if modal is open
+  const modal = document.getElementById('subscribeModal');
+  const card = modal ? modal.querySelector('.onboard-card') : null;
+  const isEn = (typeof currentLanguage !== 'undefined' && currentLanguage === 'en');
+
+  if (card && modal.classList.contains('active')) {
+    card.innerHTML = `
+      <div style="font-size:3.25rem; color:#22C55E; margin-bottom:0.75rem;"><i class="fas fa-check-circle"></i></div>
+      <h3 style="font-family:var(--font-editorial); font-size:1.55rem; font-weight:800; color:var(--color-brand-primary);">
+        ${isEn ? 'Subscribed Successfully!' : 'Đăng Ký Nhận Bản Tin Thành Công!'}
+      </h3>
+      <p style="font-size:0.925rem; color:var(--color-text-body); margin:0.75rem 0 1.5rem 0; line-height:1.6;">
+        ${isEn ? `Thank you! Future editions will be delivered to <strong>${email}</strong> every Sunday.` : `Cảm ơn bạn! Các ấn phẩm Chủ Nhật sẽ được gửi trực tiếp tới <strong>${email}</strong>.`}
+      </p>
+      <button type="button" class="fashion-btn-pill" onclick="closeSubscribeModal()" style="padding:0.75rem 2rem; font-weight:700;">
+        ${isEn ? 'Close & Continue Reading' : 'Đóng & Tiếp Tục Đọc Báo'}
+      </button>
+    `;
+  }
+
+  // Show toast notification
+  showToast(isEn ? 'Subscribed successfully! Thank you.' : 'Cảm ơn bạn! Đã đăng ký nhận bản tin thành công.', 'check-circle');
+
+  // Also auto-close modal after 3 seconds
+  setTimeout(() => {
+    closeSubscribeModal();
+  }, 3200);
+}
+window.handleSubscribeSubmit = handleSubscribeSubmit;
 function closeSubscribeModal() {
   const modal = document.getElementById('subscribeModal');
   if (modal) modal.classList.remove('active');

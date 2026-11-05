@@ -795,14 +795,16 @@
   </div>
 
   <!-- SUBSCRIBE MODAL -->
+    <!-- SUBSCRIBE MODAL -->
   <div class="onboard-modal-backdrop" id="subscribeModal" onclick="if(event.target === this) closeSubscribeModal()">
     <div class="onboard-card" style="text-align:center;">
+      <button onclick="closeSubscribeModal()" style="position:absolute; top:1.25rem; right:1.25rem; font-size:1.25rem; color:var(--color-text-muted); cursor:pointer; background:none; border:none;" aria-label="Đóng"><i class="fas fa-times"></i></button>
       <div style="font-size:2.5rem; color:var(--color-brand-primary); margin-bottom:0.5rem;"><i class="fas fa-envelope-open-text"></i></div>
       <h3 style="font-family:var(--font-editorial); font-size:1.5rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="subscribe_modal_title">Đăng Ký Nhận Bản Tin HEARTICLES.</h3>
       <p style="font-size:0.875rem; color:var(--color-text-body); margin:0.75rem 0 1.25rem 0;" data-i18n="subscribe_modal_desc">Nhận tuyển tập những bài viết nhân văn sâu sắc và ký sự chạm đến trái tim vào mỗi sáng Chủ nhật.</p>
-      <form onsubmit="event.preventDefault(); showToast('Cảm ơn bạn đã đăng ký nhận bản tin!', 'subscribe'); closeSubscribeModal();" style="display:flex; flex-direction:column; gap:0.75rem;">
-        <input type="email" required placeholder="name@example.com" style="padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none;">
-        <button type="submit" class="fashion-btn-pill" style="padding:0.75rem;">Đăng Ký Ngay</button>
+      <form onsubmit="handleSubscribeSubmit(event)" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <input type="email" id="subscribeEmailInput" required placeholder="name@example.com" style="padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+        <button type="submit" id="subscribeSubmitBtn" class="fashion-btn-pill" style="padding:0.75rem; cursor:pointer; font-weight:700;" data-i18n="btn_subscribe">Subscribe</button>
       </form>
     </div>
   </div>

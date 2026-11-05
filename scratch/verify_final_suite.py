@@ -1,63 +1,61 @@
-# -*- coding: utf-8 -*-
-import os, sys, re
-
+import os, sys, glob, re
 sys.stdout.reconfigure(encoding='utf-8')
 
-ROOT = r"C:\Users\camka\OneDrive\Desktop\BCTT_class6group1term127"
-pages = ["index.html", "trending.html", "society.html", "human-stories.html", "mind-soul.html", "in-depth.html", "about.html"]
+print("=== FINAL VERIFICATION SUITE ===")
+errors = []
 
-print("=== VERIFYING PAGES IN BCTT_class6group1term127 ===")
+# 1. Check HTML files
+html_files = glob.glob(r'C:\Users\camka\OneDrive\Desktop\BCTT_class6group1term127\*.html')
+print(f"Total HTML files: {len(html_files)}")
+if len(html_files) != 7:
+    errors.append(f"Expected 7 HTML files, found {len(html_files)}")
 
-all_ok = True
+# 2. Check title
+for f in html_files:
+    with open(f, 'r', encoding='utf-8') as fp:
+        c = fp.read()
+    if 'Class6group1term127' not in c:
+        errors.append(f"Missing Class6group1term127 in {os.path.basename(f)}")
+    if 'hls.min.js' not in c:
+        errors.append(f"Missing hls.min.js in {os.path.basename(f)}")
+    if 'fashion-footer-logo-img' not in c:
+        errors.append(f"Missing full logo in footer in {os.path.basename(f)}")
+    if 'fashion-slogan-heart' not in c:
+        errors.append(f"Missing slogan heart in {os.path.basename(f)}")
 
-for page in pages:
-    p = os.path.join(ROOT, page)
-    if not os.path.exists(p):
-        print(f"FAIL: {page} does not exist!")
-        all_ok = False
-        continue
-    
-    with open(p, 'r', encoding='utf-8') as f:
-        html = f.read()
+# 3. Check BCTT absence
+for f in html_files + glob.glob(r'C:\Users\camka\OneDrive\Desktop\BCTT_class6group1term127\js\*.js') + glob.glob(r'C:\Users\camka\OneDrive\Desktop\BCTT_class6group1term127\css\*.css'):
+    with open(f, 'r', encoding='utf-8', errors='ignore') as fp:
+        for idx, line in enumerate(fp, 1):
+            if 'bctt' in line.lower():
+                errors.append(f"Found BCTT in {os.path.basename(f)}:{idx}")
 
-    # Checks
-    no_ad = "header-ad-leaderboard-wrap" not in html
-    has_logo = "brand_logo_updated.png" in html
-    has_email = "class6group1term127@gmail.com" in html
-    no_academic_bar = "fashion-academic-bar" not in html
-    has_dropdown = "about-dropdown-menu" in html
-    has_title_class = "Class6group1term127" in html
+# 4. Check video clips in app.js
+with open(r'C:\Users\camka\OneDrive\Desktop\BCTT_class6group1term127\js\app.js', 'r', encoding='utf-8') as fp:
+    app_js = fp.read()
 
-    if not (no_ad and has_logo and has_email and no_academic_bar and has_dropdown and has_title_class):
-        print(f"WARN in {page}: no_ad={no_ad}, logo={has_logo}, email={has_email}, no_bar={no_academic_bar}, dropdown={has_dropdown}, title={has_title_class}")
-        all_ok = False
-    else:
-        print(f"PASS: {page} headers & navigation fully verified (no ad, clean masthead).")
+clips_match = re.findall(r'id:\s*"clip-(\d+)"', app_js)
+print(f"Total clips found in app.js: {len(clips_match)}")
+if len(clips_match) != 12:
+    errors.append(f"Expected 12 clips, found {len(clips_match)}")
 
-# Check index.html specific elements
-with open(os.path.join(ROOT, "index.html"), 'r', encoding='utf-8') as f:
-    index_html = f.read()
+# 5. Check Mission text in app.js
+if "Welcome to HEARTICLES" not in app_js:
+    errors.append("Welcome to HEARTICLES missing in app.js")
 
-assert "top-hero-3col-cluster" in index_html, "Missing top-hero-3col-cluster in index.html"
-assert "hero-left-stream" in index_html, "Missing hero-left-stream in index.html"
-assert "hero-center-top-post" in index_html, "Missing hero-center-top-post in index.html"
-assert "hero-right-widgets" in index_html, "Missing hero-right-widgets in index.html"
-assert "heart-tap-container" in index_html, "Missing heart-tap-container in index.html"
-assert "videoHubSection" in index_html, "Missing videoHubSection in index.html"
-assert "pollContainer" in index_html, "Missing pollContainer in index.html"
+# 6. Check style.css
+with open(r'C:\Users\camka\OneDrive\Desktop\BCTT_class6group1term127\css\style.css', 'r', encoding='utf-8') as fp:
+    css = fp.read()
 
-print("PASS: index.html 3-column hero, video, poll, and heart tap minigame verified!")
+if ".video-native-player" not in css:
+    errors.append(".video-native-player not found in style.css")
+if ".fashion-subscribe-btn" not in css:
+    errors.append(".fashion-subscribe-btn not found in style.css")
 
-# Check JS files
-for js_file in ["app.js", "translations.js", "data.js"]:
-    p = os.path.join(ROOT, "js", js_file)
-    with open(p, 'r', encoding='utf-8') as f:
-        js_code = f.read()
-    print(f"PASS: js/{js_file} loaded ({len(js_code)} chars).")
-
-# Check Assets
-logo_asset = os.path.join(ROOT, "assets", "images", "logo", "brand_logo_updated.png")
-assert os.path.exists(logo_asset), f"Missing {logo_asset}"
-print(f"PASS: Brand logo asset verified ({os.path.getsize(logo_asset)} bytes).")
-
-print("\nALL SUITE AUDITS PASSED WITH ZERO ERRORS!")
+print("\n--- RESULTS ---")
+if errors:
+    print(f"FAILED with {len(errors)} error(s):")
+    for e in errors:
+        print("  -", e)
+else:
+    print("ALL 8 VERIFICATION CHECKS PASSED WITH 100% SUCCESS!")

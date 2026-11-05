@@ -7,7 +7,7 @@
 const I18N_TRANSLATIONS = {
   vi: {
     // 1. Academic & Top Bar
-    academic_text: '<i class="fas fa-graduation-cap"></i> <span>Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU) • Lớp 6 - Nhóm 1 - Khóa 127 • BCTT</span>',
+    academic_text: '<i class="fas fa-graduation-cap"></i> <span>Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU) • Lớp 6 - Nhóm 1 - Khóa 127</span>',
     offline_banner: '<i class="fas fa-wifi-slash"></i> <span>Chế độ ngoại tuyến: Bạn đang đọc các bài viết đã lưu đệm. Hệ thống sẽ tự động cập nhật khi có mạng.</span>',
     
     // 2. Navigation
@@ -95,7 +95,7 @@ const I18N_TRANSLATIONS = {
     
     // 8. Op-Ed & Civic Poll
     opinion_badge: '<i class="fas fa-feather-alt"></i> BÌNH LUẬN & XÃ LUẬN',
-    opinion_edition: "Ấn phẩm BCTT • ULIS - VNU",
+    opinion_edition: "Ấn phẩm Báo điện tử • ULIS - VNU",
     opinion_author_name: "Cố vấn Học thuật Khoa Ngôn ngữ & Truyền thông",
     opinion_author_title: "Trường Đại học Ngoại ngữ - ĐHQGHN",
     opinion_quote: "“Báo chí chân chính trong kỷ nguyên số không đo lường sức ảnh hưởng bằng tốc độ giật gân, mà bằng chiều sâu nhân văn và khả năng thắp sáng lòng trắc ẩn trong tâm hồn công chúng.”",
@@ -124,7 +124,7 @@ const I18N_TRANSLATIONS = {
     
     // 10. Footer
     footer_desc: "Tòa soạn Tạp chí Báo điện tử Đa phương tiện • Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU)",
-    footer_group: "Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ & Truyền thông • Học phần Báo chí & Truyền thông (BCTT)",
+    footer_group: "Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ & Truyền thông • Tòa soạn Báo chí & Truyền thông Đa phương tiện",
     footer_copy: "&copy; 2026 HEARTICLES. Mọi quyền được bảo lưu. Xuất bản bởi Nhóm 1 Lớp 6 Khóa 127, ULIS - VNU.",
     footer_model: "Mô hình tòa soạn Báo Nhân Dân điện tử (nhandan.vn) kết hợp tiêu chuẩn Nielsen Norman UX.",
     
@@ -147,11 +147,11 @@ const I18N_TRANSLATIONS = {
     shortcut_help: "Xem bảng danh sách phím tắt",
     
     // 12. Category Pages
-    trending_desc: "Nhịp đập xu hướng, những câu chuyện thịnh hành và chuyển động văn hóa xã hội nóng hổi trích xuất từ tài nguyên chính thống [BCTT] Trending.",
-    society_desc: "Những vấn đề dân sinh, chính sách tài chính du học, khủng hoảng sinh hoạt phí và các mô hình tương trợ cộng đồng văn minh trích xuất từ [BCTT] Society.",
-    human_desc: "Những mảnh đời chạm đến trái tim, nghị lực phi thường và cử chỉ tử tế thắp sáng niềm tin cuộc sống trích xuất từ [BCTT] Human stories.",
-    mind_desc: "Nuôi dưỡng thế giới nội tâm, nghệ thuật sống chậm, sức khỏe toàn diện và vẻ đẹp văn hóa nghệ thuật trích xuất từ [BCTT] Mind & Soul.",
-    indepth_desc: "Phóng sự dài kỳ, ký sự đa phương tiện, chuyên khảo văn hóa và những góc nhìn học thuật đối ngoại sâu sắc trích xuất từ [BCTT] In-dept.",
+    trending_desc: "Nhịp đập xu hướng, những câu chuyện thịnh hành và chuyển động văn hóa xã hội nóng hổi.",
+    society_desc: "Những vấn đề dân sinh, chính sách tài chính du học, khủng hoảng sinh hoạt phí và các mô hình tương trợ cộng đồng văn minh.",
+    human_desc: "Những mảnh đời chạm đến trái tim, nghị lực phi thường và cử chỉ tử tế thắp sáng niềm tin cuộc sống.",
+    mind_desc: "Nuôi dưỡng thế giới nội tâm, nghệ thuật sống chậm, sức khỏe toàn diện và vẻ đẹp văn hóa nghệ thuật.",
+    indepth_desc: "Phóng sự dài kỳ, ký sự đa phương tiện, chuyên khảo văn hóa và những góc nhìn học thuật đối ngoại sâu sắc.",
     sidebar_top_read: '<i class="fas fa-chart-line"></i> ĐỌC NHIỀU NHẤT',
     sidebar_topics: '<i class="fas fa-tags"></i> CHỦ ĐỀ NỔI BẬT',
     btn_read_full: "Đọc bài viết đầy đủ &rarr;",
@@ -191,7 +191,7 @@ const I18N_TRANSLATIONS = {
     heart_game_title: "Nhịp Tim Gắn Kết · Stress Reliever",
     heart_game_sub: "Chạm vào trái tim để giải tỏa căng thẳng sau những giờ đọc tin tức. Mỗi nhịp chạm gửi gắm một thông điệp tích cực và tiếp thêm nguồn năng lượng chữa lành cho tâm hồn bạn!",
     heart_count_label: "nhịp đập yêu thương đã được chia sẻ",
-    heart_charity_cheer: "Gửi năng lượng tương trợ đến quỹ học bổng trẻ em nghèo & vùng cao (BCTT Project).",
+    heart_charity_cheer: "Gửi năng lượng tương trợ đến quỹ học bổng trẻ em nghèo & vùng cao .",
     about_opt_profiles: "Profiles",
     about_opt_photo: "Photo",
     about_opt_subscribe: "Subscribe",
@@ -200,7 +200,7 @@ const I18N_TRANSLATIONS = {
     about_tab_photo: "Kho Ảnh Phóng Sự Báo Chí",
     about_tab_subscribe: "Đăng Ký Nhận Bản Tin",
     about_tab_mission: "Tôn Chỉ Hoạt Động & Chuẩn Mực",
-    // --- Member Profiles (from [BCTT] Profiles.docx) ---
+    // --- Member Profiles (from Editorial Profiles) ---
     profiles_sec_title: "BAN BIÊN TẬP & NHÂN SỰ TÒA SOẠN",
     profiles_sec_sub: "Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ & Truyền thông • Trường Đại học Ngoại ngữ - ĐHQGHN",
     profile_mai_title: "Tổng Biên Tập (Editor-in-Chief)",
@@ -224,7 +224,7 @@ const I18N_TRANSLATIONS = {
 
   en: {
     // 1. Academic & Top Bar
-    academic_text: '<i class="fas fa-graduation-cap"></i> <span>University of Languages & International Studies - VNU • Class 6 - Group 1 - Term 127 • BCTT</span>',
+    academic_text: '<i class="fas fa-graduation-cap"></i> <span>University of Languages & International Studies - VNU • Class 6 - Group 1 - Term 127</span>',
     offline_banner: '<i class="fas fa-wifi-slash"></i> <span>Offline Mode: You are reading cached stories. The portal will auto-sync once your connection is restored.</span>',
     
     // 2. Navigation
@@ -312,7 +312,7 @@ const I18N_TRANSLATIONS = {
     
     // 8. Op-Ed & Civic Poll
     opinion_badge: '<i class="fas fa-feather-alt"></i> EDITORIAL OP-ED & COMMENTARY',
-    opinion_edition: "BCTT Journal • ULIS - VNU",
+    opinion_edition: "Digital Journal • ULIS - VNU",
     opinion_author_name: "Academic Advisor, Faculty of Linguistics & Communications",
     opinion_author_title: "University of Languages & International Studies - VNU",
     opinion_quote: "“True journalism in the digital era is never measured by sensational speed, but by humanistic depth and the enduring power to illuminate compassion in society.”",
@@ -341,7 +341,7 @@ const I18N_TRANSLATIONS = {
     
     // 10. Footer
     footer_desc: "Multimedia Journalism & Editorial Portal • University of Languages and International Studies - VNU",
-    footer_group: "Class 6 - Group 1 - Term 127 • Faculty of Linguistics & Communications • Journalism & Media Studies (BCTT)",
+    footer_group: "Class 6 - Group 1 - Term 127 • Faculty of Linguistics & Communications • Multimedia Journalism & Publishing",
     footer_copy: "&copy; 2026 HEARTICLES. All rights reserved. Published by Group 1 Class 6 Term 127, ULIS - VNU.",
     footer_model: "Inspired by Báo Nhân Dân (nhandan.vn) asymmetric editorial model & Nielsen Norman UX standards.",
     
@@ -364,11 +364,11 @@ const I18N_TRANSLATIONS = {
     shortcut_help: "Show Keyboard Shortcuts",
     
     // 12. Category Pages
-    trending_desc: "Cultural pulses, viral trends, and contemporary social movements extracted from official [BCTT] Trending resources.",
-    society_desc: "Civic livelihoods, international study policies, cost-of-living resilience, and grassroots solidarity from [BCTT] Society.",
-    human_desc: "Unforgettable lives, extraordinary courage, and heartwarming acts of kindness that restore faith in humanity from [BCTT] Human stories.",
-    mind_desc: "Nurturing inner peace, slow living, holistic wellbeing, and cultural heritage from [BCTT] Mind & Soul.",
-    indepth_desc: "Longform investigative features, multimedia cultural essays, and diplomatic scholarly analyses from [BCTT] In-dept.",
+    trending_desc: "Cultural pulses, viral trends, and contemporary social movements.",
+    society_desc: "Civic livelihoods, international study policies, cost-of-living resilience, and grassroots solidarity.",
+    human_desc: "Unforgettable lives, extraordinary courage, and heartwarming acts of kindness that restore faith in humanity.",
+    mind_desc: "Nurturing inner peace, slow living, holistic wellbeing, and cultural heritage.",
+    indepth_desc: "Longform investigative features, multimedia cultural essays, and diplomatic scholarly analyses.",
     sidebar_top_read: '<i class="fas fa-chart-line"></i> MOST READ STORIES',
     sidebar_topics: '<i class="fas fa-tags"></i> FEATURED TOPICS',
     btn_read_full: "Read Full Story &rarr;",
@@ -417,7 +417,7 @@ const I18N_TRANSLATIONS = {
     about_tab_photo: "Documentary Photo Gallery",
     about_tab_subscribe: "Newsletter Subscription",
     about_tab_mission: "Mission, Ethics & Compliance",
-    // --- Member Profiles (from [BCTT] Profiles.docx) ---
+    // --- Member Profiles (from Editorial Profiles) ---
     profiles_sec_title: "EDITORIAL BOARD & NEWSROOM ROSTER",
     profiles_sec_sub: "Class 6 - Group 1 - Term 127 • Faculty of Linguistics & Communication • ULIS - VNU",
     profile_mai_title: "Editor-in-Chief",

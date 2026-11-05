@@ -160,7 +160,7 @@ function updateLiveDate() {
 }
 
 /* ===================================================================
-   MULTIMEDIA & VIDEO PHÓNG SỰ HUB (12 Authentic Clips from [BCTT] Video)
+   MULTIMEDIA & VIDEO PHÓNG SỰ HUB (12 Authentic Clips from Video Journal)
    Curated by Quỳnh & Class 6 Group 1 Term 127 • VTV & Documentary Features
    =================================================================== */
 let currentVideoCategoryFilter = 'all';
@@ -172,10 +172,11 @@ const VIDEO_CLIPS = [
     category_en: "Society",
     title: "Áo dài tôn vinh văn hóa Việt Nam tại Phần Lan",
     title_en: "Ao Dai Celebrates Vietnamese Culture in Finland",
-    desc: "Hội Áo dài Việt Nam tại Phần Lan chính thức ra mắt sáng kiến mang 1.000 tà áo dài truyền thống tới quốc gia Bắc Âu qua dự án 'Ngôi nhà Áo dài'.",
-    desc_en: "The Vietnamese Ao Dai Association in Finland launches a landmark initiative: bringing 1,000 traditional Ao Dai to the Nordic country through the 'Ao Dai House' project.",
+    desc: "Hội Áo dài Việt Nam tại Phần Lan chính thức ra mắt sáng kiến mang 1.000 tà áo dài truyền thống tới quốc gia Bắc Âu qua dự án 'Ngôi nhà Áo dài', thắt chặt sợi dây kết nối thế hệ và lan tỏa tinh hoa văn hóa dân tộc.",
+    desc_en: "The Vietnamese Ao Dai Association in Finland launches a landmark initiative: bringing 1,000 traditional Ao Dai to the Nordic country through the 'Ao Dai House' project, celebrating national heritage and bridging cultural generations.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/ao-dai-celebrates-vietnamese-culture-in-finland-100261028101457215.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/10/28/h264/mp4/ao-dai-27533120378672986580995.mp4/master.m3u8",
     embedUrl: "",
     duration: "4:15",
     thumb: "assets/images/society/image13.png",
@@ -188,10 +189,11 @@ const VIDEO_CLIPS = [
     category_en: "Society",
     title: "Việt Nam giải quyết các lỗ hổng về an toàn trực tuyến cho trẻ em",
     title_en: "Vietnam Tackles Gaps in Child Online Safety",
-    desc: "Chiến lược quốc gia về phát triển trẻ em giai đoạn 2026–2035 nhằm củng cố kỹ năng số và xây dựng môi trường mạng an toàn cho trẻ em.",
-    desc_en: "Viet Nam’s National Strategy on Child Development for 2026–2035 aims to strengthen children’s digital skills and create a safer environment for them to grow up in.",
+    desc: "Chiến lược quốc gia về phát triển trẻ em giai đoạn 2026–2035 nhằm củng cố kỹ năng số, nâng cao năng lực tự bảo vệ và kiến tạo một môi trường mạng an toàn, lành mạnh cho thế hệ trẻ.",
+    desc_en: "Viet Nam’s National Strategy on Child Development for 2026–2035 aims to strengthen children’s digital skills and create a safer, empowering digital environment for them to grow up in.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/viet-nam-tackles-gaps-in-child-online-safety-100261101165727007.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/11/01/h264/mp4/web-an-toan-87653776369114496232065.mp4/master.m3u8",
     embedUrl: "",
     duration: "3:50",
     thumb: "assets/images/society/image14.png",
@@ -204,13 +206,14 @@ const VIDEO_CLIPS = [
     category_en: "Society",
     title: "Những kẻ lừa đảo trên mạng xã hội là ai? | Phim tài liệu ARTE.tv",
     title_en: "Who Are the Social Media Fraudsters? | ARTE.tv Documentary",
-    desc: "Phóng sự điều tra chuyên sâu từ ARTE.tv bóc trần những cơ chế tinh vi của các đường dây lừa đảo kỹ thuật số và thao túng tâm lý trên mạng xã hội.",
-    desc_en: "ARTE.tv investigative documentary delving into the sophisticated mechanisms of modern online scams and social media deception targeting digital users worldwide.",
+    desc: "Phóng sự điều tra chuyên sâu từ hãng thông tấn ARTE.tv bóc trần mạng lưới lừa đảo xuyên biên giới qua các nền tảng mạng xã hội, giải mã tâm lý thao túng tinh vi của tội phạm công nghệ cao.",
+    desc_en: "An in-depth investigative documentary from ARTE.tv exposing the dark transnational web of social media romance scams, financial manipulation, and psychological deception.",
     author: "ARTE.tv Documentary",
     watchUrl: "https://www.youtube.com/watch?v=tIqYjcHRE04",
+    streamUrl: "",
     embedUrl: "https://www.youtube.com/embed/tIqYjcHRE04",
-    duration: "14:20",
-    thumb: "assets/images/society/image2.jpg",
+    duration: "52:10",
+    thumb: "assets/images/society/image15.png",
     articleId: "video-3",
     sourceType: "youtube"
   },
@@ -220,14 +223,15 @@ const VIDEO_CLIPS = [
     category_en: "Human Stories",
     title: "Chiến dịch 500 ngày đêm: Khi khoa học mở đường đưa các anh hùng liệt sĩ trở về",
     title_en: "500-day-and-night campaign: When science paves way to bring fallen soldiers home",
-    desc: "Hành trình thầm lặng nhưng đầy tự hào ứng dụng công nghệ giám định ADN hiện đại trả lại tên cho gần 800 hài cốt liệt sĩ vì đạo lý 'Uống nước nhớ nguồn'.",
-    desc_en: "How forensic science, advanced DNA technology, and dedicated devotion bring names back to nearly 800 unidentified martyrs, fulfilling a sacred mission of national gratitude.",
-    author: "VTV / Báo Nhân Dân",
+    desc: "Hành trình xúc động của các nhà khoa học và lực lượng chức năng ứng dụng công nghệ giám định ADN hiện đại để tìm kiếm, xác định danh tính và đưa hài cốt các anh hùng liệt sĩ về với quê hương.",
+    desc_en: "A moving documentary chronicling the landmark scientific effort of utilizing advanced DNA identification technology to bring fallen heroes back to their families and homeland.",
+    author: "Báo Tin Tức • TTXVN / Vietnam News",
     watchUrl: "https://www.youtube.com/watch?v=KDXNK3brzG0",
+    streamUrl: "",
     embedUrl: "https://www.youtube.com/embed/KDXNK3brzG0",
-    duration: "8:45",
-    thumb: "assets/images/trending/image1.jpg",
-    articleId: "trending-5",
+    duration: "14:25",
+    thumb: "assets/images/human-stories/image1.png",
+    articleId: "video-4",
     sourceType: "youtube"
   },
   {
@@ -235,14 +239,15 @@ const VIDEO_CLIPS = [
     category: "Mind & Soul",
     category_en: "Mind & Soul",
     title: "Sân khấu dành cho mọi tiếng nói: Nghệ thuật dung nạp và hòa nhập",
-    title_en: "A stage for every voice: Inclusive Theatre and Creative Expression",
-    desc: "Đối với các nghệ sĩ khuyết tật, con đường bước lên sân khấu mang lại tiếng nói bình đẳng, nơi những câu chuyện cuộc đời được tỏa sáng bằng nghệ thuật biểu cảm.",
-    desc_en: "For artists with disabilities, the path to the stage often involves a different approach to scriptwriting and rehearsals, placing collaborative creative ideas at centre stage.",
+    title_en: "A stage for every voice",
+    desc: "Đối với các nghệ sĩ khuyết tật, con đường bước lên sân khấu là hành trình vượt lên rào cản thể chất để cất lên tiếng nói chân thực, kiến tạo nên những tác phẩm kịch nghệ hòa nhập sâu sắc.",
+    desc_en: "For artists with disabilities, the stage represents an empowering sanctuary where creative expression flourishes and unique perspectives take center stage through collaborative theatre.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/a-stage-for-every-voice-100261029064303631.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/10/29/h264/mp4/yt-15014836428526926456802.mp4/master.m3u8",
     embedUrl: "",
-    duration: "5:10",
-    thumb: "assets/images/mind_&_soul/image6.jpg",
+    duration: "4:40",
+    thumb: "assets/images/mind-soul/image13.png",
     articleId: "video-5",
     sourceType: "vtv"
   },
@@ -251,14 +256,15 @@ const VIDEO_CLIPS = [
     category: "Mind & Soul",
     category_en: "Mind & Soul",
     title: "10 năm lớp học vĩ cầm miễn phí giữa lòng công viên TP.HCM",
-    title_en: "10 years of free violin lessons in park: Harmonizing Community Souls",
-    desc: "Lớp học vĩ cầm miễn phí suốt một thập kỷ giữa công viên TP.HCM gieo niềm đam mê âm nhạc cổ điển vào trái tim của hàng trăm bạn trẻ và người dân.",
-    desc_en: "The violin is one of the most challenging instruments to master. In Ho Chi Minh City, one community has spent a decade making musical passion accessible for all.",
+    title_en: "10 years of free violin lessons in park",
+    desc: "Suốt một thập kỷ qua, tiếng đàn violin réo rắt dưới bóng mát công viên giữa lòng Sài Gòn đã thắp sáng niềm đam mê âm nhạc hàn lâm cho hàng trăm bạn trẻ có hoàn cảnh khó khăn.",
+    desc_en: "For ten years, free violin lessons in a public park in Ho Chi Minh City have unlocked the beauty of classical music for aspiring students from all walks of life.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/10-years-of-free-violin-lessons-in-park-100261029064839361.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/10/29/h264/mp4/yt-52403677010684809792486.mp4/master.m3u8",
     embedUrl: "",
-    duration: "4:40",
-    thumb: "assets/images/mind_&_soul/image7.jpg",
+    duration: "3:30",
+    thumb: "assets/images/mind-soul/image14.png",
     articleId: "video-6",
     sourceType: "vtv"
   },
@@ -267,14 +273,15 @@ const VIDEO_CLIPS = [
     category: "Society",
     category_en: "Society",
     title: "Văn hóa trà Thái Nguyên thúc đẩy phát triển du lịch bền vững",
-    title_en: "Thai Nguyen tea culture boosts tourism and community livelihoods",
-    desc: "Lễ hội Trà quốc tế Thái Nguyên 2026 kết nối du khách với những người trồng chè, mở ra cơ hội phát triển du lịch nông nghiệp sinh thái đặc sắc.",
-    desc_en: "At Thai Nguyen International Tea Festival 2026, innovative activities bring tourists closer to tea growers and producers, developing distinctive agritourism experiences.",
+    title_en: "Thai Nguyen tea culture boosts tourism",
+    desc: "Tại Lễ hội Trà Quốc tế Thái Nguyên, những trải nghiệm văn hóa ẩm thực đặc sắc đang đưa du khách đến gần hơn với những người làm trà tâm huyết, mở ra tiềm năng du lịch sinh thái nông nghiệp.",
+    desc_en: "At Thai Nguyen International Tea Festival, innovative cultural encounters connect tourists with local tea growers, forging sustainable community-based tourism models.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/thai-nguyen-tea-culture-boosts-tourism-100261101042721506.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/11/01/h264/mp4/web-thai-nguyen-47460137484532453785769.mp4/master.m3u8",
     embedUrl: "",
-    duration: "4:25",
-    thumb: "assets/images/society/image34.jpg",
+    duration: "4:05",
+    thumb: "assets/images/society/image16.png",
     articleId: "video-7",
     sourceType: "vtv"
   },
@@ -283,14 +290,15 @@ const VIDEO_CLIPS = [
     category: "Human Stories",
     category_en: "Human Stories",
     title: "Người mẹ Hà Nội biến bữa cơm gia đình thành tác phẩm nghệ thuật",
-    title_en: "Mother turns meals into art: Creative Culinary Storytelling in Hanoi",
-    desc: "Tại Hà Nội, một người mẹ khéo léo biến những nguyên liệu thường ngày thành những bức tranh ẩm thực sinh động, giúp bữa cơm thêm hào hứng và tràn ngập tình yêu thương.",
-    desc_en: "For many parents, a home-cooked meal is more than just food. In Hanoi, one mother turns everyday ingredients into colourful works of art, inspiring mindful nutrition.",
+    title_en: "Mother turns meals into art",
+    desc: "Từ những nguyên liệu rau củ thường nhật trong gian bếp ấm cúng, người mẹ Thủ đô đã khéo léo thổi hồn thành những bức tranh ẩm thực rực rỡ sắc màu, gửi gắm tình thương yêu con vô bờ bến.",
+    desc_en: "In Hanoi, a devoted mother transforms everyday household meals into whimsical culinary art, infusing daily routines with joy, warmth, and maternal affection.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/mother-turns-meals-into-art-100260710095813651.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/07/10/h264/mp4/yt-meals-fix-59113839086671818123733.mp4/master.m3u8",
     embedUrl: "",
-    duration: "3:40",
-    thumb: "assets/images/human_stories/image15.jpg",
+    duration: "3:45",
+    thumb: "assets/images/human-stories/image13.png",
     articleId: "video-8",
     sourceType: "vtv"
   },
@@ -299,14 +307,15 @@ const VIDEO_CLIPS = [
     category: "Mind & Soul",
     category_en: "Mind & Soul",
     title: "Ốc đảo chữa lành tâm hồn hoàn toàn miễn phí tại TP. Hồ Chí Minh",
-    title_en: "A healing oasis in Ho Chi Minh City: Sanctuary for Inner Peace",
-    desc: "Không gian chăm sóc sức khỏe tinh thần hoàn toàn miễn phí tại TP.HCM giúp mọi người tìm lại sự an yên và cân bằng sau những áp lực của cuộc sống hiện đại.",
-    desc_en: "Mental well-being is an essential component of health. In Ho Chi Minh City, a community-based centre offers a tranquil mental spa completely free of charge.",
+    title_en: "A healing oasis in Ho Chi Minh City",
+    desc: "Một không gian thanh tịnh phi thương mại dành cho bất kỳ ai đang cảm thấy mệt mỏi, căng thẳng giữa nhịp sống đô thị gấp gáp, trao đi sự tĩnh lặng và năng lượng tích cực hoàn toàn miễn phí.",
+    desc_en: "A serene community sanctuary in Ho Chi Minh City offers mindfulness, meditation, and mental health refuge entirely free of charge for urban dwellers seeking peace.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/a-healing-oasis-in-ho-chi-minh-city-100260910032153068.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/09/10/h264/mp4/yt-33204601654543588323037.mp4/master.m3u8",
     embedUrl: "",
-    duration: "5:05",
-    thumb: "assets/images/mind_&_soul/image18.png",
+    duration: "4:10",
+    thumb: "assets/images/mind-soul/image15.png",
     articleId: "video-9",
     sourceType: "vtv"
   },
@@ -315,14 +324,15 @@ const VIDEO_CLIPS = [
     category: "Society",
     category_en: "Society",
     title: "Thiết chế thể thao cộng đồng tại Hà Nội thúc đẩy lối sống năng động",
-    title_en: "Community facilities promote healthier lifestyles across Hanoi",
-    desc: "Các không gian sinh hoạt, sân chơi thể thao công cộng tại Hà Nội giúp người dân mọi lứa tuổi rèn luyện sức khỏe, thắt chặt tình đoàn kết khối phố mà không tốn kém.",
-    desc_en: "Staying active doesn't require expensive gym memberships. Across Hanoi, community running clubs, table tennis, and workout spaces build stronger, healthier neighborhoods.",
+    title_en: "Community facilities promote healthier lifestyles",
+    desc: "Mạng lưới máy tập thể dục ngoài trời, đường chạy bộ quanh hồ và sân chơi thể thao công cộng tại Thủ đô đang lan tỏa thói quen sống khỏe, gắn kết tình làng nghĩa xóm trong từng khu dân cư.",
+    desc_en: "Outdoor community gymnasiums, lakeside running tracks, and open neighborhood sports spaces across Hanoi are cultivating energetic, healthier community lifestyles.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/community-facilities-promote-healthier-lifestyles-100261019013046705.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/10/19/h264/mp4/4-yt-community-facilities-promote-healthier-lifestyles-92475811190434812163691.mp4/master.m3u8",
     embedUrl: "",
-    duration: "4:30",
-    thumb: "assets/images/society/image30.jpg",
+    duration: "3:55",
+    thumb: "assets/images/society/image17.png",
     articleId: "video-10",
     sourceType: "vtv"
   },
@@ -331,14 +341,15 @@ const VIDEO_CLIPS = [
     category: "Human Stories",
     category_en: "Human Stories",
     title: "Những người mẹ phi thường, tình yêu phi thường thắp sáng niềm tin",
-    title_en: "Extraordinary mothers, extraordinary love: Resilience through Adversity",
-    desc: "Tôn vinh tình mẫu tử thiêng liêng và nghị lực phi thường của những người mẹ kiên cường vượt qua mọi thử thách, giông bão cuộc đời để nuôi dạy các con khôn lớn.",
-    desc_en: "As Mother's Day is celebrated worldwide, people honour the boundless devotion and strength of mothers whose unique journeys require extraordinary resilience.",
+    title_en: "Extraordinary mothers, extraordinary love",
+    desc: "Nhân dịp Ngày của Mẹ, phóng sự tôn vinh nghị lực phi thường và đức hy sinh lặng thầm của những người mẹ kiên cường vượt qua nghịch cảnh để chở che và ươm mầm tương lai cho con cái.",
+    desc_en: "Honoring Mother’s Day, this moving feature celebrates the boundless resilience, courage, and unconditional love of mothers who overcome extraordinary odds for their children.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/extraordinary-mothers-extraordinary-love-10026051107442239.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/05/11/h264/mp4/yt-focus-mother-fix-41166236096252430779402.mp4/master.m3u8",
     embedUrl: "",
-    duration: "5:35",
-    thumb: "assets/images/human_stories/image20.jpg",
+    duration: "4:30",
+    thumb: "assets/images/human-stories/image14.png",
     articleId: "video-11",
     sourceType: "vtv"
   },
@@ -347,28 +358,78 @@ const VIDEO_CLIPS = [
     category: "Society",
     category_en: "Society",
     title: "Người trẻ chung tay chăm sóc và mang hơi ấm tới người cao tuổi neo đơn",
-    title_en: "Youth caring for the elderly: Warmth and Solidarity for Solitary Seniors",
-    desc: "Mỗi tháng một lần, các bạn trẻ tình nguyện viên lại cùng nhau dọn dẹp nhà cửa, nấu những bữa cơm ấm áp và trao gửi tình thân tới những cụ già neo đơn.",
-    desc_en: "Once a month, a dedicated group of young volunteers gather to clean homes, prepare warm nutritious meals, and personally deliver heartfelt companionship to elderly people living alone.",
+    title_en: "Youth caring for the elderly",
+    desc: "Hành trình định kỳ hàng tháng của những bạn trẻ tình nguyện tại TP.HCM: dọn dẹp nhà cửa, tự tay nấu từng bữa cơm nóng và lắng nghe tâm sự của các cụ già neo đơn, cô quạnh.",
+    desc_en: "Monthly volunteer journeys of youth groups in Ho Chi Minh City dedicated to cleaning homes, cooking warm meals, and bringing heartfelt companionship to isolated elderly citizens.",
     author: "BTV Quỳnh • Vietnam Today / VTV",
     watchUrl: "https://vietnamtoday.vtv.vn/youth-caring-for-the-elderly-100260226123528559.htm",
+    streamUrl: "https://cdn-videos.vtv.vn/66349b6076cb4dee98746cf1/2026/02/26/h264/mp4/yt-81091811841841072429889.mp4/master.m3u8",
     embedUrl: "",
-    duration: "4:10",
+    duration: "4:15",
     thumb: "assets/images/society/image18.png",
     articleId: "video-12",
     sourceType: "vtv"
   }
 ];
 
-function filterVideoCategory(catKey) {
-  currentVideoCategoryFilter = catKey;
-  const filtered = (catKey === 'all')
-    ? VIDEO_CLIPS
-    : VIDEO_CLIPS.filter(c => c.category.toLowerCase() === catKey.toLowerCase());
-  if (filtered.length > 0 && !filtered.some(c => c.id === currentActiveClipId)) {
-    currentActiveClipId = filtered[0].id;
-    isVideoPlaying = false;
-  }
+// State managed above
+
+// Helper to attach HLS streams reliably
+function attachHlsStream(streamUrl) {
+  setTimeout(() => {
+    const videoEl = document.getElementById('activeNativePlayer');
+    if (!videoEl || !streamUrl) return;
+
+    if (window._currentHlsInstance) {
+      try { window._currentHlsInstance.destroy(); } catch (e) {}
+      window._currentHlsInstance = null;
+    }
+
+    if (window.Hls && window.Hls.isSupported()) {
+      const hls = new window.Hls({
+        enableWorker: true,
+        lowLatencyMode: false
+      });
+      window._currentHlsInstance = hls;
+      hls.loadSource(streamUrl);
+      hls.attachMedia(videoEl);
+      hls.on(window.Hls.Events.MANIFEST_PARSED, function () {
+        const playPromise = videoEl.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => {
+            console.log('Autoplay deferred until user interaction:', err);
+          });
+        }
+      });
+      hls.on(window.Hls.Events.ERROR, function (event, data) {
+        if (data.fatal) {
+          switch (data.type) {
+            case window.Hls.ErrorTypes.NETWORK_ERROR:
+              hls.startLoad();
+              break;
+            case window.Hls.ErrorTypes.MEDIA_ERROR:
+              hls.recoverMediaError();
+              break;
+            default:
+              hls.destroy();
+              break;
+          }
+        }
+      });
+    } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
+      videoEl.src = streamUrl;
+      const playPromise = videoEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          console.log('Autoplay deferred:', err);
+        });
+      }
+    }
+  }, 40);
+}
+
+function filterVideoCategory(categoryKey) {
+  currentVideoCategoryFilter = categoryKey;
   renderVideoHub();
 }
 window.filterVideoCategory = filterVideoCategory;
@@ -383,100 +444,91 @@ function renderVideoHub() {
   const mainDesc = (isEn && mainClip.desc_en) ? mainClip.desc_en : mainClip.desc;
   const mainCat = (isEn && mainClip.category_en) ? mainClip.category_en : mainClip.category;
 
-  const isLocalEnv = (
-    window.location.protocol === 'file:' || 
-    window.location.hostname === 'localhost' || 
-    window.location.hostname === '127.0.0.1' || 
-    !window.location.hostname
-  );
-  const isYouTube = (mainClip.sourceType === 'youtube' && mainClip.embedUrl);
+  const isYouTube = (mainClip.sourceType === 'youtube');
 
-  const playBtnText = isEn ? 'Play Video' : 'Phát Video';
-  const watchYtText = isEn ? 'Watch on YouTube ↗' : 'Xem trên YouTube ↗';
-  const watchVtvText = isEn ? 'Watch on VTV Today ↗' : 'Xem trên VTV Today ↗';
+  const playBtnText = isEn ? 'Play on Web' : 'Phát Trực Tiếp';
+  const stopBtnText = isEn ? 'Stop Video' : 'Dừng Video';
+  const watchSourceText = isYouTube 
+    ? (isEn ? 'Watch on YouTube ↗' : 'Xem trên YouTube ↗')
+    : (isEn ? 'VTV Vietnam Today ↗' : 'Xem trên VTV Today ↗');
   const readStoryText = isEn ? 'Read Video Story' : 'Đọc Ký Sự Phóng Sự';
-
-  const videoNotice = (isYouTube && isFileProtocol)
-    ? (isEn
-        ? `<div class="video-local-notice"><i class="fas fa-info-circle"></i> <span>Notice: When opening from local file (file://), YouTube security may block iframe playback. Click <strong>Watch on YouTube ↗</strong> for 100% full HD playback.</span></div>`
-        : `<div class="video-local-notice"><i class="fas fa-info-circle"></i> <span>Ghi chú: Khi mở web từ tệp máy tính (file://), nếu YouTube chặn phát nhúng, bạn có thể bấm <strong>Xem trên YouTube ↗</strong> để xem trực tiếp full HD.</span></div>`)
-    : '';
 
   const badgeHtml = isYouTube
     ? `<span class="video-badge-pill"><i class="fab fa-youtube"></i> YOUTUBE DOCUMENTARY</span>`
     : `<span class="video-badge-pill"><i class="fas fa-broadcast-tower"></i> VTV VIETNAM TODAY • MULTIMEDIA</span>`;
 
-  const playerStageHtml = (isYouTube && isVideoPlaying)
-    ? (isLocalEnv
-        ? `<div class="video-poster-stage" style="cursor:default;">
-             <img src="${mainClip.thumb}" alt="${mainTitle}" class="video-poster-img" onerror="handleImageError(this)">
-             <div class="video-poster-overlay" style="background:rgba(20, 16, 17, 0.85);"></div>
-             <div class="video-play-center" style="max-width:480px; text-align:center; padding:1.5rem;">
-               <div style="font-size:2.8rem; color:#FF0000; margin-bottom:0.75rem;"><i class="fab fa-youtube"></i></div>
-               <h3 style="font-family:var(--font-editorial); font-size:1.25rem; color:#FFF; margin-bottom:0.5rem;">${mainTitle}</h3>
-               <p style="font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5; margin-bottom:1.25rem;">
-                 ${isEn 
-                   ? 'Opening via local file (file://): YouTube blocks inline embedding to protect origin headers (Error 153). Watch directly in crystal-clear 1080p Full HD on YouTube.' 
-                   : 'Do bạn đang mở tệp trực tiếp từ máy tính (file://): YouTube kích hoạt chính sách bảo mật chặn nhúng (Lỗi 153). Mời bạn bấm nút dưới để xem trực tiếp chuẩn Full HD trên YouTube.'}
-               </p>
-               <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
-                 <a href="${mainClip.watchUrl}" target="_blank" rel="noopener noreferrer" class="fashion-btn-pill" style="background:#FF0000; color:#FFF; font-weight:700; padding:0.65rem 1.4rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; border-radius:30px; box-shadow:0 4px 14px rgba(255,0,0,0.4);">
-                   <i class="fab fa-youtube"></i> <span>${isEn ? 'Watch on YouTube ↗' : 'Xem ngay trên YouTube ↗'}</span>
-                 </a>
-                 <button onclick="isVideoPlaying=false; renderVideoHub();" class="fashion-btn-pill" style="background:rgba(255,255,255,0.15); color:#FFF; padding:0.65rem 1.2rem; border:1px solid rgba(255,255,255,0.3); border-radius:30px; cursor:pointer;">
-                   ${isEn ? 'Back to Poster' : 'Quay lại bìa'}
-                 </button>
-               </div>
-             </div>
-           </div>`
-        : `<div class="video-responsive-embed">
-             <iframe id="activeVideoFrame" 
-               src="${mainClip.embedUrl}?autoplay=1&rel=0&modestbranding=1" 
-               title="${mainTitle}" 
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-               referrerpolicy="strict-origin-when-cross-origin" 
-               allowfullscreen>
-             </iframe>
-           </div>`)
-    : `<div class="video-poster-stage" onclick="${isYouTube ? `playActiveVideo('${mainClip.id}')` : `window.open('${mainClip.watchUrl}', '_blank')`}" title="${isEn ? (isYouTube ? 'Click to Play' : 'Click to Watch on VTV Today') : (isYouTube ? 'Nhấp để phát video' : 'Nhấp để xem trên VTV Today')}">
-         <img src="${mainClip.thumb}" alt="${mainTitle}" class="video-poster-img" onerror="handleImageError(this)">
-         <div class="video-poster-overlay"></div>
-         <div class="video-poster-top">
-           ${badgeHtml}
-           <span class="video-duration-pill"><i class="far fa-clock"></i> ${mainClip.duration}</span>
-         </div>
-         <div class="video-play-center">
-           <button class="video-play-pulse-btn" aria-label="Play Video">
-             <i class="fas ${isYouTube ? 'fa-play' : 'fa-external-link-alt'}"></i>
-           </button>
-           <span class="video-play-hint">${isYouTube ? playBtnText : watchVtvText}</span>
-         </div>
-       </div>`;
+  // Render direct inline player stage
+  let playerStageHtml = '';
+  if (isVideoPlaying) {
+    if (isYouTube) {
+      playerStageHtml = `
+        <div class="video-responsive-embed" id="videoPlayerStageWrap">
+          <iframe id="activeVideoFrame" 
+            src="${mainClip.embedUrl}?autoplay=1&rel=0&modestbranding=1&playsinline=1" 
+            title="${mainTitle}" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      `;
+    } else {
+      playerStageHtml = `
+        <div class="video-responsive-embed" id="videoPlayerStageWrap">
+          <video id="activeNativePlayer" 
+            controls 
+            autoplay 
+            playsinline 
+            poster="${mainClip.thumb}"
+            class="video-native-player">
+          </video>
+        </div>
+      `;
+      attachHlsStream(mainClip.streamUrl);
+    }
+  } else {
+    playerStageHtml = `
+      <div class="video-poster-stage" id="videoPlayerStageWrap" onclick="playActiveVideo('${mainClip.id}')" title="${isEn ? 'Click to play directly on web' : 'Bấm để phát video trực tiếp trên web'}">
+        <img src="${mainClip.thumb}" alt="${mainTitle}" class="video-poster-img" onerror="handleImageError(this)">
+        <div class="video-poster-overlay"></div>
+        <div class="video-poster-top">
+          ${badgeHtml}
+          <span class="video-duration-tag"><i class="fas fa-clock"></i> ${mainClip.duration}</span>
+        </div>
+        <div class="video-play-center">
+          <button class="video-play-pulse-btn" aria-label="Play Video">
+            <i class="fas fa-play"></i>
+          </button>
+          <span class="video-play-hint">${isEn ? 'Play Directly on Web' : 'Phát Trực Tiếp Trên Web'}</span>
+        </div>
+      </div>
+    `;
+  }
 
-  const actionToolbarHtml = isYouTube
-    ? `
-      <div class="video-toolbar-strip">
-        <button class="video-tool-btn primary" onclick="playActiveVideo('${mainClip.id}')">
-          <i class="fas fa-play"></i> <span>${playBtnText}</span>
-        </button>
-        <a href="${mainClip.watchUrl}" target="_blank" rel="noopener noreferrer" class="video-tool-btn youtube" title="Xem trên YouTube">
-          <i class="fab fa-youtube"></i> <span>${watchYtText}</span>
-        </a>
-        ${mainClip.articleId ? `
-        <button class="video-tool-btn story" onclick="openArticleModal('${mainClip.articleId}')">
-          <i class="fas fa-newspaper"></i> <span>${readStoryText}</span>
-        </button>` : ''}
-      </div>`
-    : `
-      <div class="video-toolbar-strip">
-        <a href="${mainClip.watchUrl}" target="_blank" rel="noopener noreferrer" class="video-tool-btn vtv" title="Xem trên VTV Today">
-          <i class="fas fa-tv"></i> <span>${watchVtvText}</span>
-        </a>
-        ${mainClip.articleId ? `
-        <button class="video-tool-btn story" onclick="openArticleModal('${mainClip.articleId}')">
-          <i class="fas fa-newspaper"></i> <span>${readStoryText}</span>
-        </button>` : ''}
-      </div>`;
+  // Action Toolbar below player
+  const playButtonHtml = isVideoPlaying
+    ? `<button class="video-tool-btn primary" onclick="stopActiveVideo()" title="${stopBtnText}">
+         <i class="fas fa-stop"></i> <span>${stopBtnText}</span>
+       </button>`
+    : `<button class="video-tool-btn primary" onclick="playActiveVideo('${mainClip.id}')" title="${playBtnText}">
+         <i class="fas fa-play"></i> <span>${playBtnText}</span>
+       </button>`;
+
+  const sourceBtnClass = isYouTube ? 'youtube' : 'vtv';
+  const sourceIconClass = isYouTube ? 'fab fa-youtube' : 'fas fa-tv';
+
+  const actionToolbarHtml = `
+    <div class="video-toolbar-strip">
+      ${playButtonHtml}
+      <button class="video-tool-btn story" onclick="openVideoStoryModal('${mainClip.id}')" title="${readStoryText}">
+        <i class="fas fa-newspaper"></i> <span>${readStoryText}</span>
+      </button>
+      <a href="${mainClip.watchUrl}" target="_blank" rel="noopener noreferrer" class="video-tool-btn ${sourceBtnClass}" title="${watchSourceText}">
+        <i class="${sourceIconClass}"></i> <span>${watchSourceText}</span>
+      </a>
+      ${isVideoPlaying ? `<span class="video-playing-indicator"><span class="video-playing-dot"></span> ${isEn ? 'LIVE PLAYING' : 'ĐANG PHÁT'}</span>` : ''}
+    </div>
+  `;
 
   // Filter Categories Pills
   const filterCategories = [
@@ -504,12 +556,8 @@ function renderVideoHub() {
     ${filterBarHtml}
     <div class="video-grid-layout">
       <div class="main-video-player-box">
-        <div id="videoPlayerStageWrap">
-          ${playerStageHtml}
-        </div>
-        
+        ${playerStageHtml}
         ${actionToolbarHtml}
-        ${videoNotice}
 
         <div class="main-video-details">
           <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
@@ -528,16 +576,21 @@ function renderVideoHub() {
           const isActive = (clip.id === currentActiveClipId);
           const iconClass = clip.sourceType === 'youtube' ? 'fab fa-youtube' : 'fas fa-tv';
           return `
-            <div class="playlist-card ${isActive ? 'active' : ''}" onclick="switchVideo('${clip.id}')">
+            <div class="playlist-card ${isActive ? 'active' : ''}" onclick="playActiveVideo('${clip.id}')" title="${isEn ? 'Click to play' : 'Bấm để phát trực tiếp'}">
               <div class="playlist-thumb-wrap">
                 <img src="${clip.thumb}" alt="${title}" loading="lazy" onerror="handleImageError(this)">
-                <div class="playlist-play-icon"><i class="${iconClass}"></i></div>
+                <div class="playlist-play-icon">
+                  <i class="${isActive && isVideoPlaying ? 'fas fa-volume-up' : iconClass}"></i>
+                </div>
                 <span class="playlist-duration-badge">${clip.duration}</span>
               </div>
               <div class="playlist-info">
                 <span class="playlist-cat">${cat}</span>
                 <h4 class="playlist-title">${title}</h4>
-                <span class="playlist-byline">${clip.author.split('•')[0].trim()}</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.25rem;">
+                  <span class="playlist-byline">${clip.author.split('•')[0].trim()}</span>
+                  ${isActive && isVideoPlaying ? `<span style="font-size:0.7rem; color:#4ADE80; font-weight:700;"><i class="fas fa-play"></i> NOW</span>` : ''}
+                </div>
               </div>
             </div>
           `;
@@ -549,44 +602,104 @@ function renderVideoHub() {
 
 function playActiveVideo(clipId) {
   if (clipId) currentActiveClipId = clipId;
-  const clip = VIDEO_CLIPS.find(c => c.id === currentActiveClipId) || VIDEO_CLIPS[0];
-  const isLocalEnv = (
-    window.location.protocol === 'file:' || 
-    window.location.hostname === 'localhost' || 
-    window.location.hostname === '127.0.0.1' || 
-    !window.location.hostname
-  );
-
-  if (clip.sourceType === 'youtube') {
-    if (isLocalEnv) {
-      window.open(clip.watchUrl, '_blank');
-      if (typeof showToast === 'function') {
-        showToast(currentLanguage === 'en' 
-          ? 'Opening documentary in Full HD on YouTube' 
-          : 'Đang mở phóng sự chuẩn Full HD 1080p trên YouTube', 'info');
-      }
-      isVideoPlaying = true;
-      renderVideoHub();
-      return;
-    }
-  }
-  
-  if (clip.sourceType === 'vtv') {
-    window.open(clip.watchUrl, '_blank');
-    return;
-  }
-
   isVideoPlaying = true;
   renderVideoHub();
+
+  const wrap = document.getElementById('videoPlayerStageWrap');
+  if (wrap && window.innerWidth < 992) {
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 window.playActiveVideo = playActiveVideo;
 
-function switchVideo(clipId) {
-  currentActiveClipId = clipId;
+function stopActiveVideo() {
+  if (window._currentHlsInstance) {
+    try { window._currentHlsInstance.destroy(); } catch (e) {}
+    window._currentHlsInstance = null;
+  }
+  const videoEl = document.getElementById('activeNativePlayer');
+  if (videoEl) {
+    videoEl.pause();
+    videoEl.src = '';
+  }
   isVideoPlaying = false;
   renderVideoHub();
 }
+window.stopActiveVideo = stopActiveVideo;
+
+function switchVideo(clipId) {
+  playActiveVideo(clipId);
+}
 window.switchVideo = switchVideo;
+
+function openVideoStoryModal(clipId) {
+  const clip = VIDEO_CLIPS.find(c => c.id === clipId) || VIDEO_CLIPS[0];
+  const modal = document.getElementById('articleReaderModal');
+  const body = document.getElementById('articleModalBody');
+  if (!modal || !body) return;
+
+  const isEn = (currentLanguage === 'en');
+  const title = isEn ? (clip.title_en || clip.title) : clip.title;
+  const desc = isEn ? (clip.desc_en || clip.desc) : clip.desc;
+  const cat = isEn ? (clip.category_en || clip.category) : clip.category;
+  const sourceName = clip.sourceType === 'youtube' ? 'YouTube / TTXVN & ARTE' : 'VTV Today / VTV';
+
+  body.innerHTML = `
+    <article class="article-detail">
+      <header class="article-header">
+        <div class="article-breadcrumb">
+          <span>${isEn ? 'Home' : 'Trang chủ'}</span> &gt;
+          <span>Multimedia Video Hub</span> &gt;
+          <span style="color:var(--color-brand-primary); font-weight:700;">${cat}</span>
+        </div>
+        <div class="article-category-badge-wrap" style="margin-top:0.75rem;">
+          <span class="category-tag">${cat}</span>
+          <span style="font-size:0.8rem; background:rgba(84,17,30,0.1); color:#54111E; padding:0.25rem 0.65rem; border-radius:4px; font-weight:700; margin-left:0.5rem;">
+            <i class="fas fa-video"></i> ${isEn ? 'Video Documentary' : 'Ký sự Phóng sự Video'}
+          </span>
+        </div>
+        <h1 class="article-title" style="font-size:2rem; margin:1rem 0;">${title}</h1>
+        <div class="article-meta-row" style="margin-bottom:1.5rem; color:var(--color-text-muted); font-size:0.875rem;">
+          <span><i class="fas fa-user-edit"></i> ${clip.author}</span>
+          <span style="margin:0 0.5rem;">•</span>
+          <span><i class="fas fa-clock"></i> ${clip.duration}</span>
+        </div>
+      </header>
+      
+      <div class="article-featured-image-wrap" style="margin-bottom:2rem; border-radius:8px; overflow:hidden;">
+        <img src="${clip.thumb}" alt="${title}" style="width:100%; max-height:480px; object-fit:cover; display:block;">
+      </div>
+
+      <div class="article-body-text" style="font-size:1.1rem; line-height:1.85; color:var(--color-text-body); text-align:justify;">
+        <p style="font-weight:600; font-size:1.2rem; line-height:1.75; color:var(--color-text-headline); margin-bottom:1.5rem;">
+          ${desc}
+        </p>
+        <p>
+          ${isEn 
+            ? 'This special multimedia phóng sự feature was produced with rigorous academic journalistic verification, capturing real voices, authentic cultural heritage, and human-centric narratives. Every frame and interview adheres to strict fact-checking standards and ethical journalism.' 
+            : 'Tác phẩm phóng sự đa phương tiện đặc biệt này được thực hiện với chuẩn mực thẩm định báo chí học thuật chặt chẽ, ghi lại những thanh âm chân thực của đời sống, chiều sâu di sản văn hóa và những câu chuyện nhân văn đầy cảm xúc. Mọi thước phim và lời bộc bạch của nhân vật đều tuân thủ các nguyên tắc đạo đức báo chí và kiểm chứng đa nguồn.'}
+        </p>
+        <div style="margin:2rem 0; text-align:center;">
+          <button onclick="closeArticleModal(); playActiveVideo('${clip.id}'); document.getElementById('multimedia-hub')?.scrollIntoView({behavior:'smooth'});" class="fashion-subscribe-btn" style="padding:0.75rem 2rem; font-size:1rem;">
+            <i class="fas fa-play" style="margin-right:0.5rem;"></i> ${isEn ? 'Watch Video Inline on Web' : 'Phát Video Trực Tiếp Trên Web'}
+          </button>
+        </div>
+      </div>
+
+      <div class="article-source-citation" style="margin-top:2.5rem; padding:1.25rem; background:var(--color-bg-alt, #FAFAFA); border-radius:6px; border:1px solid var(--color-border-hairline);">
+        <span class="citation-label" style="font-weight:700;">${isEn ? 'Official Broadcasting Source:' : 'Nguồn phát sóng chính thức:'}</span> 
+        <em>${title}</em> • <strong>${sourceName}</strong>
+        <a href="${clip.watchUrl}" target="_blank" rel="noopener noreferrer" class="citation-url" style="display:block; margin-top:0.4rem; color:var(--color-brand-primary);">
+          <i class="fas fa-external-link-alt" style="margin-right:0.35rem;"></i>${clip.watchUrl}
+        </a>
+      </div>
+    </article>
+  `;
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+window.openVideoStoryModal = openVideoStoryModal;
 
 /* ===================================================================
    THE JOURNAL (Full Curated Articles Magazine Grid)
@@ -793,13 +906,56 @@ function renderAboutUsSection() {
   container.innerHTML = `
     <!-- Sticky Secondary Navigation for About Us -->
     <nav class="about-tabs-nav" aria-label="About Us Navigation">
+      <a href="#mission" class="about-tab-btn"><i class="fas fa-bullseye"></i> <span data-i18n="about_tab_mission">${isEn ? 'Mission, Ethics & Compliance' : 'Tôn Chỉ Hoạt Động & Chuẩn Mực'}</span></a>
       <a href="#profiles" class="about-tab-btn"><i class="fas fa-users"></i> <span data-i18n="about_tab_profiles">${isEn ? 'Editorial Profiles' : 'Hồ Sơ Ban Biên Tập'}</span></a>
       <a href="#photo" class="about-tab-btn"><i class="fas fa-camera"></i> <span data-i18n="about_tab_photo">${isEn ? 'Photojournalism Gallery' : 'Kho Ảnh Phóng Sự Báo Chí'}</span></a>
       <a href="#subscribe" class="about-tab-btn"><i class="fas fa-paper-plane"></i> <span data-i18n="about_tab_subscribe">${isEn ? 'Newsletter Subscription' : 'Đăng Ký Nhận Bản Tin'}</span></a>
-      <a href="#mission" class="about-tab-btn"><i class="fas fa-bullseye"></i> <span data-i18n="about_tab_mission">${isEn ? 'Mission, Ethics & Compliance' : 'Tôn Chỉ Hoạt Động & Chuẩn Mực'}</span></a>
     </nav>
 
-    <!-- SECTION 1: PROFILES (#profiles) -->
+    <!-- SECTION 1: MISSION & EDITORIAL PHILOSOPHY (#mission) -->
+    <section id="mission" style="margin-bottom: 3.5rem; scroll-margin-top: 100px;">
+      <div class="nhandan-section-header">
+        <div class="nhandan-sec-title-wrap">
+          <span class="nhandan-sec-ribbon"></span>
+          <h2 class="nhandan-sec-title" data-i18n="about_mission_title">${isEn ? 'MISSION & EDITORIAL PHILOSOPHY' : 'TÔN CHỈ HOẠT ĐỘNG & TRIẾT LÝ TÒA SOẠN'}</h2>
+        </div>
+      </div>
+      <div style="background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-lg); padding:2.5rem; color:var(--color-text-body); box-shadow:var(--shadow-card, 0 4px 20px rgba(0,0,0,0.03));">
+        <h3 style="font-family: var(--font-editorial, 'Playfair Display', serif); font-size: 1.65rem; font-weight: 700; color: var(--color-brand-primary, #54111E); margin-top: 0; margin-bottom: 1.25rem; letter-spacing: -0.01em;">
+          ${isEn ? 'Welcome to HEARTICLES' : 'Chào Mừng Đến Với HEARTICLES'}
+        </h3>
+        
+        <p style="margin-bottom:1.25rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
+          ${isEn 
+            ? 'Based in Hanoi, Vietnam, HEARTICLES is an academic multimedia journalism publication born out of a simple, unwavering belief: in a world driven by rapid headlines and digital noise, true journalism must never lose its soul. Every piece we publish is built upon rigorous, multi-source verification and authentic engagement with official, credible sources, ensuring that all our reporting stands as trustworthy, accurate, and deeply reliable.' 
+            : 'Đặt trụ sở tại Hà Nội, Việt Nam, HEARTICLES là ấn phẩm báo chí đa phương tiện học thuật ra đời từ một niềm tin giản dị nhưng kiên định: giữa một thế giới bị cuốn theo những dòng tít chóng vánh và sự ồn ào của kỷ nguyên số, báo chí chân chính không bao giờ được đánh mất linh hồn của mình. Mọi tác phẩm chúng tôi xuất bản đều được xây dựng trên quy trình kiểm chứng đa nguồn nghiêm ngặt và sự kết nối trực tiếp với các nguồn tin chính thống, uy tín, nhằm bảo đảm mỗi bài viết luôn trung thực, chính xác và đáng tin cậy sâu sắc.'}
+        </p>
+
+        <p style="margin-bottom:1.25rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
+          ${isEn 
+            ? 'At HEARTICLES, our editorial heart beats for human-centric storytelling. We specialize in bringing forward stories of empathy, kindness, and unsung resilience—the quiet moments of human goodness that often go unnoticed, yet remind us of our shared humanity. Our perspective reaches far beyond borders: while we honor the timeless charm and spirit of Hanoi, our lens extends across the globe to cover diverse human experiences, vibrant cultures, local food traditions, and inspiring lifestyle narratives from every corner of the world.' 
+            : 'Tại HEARTICLES, trái tim biên tập của chúng tôi luôn đập cùng những câu chuyện lấy con người làm trung tâm. Chúng tôi chuyên chở những câu chuyện về sự đồng cảm, lòng trắc ẩn và sự kiên cường thầm lặng—những khoảnh khắc tốt đẹp bình dị thường bị lãng quên nhưng nhắc nhở chúng ta về sự gắn kết nhân văn. Góc nhìn của chúng tôi vươn xa khỏi mọi biên giới: vừa tôn vinh nét đẹp vượt thời gian và tinh thần của Hà Nội, ống kính của chúng tôi vừa mở rộng ra khắp thế giới để ghi lại những trải nghiệm đa dạng, các nền văn hóa sống động, nét ẩm thực bản địa cùng những câu chuyện phong cách sống đầy cảm hứng từ mọi phương trời.'}
+        </p>
+
+        <p style="margin-bottom:1.75rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
+          ${isEn 
+            ? 'While our storytelling is rooted in deep empathy, our reporting is firmly grounded in journalistic integrity and fully verified information. We write not just to report events, but to touch hearts, build global bridges, and foster a more thoughtful, compassionate world.' 
+            : 'Nếu như cách kể chuyện của chúng tôi bắt nguồn từ sự thấu cảm sâu sắc, thì phương pháp đưa tin luôn được đặt nền móng vững chắc trên đạo đức báo chí và thông tin đã được kiểm chứng tuyệt đối. Chúng tôi cầm bút không chỉ để đưa tin về các sự kiện, mà còn để chạm tới những trái tim, xây dựng những nhịp cầu kết nối toàn cầu và nuôi dưỡng một thế giới sâu lắng, giàu lòng trắc ẩn hơn.'}
+        </p>
+
+        <div style="padding-top:1.25rem; border-top:1px dashed var(--color-border-hairline); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.75rem; font-size:0.875rem; color:var(--color-text-muted);">
+          <span>
+            <i class="fas fa-shield-alt" style="color:var(--color-brand-primary); margin-right:0.35rem;"></i>
+            ${isEn ? 'Academic Multimedia Journalism Project • ULIS - VNU • Class 6 - Group 1 - Term 127' : 'Đề án Báo chí Đa phương tiện Học thuật • ULIS - VNU • Lớp 6 - Nhóm 1 - Khóa 127'}
+          </span>
+          <span>
+            <i class="fas fa-check-circle" style="color:#2E7D32; margin-right:0.35rem;"></i>
+            ${isEn ? 'Multi-Source Fact-Checking & Journalistic Ethics Compliance' : 'Kiểm chứng đa nguồn & Tuân thủ Chuẩn mực Đạo đức Báo chí'}
+          </span>
+        </div>
+      </div>
+    </section>
+<!-- SECTION 2: PROFILES (#profiles) -->
     <section id="profiles" style="margin-bottom: 3.5rem; scroll-margin-top: 100px;">
       <div class="nhandan-section-header">
         <div class="nhandan-sec-title-wrap">
@@ -932,7 +1088,7 @@ function renderAboutUsSection() {
       </div>
     </section>
 
-    <!-- SECTION 2: PHOTOJOURNALISM MOSAIC (#photo) -->
+    <!-- SECTION 3: PHOTOJOURNALISM MOSAIC (#photo) -->
     <section id="photo" style="margin-bottom: 3.5rem; scroll-margin-top: 100px;">
       <div class="nhandan-section-header">
         <div class="nhandan-sec-title-wrap">
@@ -993,8 +1149,8 @@ function renderAboutUsSection() {
       </div>
     </section>
 
-    <!-- SECTION 3: NEWSLETTER SUBSCRIPTION (#subscribe) -->
-    <section id="subscribe" style="margin-bottom: 3.5rem; scroll-margin-top: 100px;">
+    <!-- SECTION 4: NEWSLETTER SUBSCRIPTION (#subscribe) -->
+    <section id="subscribe" style="margin-bottom: 2rem; scroll-margin-top: 100px;">
       <div class="about-subscribe-card">
         <i class="fas fa-paper-plane" style="font-size:2.5rem; color:var(--color-brand-primary); margin-bottom:1rem;"></i>
         <h2 style="font-family:var(--font-editorial); font-size:1.85rem; color:var(--color-brand-primary); margin-bottom:0.5rem;" data-i18n="about_sub_title">${isEn ? 'Subscribe to HEARTICLES. Sunday Edition' : 'Đăng Ký Nhận Ấn Phẩm Chủ Nhật HEARTICLES.'}</h2>
@@ -1007,51 +1163,22 @@ function renderAboutUsSection() {
         </form>
       </div>
     </section>
-
-    <!-- SECTION 4: MISSION & EDITORIAL PHILOSOPHY (#mission) -->
-    <section id="mission" style="margin-bottom: 2rem; scroll-margin-top: 100px;">
-      <div class="nhandan-section-header">
-        <div class="nhandan-sec-title-wrap">
-          <span class="nhandan-sec-ribbon"></span>
-          <h2 class="nhandan-sec-title" data-i18n="about_mission_title">${isEn ? 'MISSION & EDITORIAL PHILOSOPHY' : 'TÔN CHỈ HOẠT ĐỘNG & TRIẾT LÝ TÒA SOẠN'}</h2>
-        </div>
-      </div>
-      <div style="background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-lg); padding:2.5rem; color:var(--color-text-body); box-shadow:var(--shadow-card, 0 4px 20px rgba(0,0,0,0.03));">
-        <h3 style="font-family: var(--font-editorial, 'Playfair Display', serif); font-size: 1.65rem; font-weight: 700; color: var(--color-brand-primary, #54111E); margin-top: 0; margin-bottom: 1.25rem; letter-spacing: -0.01em;">
-          ${isEn ? 'Welcome to HEARTICLES' : 'Chào Mừng Đến Với HEARTICLES'}
-        </h3>
-        
-        <p style="margin-bottom:1.25rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
-          ${isEn 
-            ? 'Based in Hanoi, Vietnam, HEARTICLES is an academic multimedia journalism publication born out of a simple, unwavering belief: in a world driven by rapid headlines and digital noise, true journalism must never lose its soul. Every piece we publish is built upon rigorous, multi-source verification and authentic engagement with official, credible sources, ensuring that all our reporting stands as trustworthy, accurate, and deeply reliable.' 
-            : 'Đặt trụ sở tại Hà Nội, Việt Nam, HEARTICLES là ấn phẩm báo chí đa phương tiện học thuật ra đời từ một niềm tin giản dị nhưng kiên định: giữa một thế giới bị cuốn theo những dòng tít chóng vánh và sự ồn ào của kỷ nguyên số, báo chí chân chính không bao giờ được đánh mất linh hồn của mình. Mọi tác phẩm chúng tôi xuất bản đều được xây dựng trên quy trình kiểm chứng đa nguồn nghiêm ngặt và sự kết nối trực tiếp với các nguồn tin chính thống, uy tín, nhằm bảo đảm mỗi bài viết luôn trung thực, chính xác và đáng tin cậy sâu sắc.'}
-        </p>
-
-        <p style="margin-bottom:1.25rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
-          ${isEn 
-            ? 'At HEARTICLES, our editorial heart beats for human-centric storytelling. We specialize in bringing forward stories of empathy, kindness, and unsung resilience—the quiet moments of human goodness that often go unnoticed, yet remind us of our shared humanity. Our perspective reaches far beyond borders: while we honor the timeless charm and spirit of Hanoi, our lens extends across the globe to cover diverse human experiences, vibrant cultures, local food traditions, and inspiring lifestyle narratives from every corner of the world.' 
-            : 'Tại HEARTICLES, trái tim biên tập của chúng tôi luôn đập cùng những câu chuyện lấy con người làm trung tâm. Chúng tôi chuyên chở những câu chuyện về sự đồng cảm, lòng trắc ẩn và sự kiên cường thầm lặng—những khoảnh khắc tốt đẹp bình dị thường bị lãng quên nhưng nhắc nhở chúng ta về sự gắn kết nhân văn. Góc nhìn của chúng tôi vươn xa khỏi mọi biên giới: vừa tôn vinh nét đẹp vượt thời gian và tinh thần của Hà Nội, ống kính của chúng tôi vừa mở rộng ra khắp thế giới để ghi lại những trải nghiệm đa dạng, các nền văn hóa sống động, nét ẩm thực bản địa cùng những câu chuyện phong cách sống đầy cảm hứng từ mọi phương trời.'}
-        </p>
-
-        <p style="margin-bottom:1.75rem; font-size:1.05rem; line-height:1.8; text-align:justify;">
-          ${isEn 
-            ? 'While our storytelling is rooted in deep empathy, our reporting is firmly grounded in journalistic integrity and fully verified information. We write not just to report events, but to touch hearts, build global bridges, and foster a more thoughtful, compassionate world.' 
-            : 'Nếu như cách kể chuyện của chúng tôi bắt nguồn từ sự thấu cảm sâu sắc, thì phương pháp đưa tin luôn được đặt nền móng vững chắc trên đạo đức báo chí và thông tin đã được kiểm chứng tuyệt đối. Chúng tôi cầm bút không chỉ để đưa tin về các sự kiện, mà còn để chạm tới những trái tim, xây dựng những nhịp cầu kết nối toàn cầu và nuôi dưỡng một thế giới sâu lắng, giàu lòng trắc ẩn hơn.'}
-        </p>
-
-        <div style="padding-top:1.25rem; border-top:1px dashed var(--color-border-hairline); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.75rem; font-size:0.875rem; color:var(--color-text-muted);">
-          <span>
-            <i class="fas fa-shield-alt" style="color:var(--color-brand-primary); margin-right:0.35rem;"></i>
-            ${isEn ? 'Academic Multimedia Journalism Project • ULIS - VNU • Class 6 - Group 1 - Term 127' : 'Đề án Báo chí Đa phương tiện Học thuật • ULIS - VNU • Lớp 6 - Nhóm 1 - Khóa 127'}
-          </span>
-          <span>
-            <i class="fas fa-check-circle" style="color:#2E7D32; margin-right:0.35rem;"></i>
-            ${isEn ? 'Multi-Source Fact-Checking & Journalistic Ethics Compliance' : 'Kiểm chứng đa nguồn & Tuân thủ Chuẩn mực Đạo đức Báo chí'}
-          </span>
-        </div>
-      </div>
-    </section>
   `;
+
+  // Highlight active tab based on hash or default to #mission
+  const currentHash = window.location.hash || '#mission';
+  const tabs = container.querySelectorAll('.about-tab-btn');
+  tabs.forEach(tab => {
+    if (tab.getAttribute('href') === currentHash) {
+      tab.classList.add('active');
+    } else {
+      tab.classList.remove('active');
+    }
+    tab.addEventListener('click', function() {
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
 }
 
 /* ===================================================================
@@ -1097,15 +1224,19 @@ function formatArticleSource(article, isEn) {
   if (isEn) {
     return `
       <div class="article-source-citation">
-        <span class="citation-label">Source:</span> "<em class="citation-title">${cleanTitle}</em>", ${sourceName}, by ${author}, ${formattedDate}, 
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="citation-url">${url}</a>
+        <span class="citation-label">Original Source:</span> "<em class="citation-title">${cleanTitle}</em>", <strong>${sourceName}</strong>, by ${author}, ${formattedDate}
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="citation-url" title="Open original article in new tab">
+          <i class="fas fa-external-link-alt" style="margin-right: 0.35rem; font-size: 0.85rem;"></i>${url}
+        </a>
       </div>
     `;
   } else {
     return `
       <div class="article-source-citation">
-        <span class="citation-label">Source:</span> "<em class="citation-title">${cleanTitle}</em>", ${sourceName}, viết bởi ${author}, ${formattedDate}, 
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="citation-url">${url}</a>
+        <span class="citation-label">Nguồn trích dẫn gốc:</span> "<em class="citation-title">${cleanTitle}</em>", <strong>${sourceName}</strong>, tác giả ${author}, ${formattedDate}
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="citation-url" title="Mở bài báo gốc trong tab mới">
+          <i class="fas fa-external-link-alt" style="margin-right: 0.35rem; font-size: 0.85rem;"></i>${url}
+        </a>
       </div>
     `;
   }
@@ -1137,10 +1268,18 @@ function openArticleModal(articleId) {
     bodyHtml = article.content;
   } else if (Array.isArray(article.content)) {
     bodyHtml = article.content.map(p => {
-      if (p.startsWith('### ')) {
-        return `<h3 style="font-family:var(--font-editorial); font-size:1.35rem; font-weight:800; color:var(--color-brand-primary); margin:1.5rem 0 0.75rem 0;">${p.replace('### ', '')}</h3>`;
+      if (typeof p !== 'string') return '';
+      const trimmed = p.trim();
+      if (trimmed.startsWith('### ')) {
+        return `<h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.35rem; font-weight:800; color:var(--color-brand-primary); margin:1.75rem 0 0.75rem 0;">${trimmed.replace('### ', '')}</h3>`;
       }
-      return `<p style="margin-bottom:1.15rem; line-height:1.8;">${p}</p>`;
+      if (trimmed.startsWith('## ')) {
+        return `<h2 class="article-section-heading-lg" style="font-family:var(--font-editorial); font-size:1.55rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">${trimmed.replace('## ', '')}</h2>`;
+      }
+      if (trimmed.startsWith('<figure') || trimmed.startsWith('<table') || trimmed.startsWith('<div') || trimmed.startsWith('<blockquote')) {
+        return trimmed;
+      }
+      return `<p style="margin-bottom:1.15rem; line-height:1.8; text-align:justify;">${p}</p>`;
     }).join('');
   }
 

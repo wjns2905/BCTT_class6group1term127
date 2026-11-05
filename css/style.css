@@ -5223,30 +5223,196 @@ body {
   max-width: 600px;
   margin: 0 auto 1.5rem auto;
 }
+/* ===================================================================
+   MINDFUL HEART BEATS · STRESS RELIEVER WIDGET & PARTICLE EXPLOSION
+   =================================================================== */
+.heart-tap-container {
+  max-width: 760px;
+  margin: 3rem auto;
+  padding: 2.5rem 1.5rem;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FBF6F3 100%);
+  border: 1px solid var(--border-cream);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(84, 17, 30, 0.06);
+  text-align: center;
+  position: relative;
+  overflow: visible;
+}
+.heart-tap-title {
+  font-family: var(--font-editorial);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--color-brand-primary);
+  margin-bottom: 0.4rem;
+}
+.heart-tap-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-body);
+  max-width: 600px;
+  margin: 0 auto 1.5rem auto;
+}
+.heart-tap-stage {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
 .heart-btn-circle {
-  width: 76px;
-  height: 76px;
+  width: 78px;
+  height: 78px;
   border-radius: 50%;
-  background: var(--color-brand-primary);
+  background: radial-gradient(circle at 35% 35%, #7D1728 0%, #54111E 100%);
   color: #FFFFFF;
   border: none;
-  font-size: 2rem;
+  font-size: 2.15rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(84, 17, 30, 0.35);
-  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast);
   user-select: none;
   outline: none;
+  position: relative;
+  z-index: 5;
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast);
+  animation: heartIdlePulse 3s ease-in-out infinite;
+}
+@keyframes heartIdlePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 24px rgba(84, 17, 30, 0.35);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(84, 17, 30, 0.48);
+  }
 }
 .heart-btn-circle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 10px 28px rgba(84, 17, 30, 0.45);
+  animation: none;
+  transform: scale(1.12);
+  box-shadow: 0 12px 32px rgba(84, 17, 30, 0.5);
 }
 .heart-btn-circle:active {
-  transform: scale(0.92);
+  transform: scale(0.9);
 }
+.heart-btn-circle.popping {
+  animation: heartBtnSquash 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+}
+@keyframes heartBtnSquash {
+  0% { transform: scale(0.82); }
+  40% { transform: scale(1.26) rotate(-5deg); }
+  75% { transform: scale(0.96) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Ripple Shockwave Ring */
+.heart-shockwave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 78px;
+  height: 78px;
+  margin-left: -39px;
+  margin-top: -39px;
+  border-radius: 50%;
+  border: 3px solid rgba(217, 35, 56, 0.75);
+  pointer-events: none;
+  z-index: 4;
+  animation: shockwaveExpand 0.7s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+@keyframes shockwaveExpand {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+    border-width: 4px;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+/* Tung toé Heart Particle Burst */
+.heart-particles-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+.burst-heart-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 200;
+  will-change: transform, opacity;
+  animation: burstFly 0.95s cubic-bezier(0.12, 0.8, 0.32, 1.05) forwards;
+}
+@keyframes burstFly {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.25) rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(var(--scale-end, 1)) rotate(var(--rot, 30deg));
+  }
+}
+
+/* Floating +1 Floater */
+.burst-plus-one {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #E02440, #54111E);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(224, 36, 64, 0.4);
+  white-space: nowrap;
+  z-index: 250;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  animation: floatPlusOne 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+@keyframes floatPlusOne {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.5);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.15);
+  }
+  50% {
+    transform: translate(-50%, -28px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -60px) scale(0.85);
+    opacity: 0;
+  }
+}
+
 .heart-counter-badge {
   display: inline-block;
   margin-top: 1rem;
@@ -5256,30 +5422,26 @@ body {
   background: rgba(84, 17, 30, 0.08);
   padding: 4px 14px;
   border-radius: var(--radius-full);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
+.heart-counter-badge.pop-active {
+  animation: counterPop 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes counterPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.18); background: rgba(84, 17, 30, 0.18); color: #D92338; }
+  100% { transform: scale(1); }
+}
+
 .heart-affirmation-msg {
   font-style: italic;
   font-size: 0.875rem;
   color: var(--color-brand-accent);
   margin-top: 0.5rem;
   min-height: 1.5rem;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
-.floating-heart-particle {
-  position: absolute;
-  pointer-events: none;
-  animation: floatUpFade 1.2s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
-  font-size: 1.5rem;
-}
-@keyframes floatUpFade {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-90px) scale(1.4) rotate(15deg);
-  }
-}
+
 
 /* ===================================================================
    POLL "READ RELATED STORY" BUTTON
@@ -6042,4 +6204,74 @@ body {
 .playlist-card.active .playlist-play-icon {
   background: #54111E;
   color: #FFF;
+}
+
+/* ===================================================================
+   SLEEK SOCIAL PILL BUTTONS (FOOTER & DRAWER)
+   =================================================================== */
+.social-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: #F8F5F2;
+  color: #54111E;
+  border: 1px solid rgba(84, 17, 30, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.social-pill-btn:hover {
+  background: #54111E;
+  color: #FFFFFF !important;
+  border-color: #54111E;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(84, 17, 30, 0.25);
+}
+
+.social-pill-btn.fb:hover {
+  background: #1877F2;
+  border-color: #1877F2;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.35);
+}
+
+.social-pill-btn.ig:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  border-color: #d6249f;
+  box-shadow: 0 4px 12px rgba(214, 36, 159, 0.35);
+}
+
+.social-pill-btn.tw:hover {
+  background: #000000;
+  border-color: #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.social-pill-btn i {
+  font-size: 0.95rem;
+}
+
+.drawer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.drawer-social-link:hover {
+  background: #54111E;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }

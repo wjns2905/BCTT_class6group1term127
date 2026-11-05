@@ -1941,8 +1941,10 @@ function setupEventListeners() {
 function setupHeartTapWidget() {
   const btn = document.getElementById('heartTapBtn');
   const counterEl = document.getElementById('heartCountNumber');
+  const badgeEl = document.getElementById('heartCounterBadge');
   const msgEl = document.getElementById('heartAffirmationMsg');
   const particleContainer = document.getElementById('heartParticleContainer');
+  const stageEl = btn ? btn.parentElement : null;
   if (!btn || !counterEl) return;
 
   let count = parseInt(localStorage.getItem('hearticles_tap_count') || '1280', 10);
@@ -1954,7 +1956,9 @@ function setupHeartTapWidget() {
     "“Bạn đang làm rất tốt, hãy tự hào về hành trình của chính mình!”",
     "“Lòng tốt như những bông tuyết, làm đẹp mọi thứ mà nó chạm tới.”",
     "“Nụ cười của bạn hôm nay chính là món quà dành tặng cho thế giới.”",
-    "“Hãy dịu dàng với bản thân, bạn xứng đáng được yêu thương và bình yên.”"
+    "“Hãy dịu dàng với bản thân, bạn xứng đáng được yêu thương và bình yên.”",
+    "“Một cử chỉ tử tế nhỏ bé cũng đủ sưởi ấm cả một ngày dài.”",
+    "“Trái tim bình an là khởi nguồn của mọi điều kỳ diệu.”"
   ];
   const affirmations_en = [
     "“Take a deep breath and let it go. Everything will be okay!”",
@@ -1962,37 +1966,123 @@ function setupHeartTapWidget() {
     "“You are doing remarkably well—be proud of your journey!”",
     "“Kindness is like snow—it beautifies everything it covers.”",
     "“Your smile today is a heartfelt gift to the entire world.”",
-    "“Be gentle with yourself; you deserve love, calm, and happiness.”"
+    "“Be gentle with yourself; you deserve love, calm, and happiness.”",
+    "“A single small act of kindness can brighten an entire day.”",
+    "“A peaceful heart is the wellspring of all everyday wonders.”"
   ];
 
   let affIdx = 0;
+  let heartAudioCtx = null;
+
+  function playHeartChime() {
+    try {
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtxClass) return;
+      if (!heartAudioCtx) heartAudioCtx = new AudioCtxClass();
+      if (heartAudioCtx.state === 'suspended') {
+        heartAudioCtx.resume();
+      }
+      const osc = heartAudioCtx.createOscillator();
+      const gain = heartAudioCtx.createGain();
+      osc.type = 'sine';
+      // Soothing 528Hz Solfeggio frequency (Miracle tone) gently climbing to 660Hz
+      const t = heartAudioCtx.currentTime;
+      osc.frequency.setValueAtTime(528, t);
+      osc.frequency.exponentialRampToValueAtTime(660, t + 0.15);
+      gain.gain.setValueAtTime(0.2, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
+      osc.connect(gain);
+      gain.connect(heartAudioCtx.destination);
+      osc.start(t);
+      osc.stop(t + 0.4);
+    } catch (err) {
+      // Audio playback fails gracefully if autoplay restricted
+    }
+  }
+
+  function burstHearts() {
+    if (!particleContainer) return;
+    const emojis = ['❤️', '💖', '💗', '💓', '💞', '💕', '💘', '✨', '🌸', '💝', '🎉', '🌟', '🥰', '🔥'];
+    const totalParticles = 22; // Explosive radial burst!
+
+    // Ripple Shockwave Ring
+    if (stageEl) {
+      const shockwave = document.createElement('div');
+      shockwave.className = 'heart-shockwave';
+      stageEl.appendChild(shockwave);
+      setTimeout(() => shockwave.remove(), 750);
+
+      // Floating "+1 ❤️" Floater
+      const plusOne = document.createElement('div');
+      plusOne.className = 'burst-plus-one';
+      plusOne.innerHTML = '<i class="fas fa-heart"></i> +1';
+      stageEl.appendChild(plusOne);
+      setTimeout(() => plusOne.remove(), 950);
+    }
+
+    // Radial 360-degree explosion of heart particles
+    for (let i = 0; i < totalParticles; i++) {
+      const p = document.createElement('span');
+      p.className = 'burst-heart-particle';
+      p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+      const angle = (i / totalParticles) * 2 * Math.PI + (Math.random() - 0.5) * 0.45;
+      const distance = 65 + Math.random() * 145; // 65px to 210px fly distance
+      const tx = Math.round(Math.cos(angle) * distance);
+      const ty = Math.round(Math.sin(angle) * distance - 25);
+      const rot = Math.round((Math.random() - 0.5) * 360);
+      const scaleEnd = (0.55 + Math.random() * 0.85).toFixed(2);
+      const fontSize = (1.1 + Math.random() * 1.2).toFixed(2) + 'rem';
+      const duration = (0.75 + Math.random() * 0.35).toFixed(2) + 's';
+
+      p.style.setProperty('--tx', `${tx}px`);
+      p.style.setProperty('--ty', `${ty}px`);
+      p.style.setProperty('--rot', `${rot}deg`);
+      p.style.setProperty('--scale-end', scaleEnd);
+      p.style.fontSize = fontSize;
+      p.style.animationDuration = duration;
+
+      particleContainer.appendChild(p);
+      setTimeout(() => p.remove(), 1100);
+    }
+  }
 
   btn.addEventListener('click', function(e) {
     count++;
     localStorage.setItem('hearticles_tap_count', count);
     counterEl.textContent = count.toLocaleString();
 
-    // Floating heart particle animation
-    if (particleContainer) {
-      const heart = document.createElement('span');
-      heart.className = 'floating-heart-particle';
-      const emojis = ['❤️', '💖', '✨', '🌸', '💫'];
-      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      heart.style.left = (Math.random() * 40 - 20) + 'px';
-      heart.style.top = '-10px';
-      particleContainer.appendChild(heart);
-      setTimeout(() => heart.remove(), 1200);
+    // Trigger explosive radial burst
+    burstHearts();
+
+    // Play gentle chime tone
+    playHeartChime();
+
+    // Button squash-and-stretch pop animation
+    btn.classList.remove('popping');
+    void btn.offsetWidth; // force DOM reflow
+    btn.classList.add('popping');
+    setTimeout(() => btn.classList.remove('popping'), 400);
+
+    // Counter badge pulse pop
+    if (badgeEl) {
+      badgeEl.classList.remove('pop-active');
+      void badgeEl.offsetWidth;
+      badgeEl.classList.add('pop-active');
+      setTimeout(() => badgeEl.classList.remove('pop-active'), 400);
     }
 
-    // Affirmation rotation
-    affIdx = (affIdx + 1) % affirmations_vi.length;
+    // Affirmation quote rotation with smooth opacity fade
     if (msgEl) {
-      const list = (currentLanguage === 'en') ? affirmations_en : affirmations_vi;
-      msgEl.textContent = list[affIdx];
+      affIdx = (affIdx + 1) % affirmations_vi.length;
+      const list = (typeof currentLanguage !== 'undefined' && currentLanguage === 'en') ? affirmations_en : affirmations_vi;
+      msgEl.style.opacity = '0';
+      msgEl.style.transform = 'translateY(4px)';
+      setTimeout(() => {
+        msgEl.textContent = list[affIdx];
+        msgEl.style.opacity = '1';
+        msgEl.style.transform = 'translateY(0)';
+      }, 140);
     }
-
-    // Gentle tactile spring bounce
-    btn.style.transform = 'scale(1.2) rotate(' + (Math.random() * 10 - 5) + 'deg)';
-    setTimeout(() => { btn.style.transform = ''; }, 150);
   });
 }

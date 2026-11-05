@@ -123,9 +123,9 @@ const I18N_TRANSLATIONS = {
     culture_item_desc_3: "Hành trình 42 năm biến giấc mơ thời trai trẻ thành hiện thực của một kỹ sư về hưu.",
     
     // 10. Footer
-    footer_desc: "Tòa soạn Tạp chí Báo điện tử Đa phương tiện • Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS - VNU)",
-    footer_group: "Lớp 6 - Nhóm 1 - Khóa 127 • Khoa Ngôn ngữ & Truyền thông • Tòa soạn Báo chí & Truyền thông Đa phương tiện",
-    footer_copy: "&copy; 2026 HEARTICLES. Mọi quyền được bảo lưu. Xuất bản bởi Nhóm 1 Lớp 6 Khóa 127, ULIS - VNU.",
+    footer_desc: "Một tòa soạn báo chí độc lập có trụ sở tại Hà Nội, Việt Nam.",
+    footer_group: "",
+    footer_copy: "&copy; 2026 HEARTICLES. Mọi quyền được bảo lưu. Tòa soạn báo chí độc lập tại Hà Nội, Việt Nam.",
     footer_model: "Mô hình tòa soạn Báo Nhân Dân điện tử (nhandan.vn) kết hợp tiêu chuẩn Nielsen Norman UX.",
     
     // 11. Modal & Tools
@@ -340,9 +340,9 @@ const I18N_TRANSLATIONS = {
     culture_item_desc_3: "A 42-year journey of passion and perseverance to build a bespoke historic sports car.",
     
     // 10. Footer
-    footer_desc: "Multimedia Journalism & Editorial Portal • University of Languages and International Studies - VNU",
-    footer_group: "Class 6 - Group 1 - Term 127 • Faculty of Linguistics & Communications • Multimedia Journalism & Publishing",
-    footer_copy: "&copy; 2026 HEARTICLES. All rights reserved. Published by Group 1 Class 6 Term 127, ULIS - VNU.",
+    footer_desc: "An independent news outlet based in Hanoi, Vietnam.",
+    footer_group: "",
+    footer_copy: "&copy; 2026 HEARTICLES. All rights reserved. • An independent news outlet based in Hanoi, Vietnam.",
     footer_model: "Inspired by Báo Nhân Dân (nhandan.vn) asymmetric editorial model & Nielsen Norman UX standards.",
     
     // 11. Modal & Tools

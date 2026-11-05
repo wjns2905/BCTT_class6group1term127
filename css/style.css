@@ -4726,43 +4726,34 @@ body {
 
 
 /* ===================================================================
-   HEADER LEADERBOARD ADVERTISEMENT (IELTS BANNER - CRISP & UN-CROPPED)
+   HEADER LEADERBOARD ADVERTISEMENT (IELTS BANNER)
    =================================================================== */
 .header-ad-leaderboard-wrap {
-  background: #FAF7F4;
-  padding: 0.75rem 0 0.85rem 0;
+  background: #FDFBFB;
+  padding: 0.6rem 0;
   border-bottom: 1px solid var(--color-border-hairline);
   text-align: center;
 }
-
 .ad-label-strip {
   font-size: 0.625rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  margin-bottom: 0.45rem;
-  display: block;
+  margin-bottom: 0.3rem;
 }
-
 .header-ad-link {
   display: inline-block;
-  width: 100%;
-  max-width: 970px;
+  max-width: 100%;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast);
-  line-height: 0;
-  border: 1px solid rgba(84, 17, 30, 0.08);
-  background: #E21837;
 }
-
 .header-ad-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(84, 17, 30, 0.16);
+  box-shadow: 0 4px 16px rgba(84, 17, 30, 0.12);
 }
-
 .header-ad-banner-img {
   width: 100%;
   height: auto;
@@ -4772,15 +4763,6 @@ body {
   aspect-ratio: 1444 / 378;
 }
 
-@media (max-width: 768px) {
-  .header-ad-leaderboard-wrap {
-    padding: 0.5rem 0.5rem 0.6rem 0.5rem;
-  }
-  .header-ad-link {
-    max-width: 100%;
-    border-radius: var(--radius-sm);
-  }
-}
 /* ===================================================================
    UPDATED BRAND LOGO (DIDONE HIGH-FASHION)
    =================================================================== */
@@ -6292,4 +6274,76 @@ body {
   background: #54111E;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* ===================================================================
+   USER AVATAR SIGN IN BUTTON & MODAL
+   =================================================================== */
+.fashion-user-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(84, 17, 30, 0.05);
+  color: var(--color-brand-primary);
+  border: 1.5px solid rgba(84, 17, 30, 0.15);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-spring);
+  padding: 0;
+  line-height: 1;
+  position: relative;
+  flex-shrink: 0;
+}
+.fashion-user-btn:hover {
+  background: var(--color-brand-primary);
+  color: #FFFFFF;
+  border-color: var(--color-brand-primary);
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(84, 17, 30, 0.25);
+}
+.fashion-user-btn.signed-in {
+  background: var(--color-brand-primary);
+  color: #FFFFFF;
+  border-color: var(--color-brand-accent);
+}
+.fashion-user-btn.signed-in::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 8px;
+  height: 8px;
+  background: #22C55E;
+  border-radius: 50%;
+  border: 1.5px solid #FFFFFF;
+}
+
+/* Sign In Modal */
+.signin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(21, 16, 17, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 1050;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+.signin-modal-backdrop.active {
+  display: flex;
+}
+.signin-modal-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-hairline);
+  border-radius: var(--radius-lg);
+  max-width: 440px;
+  width: 100%;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 16px 40px rgba(84, 17, 30, 0.2);
+  position: relative;
+  animation: modalScaleUp 0.28s var(--ease-spring);
 }

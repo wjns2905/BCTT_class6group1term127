@@ -30,6 +30,7 @@ function initApp() {
   syncHomepageCardsWithData(lang);
   setupPoll();
   setupHeartTapWidget();
+  updateUserAvatarState();
   initOnboarding();
   setupReadingProgressBar();
   setupNetworkStatus();
@@ -2083,6 +2084,53 @@ function setupHeartTapWidget() {
         msgEl.style.opacity = '1';
         msgEl.style.transform = 'translateY(0)';
       }, 140);
+    }
+  });
+}
+
+/* ===================================================================
+   READER SIGN IN & AVATAR HANDLER
+   =================================================================== */
+function openSignInModal() {
+  const modal = document.getElementById('signInModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeSignInModal() {
+  const modal = document.getElementById('signInModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function handleSignInSubmit(e) {
+  if (e) e.preventDefault();
+  const emailInput = document.getElementById('signInEmail');
+  const email = emailInput ? emailInput.value.trim() : 'reader@ulis.vnu.edu.vn';
+  localStorage.setItem('hearticles_user_logged_in', 'true');
+  localStorage.setItem('hearticles_user_email', email);
+  updateUserAvatarState();
+  closeSignInModal();
+  const isEn = typeof currentLanguage !== 'undefined' && currentLanguage === 'en';
+  showToast(isEn ? 'Welcome back, ' + email.split('@')[0] + '!' : 'Chào mừng bạn quay trở lại, ' + email.split('@')[0] + '!', 'check');
+}
+
+function updateUserAvatarState() {
+  const isLoggedIn = localStorage.getItem('hearticles_user_logged_in') === 'true';
+  const userBtns = document.querySelectorAll('.fashion-user-btn');
+  userBtns.forEach(btn => {
+    if (isLoggedIn) {
+      btn.classList.add('signed-in');
+      btn.innerHTML = '<i class="fas fa-user-check"></i>';
+      btn.title = 'Đã đăng nhập • Độc giả HEARTICLES';
+    } else {
+      btn.classList.remove('signed-in');
+      btn.innerHTML = '<i class="far fa-user-circle"></i>';
+      btn.title = 'Đăng nhập / Sign In';
     }
   });
 }

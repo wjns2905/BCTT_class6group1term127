@@ -42,8 +42,8 @@
     <!-- =================================================================
        2. BRAND MASTHEAD (FULL-SIZE CENTERED EDITORIAL LOGO BANNER)
        ================================================================= -->
-      <!-- =================================================================
-       1. HEADER LEADERBOARD ADVERTISEMENT (IELTS BANNER - CRISP & UN-CROPPED)
+    <!-- =================================================================
+       1. HEADER LEADERBOARD ADVERTISEMENT (IELTS FIGHTER BANNER)
        ================================================================= -->
   <div class="header-ad-leaderboard-wrap">
     <div class="container" style="display:flex; flex-direction:column; align-items:center;">
@@ -53,6 +53,202 @@
       </a>
     </div>
   </div>
+
+  <div class="fashion-masthead-hero">
+    <div class="container masthead-hero-inner">
+      <a href="index.html" class="fashion-brand-logo-masthead" aria-label="HEARTICLES. - Where News Begins with a Heartbeat">
+        <img src="assets/images/logo/brand_logo_updated.png" alt="HEARTICLES. - Where News Begins with a Heartbeat" class="fashion-brand-logo-fullsize">
+      </a>
+    </div>
+  </div>
+
+  <!-- =================================================================
+       3. STICKY EDITORIAL NAVIGATION (FULL-WIDTH CATEGORIES BAR)
+       ================================================================= -->
+  <header class="fashion-header">
+    <div class="container fashion-header-container">
+
+      <!-- Minimalist Navigation with About Us Dropdown -->
+      <nav class="fashion-nav" aria-label="Thanh điều hướng tạp chí">
+        <a href="index.html" class="nav-item active" data-i18n="nav_home">Home</a>
+        <a href="trending.html" class="nav-item " data-i18n="nav_trending">Trending</a>
+        <a href="society.html" class="nav-item " data-i18n="nav_society">Society</a>
+        <a href="human-stories.html" class="nav-item " data-i18n="nav_human_stories">Human Stories</a>
+        <a href="mind-soul.html" class="nav-item " data-i18n="nav_mind_soul">Mind & Soul</a>
+        <a href="in-depth.html" class="nav-item " data-i18n="nav_indepth">In-depth</a>
+        <div class="nav-item-dropdown">
+          <a href="about.html" class="nav-item " data-i18n="nav_about" style="display:inline-flex; align-items:center; gap:0.35rem;">
+            About Us <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i>
+          </a>
+  
+          <div class="about-dropdown-menu">
+            <a href="about.html#mission" class="about-dropdown-item"><i class="fas fa-bullseye"></i> <span data-i18n="about_opt_mission">Mission</span></a>
+            <a href="about.html#profiles" class="about-dropdown-item"><i class="fas fa-users"></i> <span data-i18n="about_opt_profiles">Profiles</span></a>
+            <a href="about.html#photo" class="about-dropdown-item"><i class="fas fa-camera"></i> <span data-i18n="about_opt_photo">Photo</span></a>
+            <a href="about.html#subscribe" class="about-dropdown-item"><i class="fas fa-paper-plane"></i> <span data-i18n="about_opt_subscribe">Subscribe</span></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Actions: Email Pill, Bilingual Switcher, Search, Drawer -->
+      <div class="fashion-header-actions">
+
+
+
+
+
+
+        <!-- Primary language toggle pill (Default: EN) -->
+        <!-- Hidden pill placeholder for drawer reference -->
+        <div class="lang-switch-pill" style="display:none !important;" role="group" aria-label="Language Selector">
+          <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+          <span class="lang-pill-divider">/</span>
+          <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+
+        <button class="fashion-search-btn" onclick="openSearchModal()" title="Tìm kiếm bài viết (/)" aria-label="Tìm kiếm" data-i18n-title="search_tooltip">
+          <i class="fas fa-search"></i>
+        </button>
+
+                <button class="fashion-subscribe-btn" onclick="openSubscribeModal()" title="Đăng ký nhận bản tin" data-i18n="btn_subscribe">
+          Subscribe
+        </button>
+
+        <!-- User Sign-in Avatar Button -->
+        <button class="fashion-user-btn" id="headerUserBtn" onclick="openSignInModal()" title="Đăng nhập tài khoản / Sign In" aria-label="Tài khoản cá nhân" data-i18n-title="btn_signin_title">
+          <i class="far fa-user-circle"></i>
+        </button>
+
+        <button class="fashion-hamburger-btn" onclick="openDrawer()" aria-label="Mở menu chuyển trang">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="flex-grow: 1;">
+    <!-- ===============================================================
+         1. 3-COLUMN TOP POST CLUSTER (REQUESTED BY USER IN DOCX)
+         Col 1 (Left 280px): Curated Stories Stream (Trending 4, 5, Mind 1, 2, Human 5, Society 1)
+         Col 2 (Center Lead): Top Post Hero (Lawmakers Border Regions Lead Story)
+         Col 3 (Right 300px): Trending Box + Most Read Box with 'More' Buttons
+         =============================================================== -->
+    <section class="top-hero-3col-cluster">
+      
+      <!-- COLUMN 1: LEFT STREAM (TIN NỔI BẬT) -->
+      <aside class="hero-left-stream" aria-label="Curated Side Stories">
+        <div class="stream-header-strip">
+          <span class="stream-title-text" data-i18n="stream_header_title"><i class="fas fa-layer-group"></i> TIN NỔI BẬT</span>
+          <span style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700;" data-i18n="stream_curated_badge">7 BÀI CHỌN LỌC</span>
+        </div>
+
+        <!-- 1. Trending 4: Gánh mưu sinh Hội An -->
+        <article class="stream-card-mini" onclick="openArticleModal('trending-4')">
+          <img src="assets/images/trending/image8.jpg" alt="Gánh mưu sinh Hội An" class="stream-thumb-img" onerror="handleImageError(this)">
+          <div class="stream-mini-body">
+            <span class="stream-mini-cat">TRENDING</span>
+            <h4 class="stream-mini-headline">Gánh mưu sinh: Hồn cốt bình dị trên từng góc phố cổ Hội An</h4>
+            <span class="stream-mini-time"><i class="far fa-clock"></i> 6 min read • VnExpress</span>
+          </div>
+        </article>
+
+        <!-- 2. Trending 5: ADN Hài cốt liệt sĩ -->
+        <article class="stream-card-mini" onclick="openArticleModal('trending-5')">
+          <img src="assets/images/trending/image1.jpg" alt="Chiến dịch 500 ngày đêm ADN" class="stream-thumb-img" onerror="handleImageError(this)">
+          <div class="stream-mini-body">
+            <span class="stream-mini-cat">TRENDING</span>
+            <h4 class="stream-mini-headline">Chiến dịch 500 ngày đêm ADN: Trả lại danh tính cho gần 800 hài cốt liệt sĩ</h4>
+            <span class="stream-mini-time"><i class="far fa-clock"></i> 5 min read • TTXVN</span>
+          </div>
+        </article>
+
+        <!-- 3. Mind & Soul 1: Taeyang concert Mỹ Đình -->
+        <article class="stream-card-mini" onclick="openArticleModal('mind-1')">
+          <img src="assets/images/mind_&_soul/image2.jpg" alt="Taeyang Mỹ Đình" class="stream-thumb-img" onerror="handleImageError(this)">
+          <div class="stream-mini-body">
+            <span class="stream-mini-cat">MIND &amp; SOUL</span>
+            <h4 class="stream-mini-headline">Taeyang (BigBang) nhắc đến phở và 'show tuyệt nhất' tại SVĐ Mỹ Đình</h4>
+            <span class="stream-mini-time"><i class="far fa-clock"></i> 4 min read • Báo Lao Động</span>
+          </div>
+        </article>
+
+        <!-- 4. Mind & Soul 2: Cồng chiêng Tây Nguyên -->
+        <article class="stream-card-mini" onclick="openArticleModal('mind-2')">
+          <img src="assets/images/mind_&_soul/image5.jpg" alt="Megan Thee Stallion" class="stream-thumb-img" onerror="handleImageError(this)">
+          <div class="stream-mini-body">
+            <span class="stream-mini-cat">MIND &amp; SOUL</span>
+            <h4 class="stream-mini-headline">Megan Thee Stallion: Biến hóa huyền ảo mùa Halloween gây sốt toàn cầu</h4>
+            <span class="stream-mini-time"><i class="far fa-clock"></i> 5 min read</span>
+          </div>
+        </article>
+
+        <!-- 5. Human Stories 5: Thầy giáo Nam Trà My -->
+        <article class="stream-card-mini" onclick="openArticleModal('human-5')">
+          <img src="assets/images/human_stories/mountain_teacher_trail.jpg" alt="Thầy giáo Nam Trà My" class="stream-thumb-img" onerror="handleImageError(this)">
+          <div class="stream-mini-body">
+            <span class="stream-mini-cat">HUMAN STORIES</span>
+            <h4 class="stream-mini-headline">Thầy giáo cõng chữ lên đỉnh Ngọc Linh: 15 năm thắp sáng tương lai học trò</h4>
+            <span class="stream-mini-time"><i class="far fa-clock"></i> 5 min read</span>
+          </div>
+        </article>
+
+        <!-- 6. Society 1: Vale Pantry -->
+        <article class="stream-card-mini" onclick="openArticleModal('society-1')">
+          <img src="assets/images/society/image3.jpg" alt="Vale Pantry" class="stream-thumb-img" onerror="handleImageError(this)">
+          <div class="stream-mini-body">
+            <span class="stream-mini-cat">SOCIETY</span>
+            <h4 class="stream-mini-headline">Cost of Living Crisis: Sáng kiến Vale Pantry bảo toàn phẩm giá người nhận</h4>
+            <span class="stream-mini-time"><i class="far fa-clock"></i> 6 min read • The Guardian</span>
+          </div>
+        </article>
+
+        <!-- 7. In-depth 3: Dạy lòng trắc ẩn bằng khoa học -->
+        <article class="stream-card-mini" onclick="openArticleModal('indepth-3')">
+          <img src="assets/images/in-dept/image3.jpg" alt="Dạy lòng trắc ẩn bằng khoa học" class="stream-thumb-img" onerror="handleImageError(this)">
+          <div class="stream-mini-body">
+            <span class="stream-mini-cat">IN-DEPTH</span>
+            <h4 class="stream-mini-headline">Những nhà giáo dục dùng khoa học dạy lòng trắc ẩn: Khi sự tử tế là môn chính khóa</h4>
+            <span class="stream-mini-time"><i class="far fa-clock"></i> 7 min read • Positive News</span>
+          </div>
+        </article>
+            <div class="drawer-socials" style="margin-top:auto; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; gap:0.75rem;">
+        <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.5);">Follow us:</span>
+        <a href="https://www.facebook.com/people/Hearticles/61595901793120/" target="_blank" rel="noopener noreferrer" class="drawer-social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/hearticles.news/" target="_blank" rel="noopener noreferrer" class="drawer-social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/hearticles_news" target="_blank" rel="noopener noreferrer" class="drawer-social-link" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </aside>
+
+      <!-- COLUMN 2: CENTER TOP POST (HERO STORY) -->
+      <article class="hero-center-top-post" onclick="openArticleModal('trending-1')">
+        <div class="center-post-media-wrap">
+          <img src="assets/images/trending/lawmakers_lead.jpg" alt="Quốc hội thảo luận vùng biên giới" class="center-post-img" onerror="handleImageError(this)">
+          <span class="center-post-badge" data-i18n="focal_badge"><i class="fas fa-star"></i> TIÊU ĐIỂM CHỦ ĐẠO • TOP STORY</span>
+        </div>
+        <div class="center-post-body">
+          <h1 class="center-post-title" data-i18n="focal_lead_title">
+            Lawmakers propose measures to boost development in mountainous, border regions
+          </h1>
+          <p class="center-post-sapo" data-i18n="focal_lead_sapo">
+            Đại biểu Quốc hội đề xuất các giải pháp đột phá nhằm phát huy thế mạnh vùng, tăng cường kết nối hạ tầng giao thông và thúc đẩy kinh tế - xã hội các tỉnh miền núi, biên giới phía Bắc.
+          </p>
+          <div class="center-post-meta">
+            <span class="center-post-author" data-i18n="focal_lead_author"><i class="far fa-user"></i> Đoàn Thị Lê An &amp; NDO</span>
+            <span class="center-post-time" data-i18n="focal_lead_meta"><i class="far fa-clock"></i> 5 min read • Báo Nhân Dân</span>
+          </div>
+
+          <!-- Red Bullet Related Stories Strip -->
+          <div class="center-post-related">
+            <div class="related-item-row" onclick="event.stopPropagation(); openArticleModal('trending-5');">
+              <span class="related-red-dot"></span>
+              <span class="related-text-link" data-i18n="focal_related_1">Chiến dịch 500 ngày đêm ADN: Trả lại danh tính cho gần 800 hài cốt liệt sĩ</span>
+            </div>
+            <div class="related-item-row" onclick="event.stopPropagation(); openArticleModal('trending-7');">
+              <span class="related-red-dot"></span>
+              <span class="related-text-link" data-i18n="focal_related_2">Trí tuệ nhân tạo trong báo chí hiện đại: Tăng tốc quy trình nhưng giữ trọn đạo đức nhân văn</span>
+            </div>
+          </div>
+        </div>
       </article>
 
       <!-- COLUMN 3: RIGHT WIDGETS (TRENDING + MOST READ + MORE BUTTONS) -->
@@ -529,7 +725,8 @@
       <a href="human-stories.html" class="drawer-link" data-i18n="nav_human_stories"><i class="fas fa-heart"></i> Human Stories</a>
       <a href="mind-soul.html" class="drawer-link" data-i18n="nav_mind_soul"><i class="fas fa-spa"></i> Mind &amp; Soul</a>
       <a href="in-depth.html" class="drawer-link" data-i18n="nav_indepth"><i class="fas fa-feather-alt"></i> In-depth</a>
-      <a href="about.html" class="drawer-link" data-i18n="nav_about"><i class="fas fa-info-circle"></i> About us</a>
+      <a href="javascript:void(0)" class="drawer-link" onclick="closeDrawer(); openSignInModal();" data-i18n="btn_signin"><i class="far fa-user-circle"></i> Đăng nhập / Sign In</a>
+      <a href="about.html" class="drawer-link"  data-i18n="nav_about"><i class="fas fa-info-circle"></i> About us</a>
     </nav>
     <div style="margin-top:auto; padding-top:1.5rem; border-top:1px solid #332B25;">
       <p style="font-size:0.8125rem; color:#E2D8D4; font-weight:600;">Tòa soạn ULIS - VNU • Lớp 6 - Nhóm 1 - Khóa 127:</p>
@@ -549,7 +746,41 @@
     </div>
   </div>
 
-  <!-- SEARCH MODAL -->
+    <!-- SIGN IN MODAL -->
+  <div class="signin-modal-backdrop" id="signInModal" onclick="if(event.target === this) closeSignInModal()">
+    <div class="signin-modal-card">
+      <button onclick="closeSignInModal()" style="position:absolute; top:1.25rem; right:1.25rem; font-size:1.25rem; color:var(--color-text-muted); cursor:pointer; background:none; border:none;" aria-label="Đóng"><i class="fas fa-times"></i></button>
+      <div style="text-align:center; margin-bottom:1.5rem;">
+        <div style="width:58px; height:58px; border-radius:50%; background:rgba(84,17,30,0.08); color:var(--color-brand-primary); font-size:1.85rem; display:inline-flex; align-items:center; justify-content:center; margin-bottom:0.75rem;">
+          <i class="far fa-user-circle"></i>
+        </div>
+        <h3 style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="signin_modal_title">Đăng Nhập Độc Giả</h3>
+        <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.35rem;" data-i18n="signin_modal_desc">Truy cập tài khoản để lưu bài viết yêu thích, thảo luận và nhận bản tin sớm nhất.</p>
+      </div>
+
+      <form onsubmit="handleSignInSubmit(event)" style="display:flex; flex-direction:column; gap:0.9rem;">
+        <div>
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--color-text-body); margin-bottom:0.3rem;" data-i18n="signin_email_label">Email độc giả</label>
+          <input type="email" id="signInEmail" required placeholder="name@ulis.vnu.edu.vn" value="reader@ulis.vnu.edu.vn" style="width:100%; padding:0.65rem 0.9rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--color-text-body); margin-bottom:0.3rem;" data-i18n="signin_password_label">Mật khẩu</label>
+          <input type="password" required value="••••••••" placeholder="Nhập mật khẩu..." style="width:100%; padding:0.65rem 0.9rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--color-text-muted);">
+          <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+            <input type="checkbox" checked> <span data-i18n="signin_remember">Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="javascript:void(0)" onclick="showToast('Liên kết đặt lại mật khẩu đã được gửi đến email!', 'info')" style="color:var(--color-brand-primary); font-weight:600;" data-i18n="signin_forgot">Quên mật khẩu?</a>
+        </div>
+        <button type="submit" class="fashion-btn-pill" style="padding:0.75rem; margin-top:0.5rem; width:100%; font-size:0.95rem; font-weight:700;" data-i18n="btn_signin">
+          Đăng Nhập
+        </button>
+      </form>
+    </div>
+  </div>
+
+<!-- SEARCH MODAL -->
   <div class="search-modal" id="searchModal" onclick="if(event.target === this) closeSearchModal()">
     <div class="search-modal-box">
       <div class="search-input-wrap">

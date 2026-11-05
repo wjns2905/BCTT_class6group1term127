@@ -93,7 +93,7 @@
       <div class="fashion-header-actions">
 
         <!-- Primary language toggle pill (Default: EN) -->
-        <div class="lang-switch-pill" style="display:none !important;" role="group" aria-label="Language Selector">
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
           <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
           <span class="lang-pill-divider">/</span>
           <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
@@ -121,12 +121,19 @@
 
   <main class="container" style="flex-grow: 1;">
     <section class="category-page-hero">
-      <div class="category-breadcrumb">
-        <a href="index.html">Home</a> <span>/</span> <span>In-depth</span>
+            <div class="category-hero-header-row" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+        <div class="category-breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Home</a> <span>/</span> <span data-i18n="nav_indepth">Indepth</span>
+        </div>
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+          <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+          <span class="lang-pill-divider">/</span>
+          <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
       </div>
-      <h1 class="category-page-title">IN-DEPTH.</h1>
+      <h1 class="category-page-title" data-i18n="cat_heading_indepth">IN-DEPTH.</h1>
       <p class="category-page-desc" data-i18n="indepth_desc">
-        Phóng sự dài kỳ, ký sự đa phương tiện, chuyên khảo văn hóa và những góc nhìn học thuật đối ngoại sâu sắc.
+        Longform investigative features, multimedia cultural essays, and diplomatic scholarly analyses.
       </p>
     </section>
 
@@ -136,7 +143,7 @@
         <span class="category-featured-kicker" data-i18n="cat_feat_indepth_kicker">CULTURAL DISPATCH · VIETNAM NEWS</span>
         <h2 class="category-featured-title" data-i18n="cat_feat_indepth_title">A Hanoi that never stands still: Milk flower scent and autumn memories</h2>
         <p class="category-featured-excerpt" data-i18n="cat_feat_indepth_excerpt">
-          Hương hoa sữa nồng nàn tháng Mười không chỉ là câu chuyện yêu hay ghét một mùi hương, mà là tấm gương phản chiếu nhịp thở của một Hà Nội không bao giờ ngừng chuyển động.
+          The poignant fragrance of milk flowers in October is not simply a matter of personal fragrance preference, but an enduring mirror reflecting the heartbeat of a Hanoi that never stands still.
         </p>
         <div>
           <button class="fashion-btn-pill" data-i18n="btn_read_full">Read Full Story &rarr;</button>

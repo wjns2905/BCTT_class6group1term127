@@ -93,7 +93,7 @@
       <div class="fashion-header-actions">
 
         <!-- Primary language toggle pill (Default: EN) -->
-        <div class="lang-switch-pill" style="display:none !important;" role="group" aria-label="Language Selector">
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
           <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
           <span class="lang-pill-divider">/</span>
           <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
@@ -121,12 +121,19 @@
 
   <main class="container" style="flex-grow: 1;">
     <section class="category-page-hero">
-      <div class="category-breadcrumb">
-        <a href="index.html">Home</a> <span>/</span> <span>About Us</span>
+            <div class="category-hero-header-row" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+        <div class="category-breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Home</a> <span>/</span> <span data-i18n="nav_about">About</span>
+        </div>
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+          <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+          <span class="lang-pill-divider">/</span>
+          <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
       </div>
-      <h1 class="category-page-title">ABOUT HEARTICLES.</h1>
+      <h1 class="category-page-title" data-i18n="nav_about">ABOUT HEARTICLES.</h1>
       <p class="category-page-desc" data-i18n="about_hero_sub">
-        "Where News Begins with a Heartbeat — Nơi tin tức khởi nguồn từ nhịp đập trái tim và lòng trắc ẩn."
+        "Where News Begins with a Heartbeat - Where journalism springs from empathy and human connection."
       </p>
     </section>
 

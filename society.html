@@ -93,7 +93,7 @@
       <div class="fashion-header-actions">
 
         <!-- Primary language toggle pill (Default: EN) -->
-        <div class="lang-switch-pill" style="display:none !important;" role="group" aria-label="Language Selector">
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
           <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
           <span class="lang-pill-divider">/</span>
           <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
@@ -121,12 +121,19 @@
 
   <main class="container" style="flex-grow: 1;">
     <section class="category-page-hero">
-      <div class="category-breadcrumb">
-        <a href="index.html">Home</a> <span>/</span> <span>Society</span>
+            <div class="category-hero-header-row" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+        <div class="category-breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Home</a> <span>/</span> <span data-i18n="nav_society">Society</span>
+        </div>
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+          <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+          <span class="lang-pill-divider">/</span>
+          <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
       </div>
-      <h1 class="category-page-title">SOCIETY.</h1>
+      <h1 class="category-page-title" data-i18n="cat_heading_society">SOCIETY.</h1>
       <p class="category-page-desc" data-i18n="society_desc">
-        Những vấn đề dân sinh, chính sách tài chính du học, khủng hoảng sinh hoạt phí và các mô hình tương trợ cộng đồng văn minh.
+        Civic livelihoods, international study policies, cost-of-living resilience, and grassroots solidarity.
       </p>
     </section>
 
@@ -136,7 +143,7 @@
         <span class="category-featured-kicker" data-i18n="cat_feat_society_kicker">COMMUNITY SPOTLIGHT · THE GUARDIAN</span>
         <h2 class="category-featured-title" data-i18n="cat_feat_society_title">Cost of Living Crisis: Community Pantries Preserving Dignity</h2>
         <p class="category-featured-excerpt" data-i18n="cat_feat_society_excerpt">
-          Mô hình siêu thị cộng đồng Vale Pantry và dự án trao tặng 3 triệu đôi giày cho trẻ em nghèo mở ra định nghĩa mới về lòng hảo tâm: Cho đi mà không làm tổn thương lòng tự trọng.
+          The Vale Pantry community shop in Dorset and initiatives giving 3 million pairs of shoes to underprivileged children redefine charitable giving: uplifting communities while honoring self-dignity.
         </p>
         <div>
           <button class="fashion-btn-pill" data-i18n="btn_read_full">Read Full Story &rarr;</button>

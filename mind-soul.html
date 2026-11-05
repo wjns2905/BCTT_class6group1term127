@@ -93,7 +93,7 @@
       <div class="fashion-header-actions">
 
         <!-- Primary language toggle pill (Default: EN) -->
-        <div class="lang-switch-pill" style="display:none !important;" role="group" aria-label="Language Selector">
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
           <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
           <span class="lang-pill-divider">/</span>
           <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
@@ -121,12 +121,19 @@
 
   <main class="container" style="flex-grow: 1;">
     <section class="category-page-hero">
-      <div class="category-breadcrumb">
-        <a href="index.html">Home</a> <span>/</span> <span>Mind &amp; Soul</span>
+            <div class="category-hero-header-row" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+        <div class="category-breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Home</a> <span>/</span> <span data-i18n="nav_mind_soul">Mind Soul</span>
+        </div>
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+          <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+          <span class="lang-pill-divider">/</span>
+          <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
       </div>
-      <h1 class="category-page-title">MIND &amp; SOUL.</h1>
+      <h1 class="category-page-title" data-i18n="cat_heading_mind">MIND &amp; SOUL.</h1>
       <p class="category-page-desc" data-i18n="mind_desc">
-        Nuôi dưỡng thế giới nội tâm, nghệ thuật sống chậm, sức khỏe toàn diện và vẻ đẹp văn hóa nghệ thuật.
+        Nurturing inner peace, slow living, holistic wellbeing, and cultural heritage.
       </p>
     </section>
 
@@ -136,7 +143,7 @@
         <span class="category-featured-kicker" data-i18n="cat_feat_mind_kicker">MUSIC &amp; CULTURE · LAO DONG NEWSPAPER</span>
         <h2 class="category-featured-title" data-i18n="cat_feat_mind_title">Taeyang (BigBang) expresses deep love for pho and 'best show' at My Dinh Stadium</h2>
         <p class="category-featured-excerpt" data-i18n="cat_feat_mind_excerpt">
-          Nam nghệ sĩ hàng đầu xứ kim chi bày tỏ tình cảm chân thành với khán giả Việt Nam sau hai đêm bùng nổ của tour diễn kỷ niệm 20 năm tại Hà Nội.
+          The acclaimed Korean artist expresses deep gratitude to Vietnamese fans after two sensational nights of his 20th-anniversary tour in Hanoi.
         </p>
         <div>
           <button class="fashion-btn-pill" data-i18n="btn_read_full">Read Full Story &rarr;</button>

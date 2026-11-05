@@ -93,7 +93,7 @@
       <div class="fashion-header-actions">
 
         <!-- Primary language toggle pill (Default: EN) -->
-        <div class="lang-switch-pill" style="display:none !important;" role="group" aria-label="Language Selector">
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
           <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
           <span class="lang-pill-divider">/</span>
           <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
@@ -121,12 +121,19 @@
 
   <main class="container" style="flex-grow: 1;">
     <section class="category-page-hero">
-      <div class="category-breadcrumb">
-        <a href="index.html">Home</a> <span>/</span> <span>Human Stories</span>
+            <div class="category-hero-header-row" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+        <div class="category-breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Home</a> <span>/</span> <span data-i18n="nav_human_stories">Human Stories</span>
+        </div>
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+          <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+          <span class="lang-pill-divider">/</span>
+          <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
       </div>
-      <h1 class="category-page-title">HUMAN STORIES.</h1>
+      <h1 class="category-page-title" data-i18n="cat_heading_human">HUMAN STORIES.</h1>
       <p class="category-page-desc" data-i18n="human_desc">
-        Những mảnh đời chạm đến trái tim, nghị lực phi thường và cử chỉ tử tế thắp sáng niềm tin cuộc sống.
+        Unforgettable lives, extraordinary courage, and heartwarming acts of kindness that restore faith in humanity.
       </p>
     </section>
 
@@ -136,7 +143,7 @@
         <span class="category-featured-kicker" data-i18n="cat_feat_human_kicker">INSPIRATIONAL STORY · ARTICLE 3 HUMAN STORIES</span>
         <h2 class="category-featured-title" data-i18n="cat_feat_human_title">“Tôi được trao cơ hội thứ hai để sống” — Qusay Hussein</h2>
         <p class="category-featured-excerpt" data-i18n="cat_feat_human_excerpt">
-          Sống sót kỳ diệu sau vụ đánh bom thảm khốc và mất đi thị lực, Qusay Hussein cùng 5 nhân vật phi thường chia sẻ khoảnh khắc sinh tử đã thay đổi cuộc đời họ mãi mãi.
+          Miraculously surviving a devastating bombing and losing his eyesight, Qusay Hussein alongside extraordinary figures share near-death turning points that reshaped their lives forever.
         </p>
         <div>
           <button class="fashion-btn-pill" data-i18n="btn_read_full">Read Full Story &rarr;</button>

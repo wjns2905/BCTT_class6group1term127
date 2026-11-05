@@ -49,6 +49,8 @@ const I18N_TRANSLATIONS = {
     focal_lead_meta: '<i class="far fa-clock"></i> 5 min read • Báo Nhân Dân',
     focal_related_1: "Chiến dịch 500 ngày đêm ADN: Trả lại danh tính cho gần 800 hài cốt liệt sĩ",
     focal_related_2: "Trí tuệ nhân tạo trong báo chí hiện đại: Tăng tốc quy trình nhưng giữ trọn đạo đức nhân văn",
+    focal_related_3: "Ánh sáng điện lưới về bản xa: Hơn 1.500 đồng bào dân tộc thiểu số bước vào kỷ nguyên mới",
+    related_coverage_title: "BÀI VIẾT LIÊN QUAN • RELATED COVERAGE",
     
     // Sub-Lead
     sublead_cat_1: "TRENDING",
@@ -202,7 +204,7 @@ const I18N_TRANSLATIONS = {
       // --- Update Giao Dien 2026 Additions ---
     ad_label: "QUẢNG CÁO • ADVERTISEMENT",
     stream_header_title: "TIN NỔI BẬT",
-    stream_curated_badge: "7 BÀI CHỌN LỌC",
+    stream_curated_badge: "6 BÀI CHỌN LỌC",
     widget_trending_title: "TRENDING • THỊNH HÀNH",
     widget_more_trending: "Xem thêm Trending &rarr;",
     widget_read_title: "MOST READ • ĐỌC NHIỀU NHẤT",
@@ -276,6 +278,8 @@ const I18N_TRANSLATIONS = {
     focal_lead_meta: '<i class="far fa-clock"></i> 5 min read • Nhân Dân Daily',
     focal_related_1: "500-day-and-night campaign: DNA testing results returned for nearly 800 fallen soldiers",
     focal_related_2: "AI in modern journalism: Enhancing reporting speed while preserving human empathy and ethics",
+    focal_related_3: "Grid power brings light to remote villages: Over 1,500 ethnic minorities enter new era",
+    related_coverage_title: "RELATED COVERAGE",
     
     // Sub-Lead
     sublead_cat_1: "TRENDING",
@@ -429,7 +433,7 @@ const I18N_TRANSLATIONS = {
       // --- Update Giao Dien 2026 Additions ---
     ad_label: "ADVERTISEMENT • QUẢNG CÁO",
     stream_header_title: "CURATED STORIES",
-    stream_curated_badge: "7 CURATED STORIES",
+    stream_curated_badge: "6 CURATED STORIES",
     widget_trending_title: "TRENDING STORIES",
     widget_more_trending: "More Trending &rarr;",
     widget_read_title: "MOST READ STORIES",

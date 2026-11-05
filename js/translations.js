@@ -183,12 +183,18 @@ const I18N_TRANSLATIONS = {
     cat_heading_mind: "TÂM HỒN & TRÍ TUỆ.",
     cat_heading_indepth: "CHUYÊN SÂU.",
     breadcrumb_home: "Trang chủ",
+    dock_search: "Tìm kiếm",
+    dock_menu: "Menu",
+
         cat_heading_trending: "TRENDING.",
     cat_heading_society: "SOCIETY.",
     cat_heading_human: "HUMAN STORIES.",
     cat_heading_mind: "MIND & SOUL.",
     cat_heading_indepth: "IN-DEPTH.",
     breadcrumb_home: "Home",
+    dock_search: "Search",
+    dock_menu: "Menu",
+
     cat_feat_trending_kicker: "TIÊU ĐIỂM CHUYÊN MỤC · BÀI 4 TRENDING",
     cat_feat_trending_title: "Gánh mưu sinh: Hồn cốt bình dị trên từng góc phố cổ Hội An",
     cat_feat_trending_excerpt: "Hình ảnh đôi quang gánh trĩu nặng nhịp sống mưu sinh, vẻ đẹp cần lao mộc mạc và ký ức rêu phong trên từng ngõ nhỏ di sản được khắc họa xúc động qua lăng kính phóng sự VnExpress.",

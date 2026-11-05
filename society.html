@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Class6group1term127 - Society</title>
   <meta name="description" content="Chuyên trang Society tạp chí HEARTICLES. — ULIS - VNU">
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/heart-logo.svg">
@@ -68,7 +68,9 @@
   <header class="fashion-header">
     <div class="container fashion-header-container">
 
-      <!-- Minimalist Navigation with About Us Dropdown -->
+            <!-- Mobile Sticky Nav Brand Mark -->
+      <a href="index.html" class="fashion-mobile-brand" aria-label="HEARTICLES. - Home">HEARTICLES.</a>
+<!-- Minimalist Navigation with About Us Dropdown -->
       <nav class="fashion-nav" aria-label="Thanh điều hướng tạp chí">
         <a href="index.html" class="nav-item " data-i18n="nav_home">Home</a>
         <a href="trending.html" class="nav-item " data-i18n="nav_trending">Trending</a>
@@ -382,27 +384,27 @@
     </div>
   </div>
 
-  <!-- MOBILE BOTTOM DOCK -->
-  <nav class="mobile-bottom-dock" aria-label="Điều hướng nhanh trên di động">
-    <a href="index.html" class="dock-btn">
+    <!-- MOBILE BOTTOM DOCK -->
+  <nav class="mobile-bottom-dock" aria-label="Quick mobile navigation">
+    <a href="index.html" class="dock-btn ">
       <i class="fas fa-home"></i>
-      <span>Home</span>
+      <span data-i18n="nav_home">Home</span>
     </a>
-    <a href="trending.html" class="dock-btn">
+    <a href="trending.html" class="dock-btn ">
       <i class="fas fa-fire"></i>
-      <span>Trending</span>
+      <span data-i18n="nav_trending">Trending</span>
     </a>
-    <a href="human-stories.html" class="dock-btn">
+    <a href="human-stories.html" class="dock-btn ">
       <i class="fas fa-heart"></i>
-      <span>Human</span>
+      <span data-i18n="nav_human_stories">Human</span>
     </a>
     <a href="javascript:void(0)" class="dock-btn" onclick="openSearchModal()">
       <i class="fas fa-search"></i>
-      <span data-i18n="nav_search">Search</span>
+      <span data-i18n="dock_search">Search</span>
     </a>
     <a href="javascript:void(0)" class="dock-btn" onclick="openDrawer()">
       <i class="fas fa-bars"></i>
-      <span>Menu</span>
+      <span data-i18n="dock_menu">Menu</span>
     </a>
   </nav>
 

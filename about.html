@@ -47,7 +47,7 @@
        ================================================================= -->
   <div class="header-ad-leaderboard-wrap">
     <div class="container" style="display:flex; flex-direction:column; align-items:center;">
-      <span class="ad-label-strip" data-i18n="ad_label">ADVERTISEMENT • QUẢNG CÁO</span>
+      <span class="ad-label-strip" data-i18n="ad_label">ADVERTISEMENT</span>
       <a href="https://www.britishcouncil.vn/thi-ielts/one-skill-retake" target="_blank" rel="noopener noreferrer" class="header-ad-link" title="British Council IELTS - One Skill Retake">
         <img src="assets/images/ads/header_ad_banner.png" alt="British Council IELTS One Skill Retake Leaderboard Ad" class="header-ad-banner-img" width="1444" height="378">
       </a>
@@ -179,17 +179,17 @@
 
   <!-- OFFCANVAS DRAWER MENU -->
   <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
-  <aside class="offcanvas-drawer" id="offcanvasDrawer" aria-label="Menu mở rộng">
+  <aside class="offcanvas-drawer" id="offcanvasDrawer" aria-label="Navigation Menu">
     <div class="drawer-header">
       <div class="brand-title" style="color:#FFF; font-family:var(--font-editorial); font-size:1.6rem; font-weight:900; letter-spacing:-0.03em;">
         HEARTICLES<span style="color:var(--color-brand-accent);">.</span>
       </div>
-      <button onclick="closeDrawer()" style="color:#FFF; font-size:1.5rem;" aria-label="Đóng menu"><i class="fas fa-times"></i></button>
+      <button onclick="closeDrawer()" style="color:#FFF; font-size:1.5rem;" aria-label="Close menu"><i class="fas fa-times"></i></button>
     </div>
 
     <!-- Drawer Language Selector Row (Default: EN) -->
     <div class="drawer-lang-row" style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; margin-bottom:1rem; background:rgba(255,255,255,0.06); border-radius:8px;">
-      <span style="font-size:0.875rem; color:#E2D8D4; font-weight:600;"><i class="fas fa-globe" style="margin-right:0.4rem; color:var(--color-brand-accent);"></i> Ngôn ngữ / Language:</span>
+      <span style="font-size:0.875rem; color:#E2D8D4; font-weight:600;"><i class="fas fa-globe" style="margin-right:0.4rem; color:var(--color-brand-accent);"></i> Language / Ngôn ngữ:</span>
       <div class="lang-switch-pill" role="group" aria-label="Language Selector">
         <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
         <span class="lang-pill-divider">/</span>
@@ -224,7 +224,7 @@
   <!-- ARTICLE READER MODAL -->
   <div class="article-modal-backdrop" id="articleReaderModal">
     <div class="article-modal-container">
-      <button class="article-modal-close-btn" onclick="closeArticleModal()" aria-label="Đóng bài viết">
+      <button class="article-modal-close-btn" onclick="closeArticleModal()" aria-label="Close article">
         <i class="fas fa-times"></i>
       </button>
       <div id="articleModalBody"></div>
@@ -240,7 +240,7 @@
           <i class="far fa-user-circle"></i>
         </div>
         <h3 style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="signin_modal_title">Đăng Nhập Độc Giả</h3>
-        <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.35rem;" data-i18n="signin_modal_desc">Truy cập tài khoản để lưu bài viết yêu thích, thảo luận và nhận bản tin sớm nhất.</p>
+        <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.35rem;" data-i18n="signin_modal_desc">Access your reading history, saved bookmarks, and personalized notifications.</p>
       </div>
 
       <form onsubmit="handleSignInSubmit(event)" style="display:flex; flex-direction:column; gap:0.9rem;">
@@ -254,7 +254,7 @@
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--color-text-muted);">
           <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
-            <input type="checkbox" checked> <span data-i18n="signin_remember">Ghi nhớ đăng nhập</span>
+            <input type="checkbox" checked> <span data-i18n="signin_remember">Remember me</span>
           </label>
           <a href="javascript:void(0)" onclick="showToast('Liên kết đặt lại mật khẩu đã được gửi đến email!', 'info')" style="color:var(--color-brand-primary); font-weight:600;" data-i18n="signin_forgot">Quên mật khẩu?</a>
         </div>
@@ -274,7 +274,7 @@
         <button onclick="closeSearchModal()" style="font-size:1.25rem; color:var(--color-text-muted);"><i class="fas fa-times"></i></button>
       </div>
       <div class="search-results-list" id="searchResults">
-        <p style="color:var(--color-text-body); font-size:0.95rem; font-weight:500;">Nhập từ khóa để tìm kiếm trong 34 bài viết gốc...</p>
+        <p style="color:var(--color-text-body); font-size:0.95rem; font-weight:500;" data-i18n="search_hint">Search across 100 original verified articles...</p>
       </div>
     </div>
   </div>
@@ -285,8 +285,8 @@
     <div class="onboard-card" style="text-align:center;">
       <button onclick="closeSubscribeModal()" style="position:absolute; top:1.25rem; right:1.25rem; font-size:1.25rem; color:var(--color-text-muted); cursor:pointer; background:none; border:none;" aria-label="Đóng"><i class="fas fa-times"></i></button>
       <div style="font-size:2.5rem; color:var(--color-brand-primary); margin-bottom:0.5rem;"><i class="fas fa-envelope-open-text"></i></div>
-      <h3 style="font-family:var(--font-editorial); font-size:1.5rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="subscribe_modal_title">Đăng Ký Nhận Bản Tin HEARTICLES.</h3>
-      <p style="font-size:0.875rem; color:var(--color-text-body); margin:0.75rem 0 1.25rem 0;" data-i18n="subscribe_modal_desc">Nhận tuyển tập những bài viết nhân văn sâu sắc và ký sự chạm đến trái tim vào mỗi sáng Chủ nhật.</p>
+      <h3 style="font-family:var(--font-editorial); font-size:1.5rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="subscribe_modal_title">Subscribe to HEARTICLES.</h3>
+      <p style="font-size:0.875rem; color:var(--color-text-body); margin:0.75rem 0 1.25rem 0;" data-i18n="subscribe_modal_desc">Receive curated weekly human-interest journalism directly in your inbox every Sunday morning.</p>
       <form onsubmit="handleSubscribeSubmit(event)" style="display:flex; flex-direction:column; gap:0.75rem;">
         <input type="email" id="subscribeEmailInput" required placeholder="name@example.com" style="padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
         <button type="submit" id="subscribeSubmitBtn" class="fashion-btn-pill" style="padding:0.75rem; cursor:pointer; font-weight:700;" data-i18n="btn_subscribe">Subscribe</button>
@@ -304,8 +304,8 @@
       </div>
       <div id="onboardStepContent"></div>
       <div class="onboard-action-row">
-        <button class="btn-text-skip" onclick="closeOnboardingModal()">Bỏ qua</button>
-        <button class="btn-onboard-next" id="onboardBtnNext" onclick="nextOnboardStep()">Tiếp tục</button>
+        <button class="btn-text-skip" onclick="closeOnboardingModal()" data-i18n="btn_skip">Skip</button>
+        <button class="btn-onboard-next" id="onboardBtnNext" onclick="nextOnboardStep()" data-i18n="btn_next">Next</button>
       </div>
     </div>
   </div>
@@ -320,23 +320,23 @@
         <button onclick="closeShortcutsModal()" style="color:var(--color-text-muted); font-size:1.25rem;" aria-label="Đóng phím tắt"><i class="fas fa-times"></i></button>
       </div>
       <div class="shortcut-row">
-        <span data-i18n="shortcut_search">Mở ô tìm kiếm nhanh</span>
+        <span data-i18n="shortcut_search">Open quick search</span>
         <kbd class="shortcut-key">/</kbd>
       </div>
       <div class="shortcut-row">
-        <span data-i18n="shortcut_esc">Đóng bài đọc / Đóng hộp thoại</span>
+        <span data-i18n="shortcut_esc">Close article / Close modal</span>
         <kbd class="shortcut-key">ESC</kbd>
       </div>
       <div class="shortcut-row">
-        <span data-i18n="shortcut_zoom">Tăng / Giảm cỡ chữ đọc bài (Zoom Text)</span>
+        <span data-i18n="shortcut_zoom">Increase / Decrease reading font size</span>
         <kbd class="shortcut-key">T</kbd>
       </div>
       <div class="shortcut-row">
-        <span data-i18n="shortcut_help">Xem bảng danh sách phím tắt</span>
+        <span data-i18n="shortcut_help">Show keyboard shortcuts list</span>
         <kbd class="shortcut-key">?</kbd>
       </div>
       <div style="margin-top:1.25rem; font-size:0.75rem; color:var(--color-text-muted); text-align:center;">
-        Nhấn <kbd class="shortcut-key">ESC</kbd> hoặc click ra ngoài để đóng.
+        <span data-i18n="shortcuts_close_hint">Press <kbd class="shortcut-key">ESC</kbd> or click outside to dismiss.</span>
       </div>
     </div>
   </div>
@@ -357,7 +357,7 @@
     </a>
     <a href="javascript:void(0)" class="dock-btn" onclick="openSearchModal()">
       <i class="fas fa-search"></i>
-      <span>Tìm kiếm</span>
+      <span data-i18n="nav_search">Search</span>
     </a>
     <a href="javascript:void(0)" class="dock-btn" onclick="openDrawer()">
       <i class="fas fa-bars"></i>

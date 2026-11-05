@@ -63,6 +63,15 @@ function syncHomepageCardsWithData(lang) {
   if (typeof ARTICLES_DATA === 'undefined') return;
   const isEn = (lang === 'en');
 
+  // Category map for cards
+  const categoryMap = {
+    'trending': { en: 'TRENDING', vi: 'THỊNH HÀNH' },
+    'society': { en: 'SOCIETY', vi: 'XÃ HỘI' },
+    'human-stories': { en: 'HUMAN STORIES', vi: 'CÂU CHUYỆN NHÂN VĂN' },
+    'mind-soul': { en: 'MIND & SOUL', vi: 'TÂM HỒN & TRÍ TUỆ' },
+    'in-depth': { en: 'IN-DEPTH', vi: 'CHUYÊN SÂU' }
+  };
+
   document.querySelectorAll('[onclick*="openArticleModal"]').forEach(el => {
     const match = el.getAttribute('onclick').match(/openArticleModal\(['"]([^'"]+)['"]\)/);
     if (!match) return;
@@ -77,12 +86,58 @@ function syncHomepageCardsWithData(lang) {
     }
 
     // 2. Sync title if present and not overridden by data-i18n
-    const titleEl = el.querySelector('.stream-mini-headline, .center-post-title, .widget-card-headline, .mosaic-small-title, .culture-item-title, .related-text');
+    const titleEl = el.querySelector('.stream-mini-headline, .center-post-title, .widget-card-title, .widget-card-headline, .society-lead-headline, .society-mini-title, .mosaic-small-title, .mosaic-card-title, .culture-hero-title, .culture-item-title, .related-text-link, .category-stream-title, .fashion-card-title');
     if (titleEl && !titleEl.hasAttribute('data-i18n')) {
       const chosenTitle = isEn ? (art.title_en || art.title) : (art.title || art.title_en);
       if (chosenTitle) {
         titleEl.textContent = chosenTitle;
       }
+    }
+
+    // 3. Sync excerpt / description if present and not overridden by data-i18n
+    const descEl = el.querySelector('.center-post-sapo, .society-lead-desc, .culture-hero-excerpt, .culture-item-desc, .mosaic-card-excerpt, .category-stream-excerpt, .fashion-card-excerpt');
+    if (descEl && !descEl.hasAttribute('data-i18n')) {
+      const chosenDesc = isEn ? (art.subtitle_en || art.subtitle || art.excerpt_en || art.excerpt) : (art.subtitle || art.subtitle_en || art.excerpt || art.excerpt_en);
+      if (chosenDesc) {
+        descEl.textContent = chosenDesc;
+      }
+    }
+
+    // 4. Sync category badge if present and not overridden by data-i18n
+    const catEl = el.querySelector('.stream-mini-cat, .widget-card-cat, .society-lead-tag, .society-mini-cat, .mosaic-kicker, .culture-tag, .culture-item-cat, .fashion-card-category-tag');
+    if (catEl && !catEl.hasAttribute('data-i18n')) {
+      const catKey = (art.category || '').toLowerCase();
+      if (categoryMap[catKey]) {
+        catEl.textContent = isEn ? categoryMap[catKey].en : categoryMap[catKey].vi;
+      } else {
+        catEl.textContent = isEn ? (art.category || '').toUpperCase() : (art.categoryName || '').toUpperCase();
+      }
+    }
+
+    // 5. Sync reading time and view counts
+    const metaEl = el.querySelector('.stream-mini-time, .widget-card-meta, .society-mini-meta, .mosaic-small-meta, .category-stream-footer, .fashion-card-stats');
+    if (metaEl && !metaEl.hasAttribute('data-i18n')) {
+      let metaHtml = metaEl.innerHTML;
+      if (isEn) {
+        metaHtml = metaHtml
+          .replace(/lượt đọc/gi, 'reads')
+          .replace(/phút đọc/gi, 'min read')
+          .replace(/Báo Nhân Dân/gi, 'Nhan Dan Daily')
+          .replace(/Báo Lao Động/gi, 'Lao Dong Newspaper')
+          .replace(/Báo Tiền Phong/gi, 'Tien Phong News')
+          .replace(/Tuổi Trẻ/gi, 'Tuoi Tre News')
+          .replace(/TTXVN/gi, 'Vietnam News Agency');
+      } else {
+        metaHtml = metaHtml
+          .replace(/reads/gi, 'lượt đọc')
+          .replace(/min read/gi, 'phút đọc')
+          .replace(/Nhan Dan Daily/gi, 'Báo Nhân Dân')
+          .replace(/Lao Dong Newspaper/gi, 'Báo Lao Động')
+          .replace(/Tien Phong News/gi, 'Báo Tiền Phong')
+          .replace(/Tuoi Tre News/gi, 'Tuổi Trẻ')
+          .replace(/Vietnam News Agency/gi, 'TTXVN');
+      }
+      metaEl.innerHTML = metaHtml;
     }
   });
 }

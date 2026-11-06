@@ -32,6 +32,7 @@ function initApp() {
   setupHeartTapWidget();
   updateUserAvatarState();
   initOnboarding();
+  setupStickyHeader();
   setupReadingProgressBar();
   setupNetworkStatus();
 }
@@ -1893,6 +1894,24 @@ function renderOnboardStep(step) {
 /* ===================================================================
    READING PROGRESS BAR
    =================================================================== */
+
+/* ===================================================================
+   STICKY HEADER SCROLL ELEVATION LISTENER
+   =================================================================== */
+function setupStickyHeader() {
+  const header = document.querySelector('.fashion-header');
+  if (!header) return;
+  const onScroll = () => {
+    if (window.scrollY > 15) {
+      header.classList.add('is-scrolled');
+    } else {
+      header.classList.remove('is-scrolled');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
 function setupReadingProgressBar() {
   window.addEventListener('scroll', () => {
     const total = document.documentElement.scrollHeight - window.innerHeight;

@@ -2708,24 +2708,59 @@ body {
   position: relative;
   padding: 0.5rem 0;
   letter-spacing: -0.01em;
-  transition: color var(--duration-fast) var(--ease-spring);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.24s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.fashion-nav .nav-item:hover {
-  color: var(--color-brand-primary);
-}
-.fashion-nav .nav-item.active {
-  color: var(--color-brand-primary);
-  font-weight: 700;
-}
-.fashion-nav .nav-item.active::after {
+
+/* Beautiful animated underline for all category items */
+.fashion-nav .nav-item::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -4px;
   left: 0;
   width: 100%;
   height: 2.5px;
-  background-color: var(--color-brand-primary);
+  background-color: var(--color-brand-primary, #54111E);
   border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.32s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s ease;
+}
+
+/* Hover & Focus state: smooth sweep in from left */
+.fashion-nav .nav-item:hover,
+.fashion-nav .nav-item:focus-visible,
+.nav-item-dropdown:hover > .nav-item {
+  color: var(--color-brand-primary, #54111E);
+}
+
+.fashion-nav .nav-item:hover::after,
+.fashion-nav .nav-item:focus-visible::after,
+.nav-item-dropdown:hover > .nav-item::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Active category item: underline is permanently visible */
+.fashion-nav .nav-item.active {
+  color: var(--color-brand-primary, #54111E);
+  font-weight: 700;
+}
+
+.fashion-nav .nav-item.active::after {
+  transform: scaleX(1) !important;
+  transform-origin: left center !important;
+}
+
+/* About Us dropdown chevron smooth rotation */
+.fashion-nav .nav-item .fa-chevron-down {
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-item-dropdown:hover .fa-chevron-down {
+  transform: rotate(180deg);
 }
 .nav-item-her {
   color: var(--color-brand-primary) !important;
@@ -6629,6 +6664,10 @@ button, a, input, select, textarea {
   .fashion-nav .nav-item.active {
     color: var(--color-brand-primary) !important;
     font-weight: 700 !important;
+  }
+  .fashion-nav .nav-item::after {
+    bottom: -2px !important;
+    height: 2px !important;
   }
   .fashion-nav .about-dropdown-menu {
     display: none !important;

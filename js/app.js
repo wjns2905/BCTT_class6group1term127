@@ -1428,8 +1428,25 @@ function attachModalHlsStream(streamUrl) {
 }
 window.attachModalHlsStream = attachModalHlsStream;
 
-function openArticleModal(articleId) {
+function getArticleUrl(articleId) {
+  if (articleId === 'trending-1') {
+    const isSub = window.location.pathname.includes('/hearticles/');
+    return isSub ? 'index.html' : 'hearticles/madeuparticle/index.html';
+  }
+  const isSub = window.location.pathname.includes('/hearticles/');
+  const prefix = isSub ? '../../' : '';
+  return `${prefix}article.html?id=${encodeURIComponent(articleId)}`;
+}
+window.getArticleUrl = getArticleUrl;
 
+function openArticleModal(articleId) {
+  // Direct navigation: each article has its own dedicated link/page!
+  const targetUrl = getArticleUrl(articleId);
+  window.location.href = targetUrl;
+}
+window.openArticleModal = openArticleModal;
+
+function openArticleModalLegacy(articleId) {
   const article = ARTICLES_DATA.find(a => a.id === articleId);
   if (!article) return;
 
@@ -2518,3 +2535,176 @@ function checkInitialArticleRoute() {
     }, 150);
   }
 }
+
+
+/* ===================================================================
+   DEDICATED FULL-PAGE ARTICLE RENDERER (article.html)
+   =================================================================== */
+function renderDedicatedArticlePage(articleId) {
+  const host = document.getElementById('standaloneArticleHost');
+  if (!host || typeof ARTICLES_DATA === 'undefined') return;
+
+  const article = ARTICLES_DATA.find(a => a.id === articleId) || ARTICLES_DATA[0];
+  if (!article) return;
+
+  const isEn = (currentLanguage === 'en');
+  const title = (isEn && article.title_en) ? article.title_en : article.title;
+  const subtitle = (isEn && article.subtitle_en) ? article.subtitle_en : article.subtitle;
+  const readTime = isEn ? (article.readTime || '').replace('phút đọc', 'min read') : article.readTime;
+  const breadcrumbHome = isEn ? 'Home' : 'Trang chủ';
+  const breadcrumbCategory = article.categoryName || 'Trending';
+  const categoryUrl = `${article.category}.html`;
+
+  // Update document title
+  document.title = `Class6group1term127 - ${title}`;
+
+  // Update active nav category
+  document.querySelectorAll('.fashion-nav .nav-item').forEach(el => {
+    if (el.getAttribute('href') === categoryUrl) {
+      el.classList.add('active');
+    } else if (el.getAttribute('href') !== 'index.html') {
+      el.classList.remove('active');
+    }
+  });
+
+  const savedComments = JSON.parse(localStorage.getItem(`comments_${article.id}`) || '[]');
+  const isLiked = localStorage.getItem(`liked_${article.id}`) === 'true';
+
+  let bodyHtml = '';
+  const contentSource = (isEn && article.content_en) ? article.content_en : article.content;
+  if (typeof contentSource === 'string') {
+    bodyHtml = contentSource;
+  } else if (Array.isArray(contentSource)) {
+    bodyHtml = contentSource.map(p => {
+      if (typeof p !== 'string') return '';
+      let trimmed = p.trim();
+      if (trimmed.startsWith('### ')) {
+        return `<h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">${trimmed.replace('### ', '')}</h3>`;
+      }
+      if (trimmed.startsWith('## ')) {
+        return `<h2 class="article-section-heading-lg" style="font-family:var(--font-editorial); font-size:1.65rem; font-weight:800; color:var(--color-brand-primary); margin:2.25rem 0 1rem 0;">${trimmed.replace('## ', '')}</h2>`;
+      }
+      if (trimmed.startsWith('<figure') || trimmed.startsWith('<table') || trimmed.startsWith('<div') || trimmed.startsWith('<blockquote')) {
+        if (trimmed.includes('<img') && !trimmed.includes('onerror=')) {
+          trimmed = trimmed.replace(/<img\b/g, '<img onerror="handleImageError(this)"');
+        }
+        return trimmed;
+      }
+      return `<p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">${p}</p>`;
+    }).join('');
+  }
+
+  host.innerHTML = `
+    <article class="article-reading-content" style="font-size: ${currentFontSize}rem;">
+      <div class="article-breadcrumb" style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1.25rem; flex-wrap:wrap;">
+        <a href="index.html" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">${breadcrumbHome}</a>
+        <span>/</span>
+        <a href="${categoryUrl}" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">${breadcrumbCategory}</a>
+        <span>/</span>
+        <span style="color:var(--color-brand-accent); font-weight:700;">${article.id}</span>
+      </div>
+
+      <h1 class="article-headline" style="font-family:var(--font-editorial); font-size:clamp(1.85rem, 4vw, 2.75rem); font-weight:900; line-height:1.25; margin-bottom:1rem; color:var(--color-text-headline); letter-spacing:-0.02em;">${title}</h1>
+      <p class="article-sapo" style="font-family:var(--font-serif); font-size:clamp(1.1rem, 2vw, 1.3rem); line-height:1.65; color:var(--color-text-muted); margin-bottom:1.75rem; font-style:italic;">${subtitle}</p>
+
+      <div class="article-author-strip" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:1.25rem; border-bottom:1px solid var(--color-border-hairline); margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+        <div class="article-author-info" style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="author-avatar-small" style="width:46px; height:46px; border-radius:50%; background:var(--color-brand-primary); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.1rem;">${article.author.charAt(0)}</div>
+          <div>
+            <div class="author-name-text" style="font-weight:700; color:var(--color-text-headline); font-size:1rem;">${article.author}</div>
+            <div class="article-date-text" style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;"><i class="far fa-clock"></i> ${article.date}</div>
+          </div>
+        </div>
+
+        <div class="article-reading-tools" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+          <button class="tool-btn" onclick="adjustFontSize(-0.1)" title="${isEn ? 'Decrease Font' : 'Giảm cỡ chữ'}"><i class="fas fa-font"></i> A-</button>
+          <button class="tool-btn" onclick="adjustFontSize(0.1)" title="${isEn ? 'Increase Font' : 'Tăng cỡ chữ'}"><i class="fas fa-font"></i> A+</button>
+          <button class="tool-btn ${isSpeaking ? 'active' : ''}" id="btnTTS" onclick="toggleTextToSpeech('${article.id}')" title="${isEn ? 'Text to Speech' : 'Nghe đọc bài báo'}">
+            <i class="fas ${isSpeaking ? 'fa-pause' : 'fa-volume-up'}"></i> <span>${isSpeaking ? (isEn ? 'Pause' : 'Tạm dừng') : (isEn ? 'Listen' : 'Đọc bài báo')}</span>
+          </button>
+          <button class="btn-article-like ${isLiked ? 'liked' : ''}" id="likeBtn_${article.id}" onclick="toggleLikeArticle('${article.id}')" title="${isEn ? 'Like Story' : 'Thả tim bài viết'}">
+            <i class="fas fa-heart"></i> <span id="likeCount_${article.id}">${article.likes + (isLiked ? 1 : 0)}</span>
+          </button>
+          <button class="tool-btn" onclick="shareArticle('${title.replace(/'/g, "\\'")}')" title="${isEn ? 'Share' : 'Chia sẻ'}"><i class="fas fa-share-alt"></i> <span>${isEn ? 'Share' : 'Chia sẻ'}</span></button>
+        </div>
+      </div>
+
+      <div class="article-hero-media" style="border-radius:var(--radius-lg); overflow:hidden; margin:2rem 0; box-shadow:0 6px 24px rgba(0,0,0,0.06);">
+        <img src="${article.image}" alt="${title}" style="width:100%; display:block; max-height:560px; object-fit:cover;" onerror="handleImageError(this)">
+        <div class="article-media-caption" style="font-size:0.85rem; color:var(--color-text-muted); padding:0.6rem 0.5rem; font-style:italic; line-height:1.5;">${article.imageCaption || title}</div>
+      </div>
+
+      ${renderModalVideoBlock(article, isEn, title)}
+
+      <div class="article-body-text" id="articleBodyContent" style="font-family:var(--font-body); font-size:1.15rem; line-height:1.85; color:var(--color-text-body);">
+        ${bodyHtml}
+        ${formatArticleSource(article, isEn)}
+      </div>
+
+      <!-- Comments Block -->
+      <div class="article-comments-block" style="margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--color-border-hairline);">
+        <h3 style="font-family:var(--font-editorial); font-size:1.45rem; color:var(--color-text-headline); margin-bottom:1.25rem;">
+          <i class="far fa-comments" style="color:var(--color-brand-primary);"></i> ${isEn ? 'Reader Discussion' : 'Bình luận & Thảo luận'} (<span id="commentCount">${savedComments.length}</span>)
+        </h3>
+        
+        <div class="comment-form-wrap" style="display:flex; gap:0.75rem; margin-bottom:1.5rem;">
+          <input type="text" class="comment-input-field" id="newCommentInput" placeholder="${isEn ? 'Share your reflection on this story...' : 'Chia sẻ góc nhìn nhân văn của bạn về bài viết này...'}" onkeypress="if(event.key === 'Enter') submitComment('${article.id}')" style="flex-grow:1; padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:var(--radius-full); font-size:0.95rem; outline:none;">
+          <button class="comment-submit-btn fashion-btn-pill" onclick="submitComment('${article.id}')" style="padding:0.75rem 1.5rem; background:var(--color-brand-primary); color:#FFF; font-weight:700; border:none; cursor:pointer;">${isEn ? 'Submit' : 'Gửi'}</button>
+        </div>
+
+        <div class="comments-list-container" id="commentsListContainer">
+          ${savedComments.length === 0 ? `<p style="color:var(--color-text-muted); font-size:0.9rem; font-style:italic;">${isEn ? 'Be the first to share your heartfelt thoughts on this story.' : 'Hãy là người đầu tiên chia sẻ cảm nghĩ về bài viết này.'}</p>` : ''}
+          ${savedComments.map(c => `
+            <div class="comment-item-card" style="background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-md); padding:0.85rem 1rem; margin-bottom:0.75rem; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem;">
+                <strong style="color:var(--color-brand-primary); font-size:0.9rem;">${c.author}</strong>
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">${c.time}</span>
+              </div>
+              <p style="font-size:0.9rem; color:var(--color-text-body); margin:0;">${c.text}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </article>
+  `;
+
+  // Render related articles
+  renderRelatedArticles(article, isEn);
+}
+window.renderDedicatedArticlePage = renderDedicatedArticlePage;
+
+function renderRelatedArticles(currentArt, isEn) {
+  const grid = document.getElementById('relatedArticlesGrid');
+  const heading = document.getElementById('relatedSectionHeading');
+  const viewAll = document.getElementById('relatedViewAllText');
+  const catLink = document.getElementById('relatedCategoryLink');
+  if (!grid || typeof ARTICLES_DATA === 'undefined') return;
+
+  if (heading) heading.textContent = isEn ? 'More In This Category' : 'Tin cùng chuyên mục';
+  if (viewAll) viewAll.textContent = isEn ? 'View Category' : 'Xem tất cả';
+  if (catLink) catLink.href = `${currentArt.category}.html`;
+
+  const related = ARTICLES_DATA
+    .filter(a => a.category === currentArt.category && a.id !== currentArt.id)
+    .slice(0, 3);
+
+  grid.innerHTML = related.map(item => {
+    const rTitle = (isEn && item.title_en) ? item.title_en : item.title;
+    const rExcerpt = (isEn && item.subtitle_en) ? item.subtitle_en : item.subtitle;
+    const rUrl = getArticleUrl(item.id);
+    return `
+      <article class="fashion-article-card" onclick="window.location.href='${rUrl}'" style="cursor:pointer; background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-md); overflow:hidden; display:flex; flex-direction:column;">
+        <div style="aspect-ratio:16/10; overflow:hidden;">
+          <img src="${item.image}" alt="${rTitle}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="handleImageError(this)">
+        </div>
+        <div style="padding:1.15rem; display:flex; flex-direction:column; flex-grow:1;">
+          <span style="font-size:0.725rem; font-weight:800; color:var(--color-brand-accent); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.4rem;">${item.categoryName}</span>
+          <h4 style="font-family:var(--font-editorial); font-size:1.05rem; font-weight:800; line-height:1.35; margin:0 0 0.5rem 0; color:var(--color-text-headline);">${rTitle}</h4>
+          <p style="font-size:0.85rem; color:var(--color-text-muted); line-height:1.5; margin:0 0 1rem 0; flex-grow:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${rExcerpt}</p>
+          <span style="font-size:0.75rem; color:var(--color-brand-primary); font-weight:700;">${isEn ? 'Read Story &rarr;' : 'Đọc bài viết &rarr;'}</span>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+window.renderRelatedArticles = renderRelatedArticles;

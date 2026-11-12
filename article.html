@@ -17,19 +17,19 @@
   
   <!-- Stylesheets -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
-    <script>
+  <script>
     function handleImageError(img) {
       if (!img) return;
-      const cur = img.getAttribute('src') || '';
-      if (!img.dataset.triedFix) {
-        img.dataset.triedFix = 'true';
-        if (cur.startsWith('assets/')) {
-          if (window.location.hostname.includes('github.io')) {
-            const parts = window.location.pathname.split('/').filter(Boolean);
-            const repo = parts[0] || '';
-            img.src = '/' + repo + '/' + cur;
-            return;
-          }
+      const cur = img.getAttribute('src') || img.src || '';
+      if (!cur) return;
+      const idx = cur.indexOf('assets/');
+      if (idx !== -1) {
+        const clean = cur.slice(idx);
+        if (!img.dataset.triedFix && window.location.hostname.includes('github.io')) {
+          img.dataset.triedFix = 'true';
+          const repo = window.location.pathname.split('/').filter(Boolean)[0] || '';
+          img.src = '/' + repo + '/' + clean;
+          return;
         }
       }
       img.onerror = null;

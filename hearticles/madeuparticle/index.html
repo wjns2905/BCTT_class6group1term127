@@ -21,17 +21,19 @@
   <script>
     function handleImageError(img) {
       if (!img) return;
-      const cur = img.getAttribute('src') || '';
-      if (!img.dataset.triedFix) {
-        img.dataset.triedFix = 'true';
-        if (cur.startsWith('assets/')) {
-          img.src = '../../' + cur;
+      const cur = img.getAttribute('src') || img.src || '';
+      if (!cur) return;
+      const idx = cur.indexOf('assets/');
+      if (idx !== -1) {
+        const clean = cur.slice(idx);
+        if (!img.dataset.triedPfx) {
+          img.dataset.triedPfx = 'true';
+          img.src = '../../' + clean;
           return;
         }
-        if (window.location.hostname.includes('github.io')) {
-          const parts = window.location.pathname.split('/').filter(Boolean);
-          const repo = parts[0] || '';
-          const clean = cur.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
+        if (!img.dataset.triedRepo && window.location.hostname.includes('github.io')) {
+          img.dataset.triedRepo = 'true';
+          const repo = window.location.pathname.split('/').filter(Boolean)[0] || '';
           img.src = '/' + repo + '/' + clean;
           return;
         }

@@ -2209,19 +2209,20 @@ function handleImageError(img) {
   if (!img) return;
   const isSub = window.location.pathname.includes('/hearticles/');
   const pfx = isSub ? '../../' : '';
-  const cur = img.getAttribute('src') || '';
+  const cur = img.getAttribute('src') || img.src || '';
   if (!cur) return;
 
-  if (!img.dataset.triedFix) {
-    img.dataset.triedFix = 'true';
-    if (cur.startsWith('assets/')) {
-      img.src = pfx + cur;
+  const idx = cur.indexOf('assets/');
+  if (idx !== -1) {
+    const clean = cur.slice(idx);
+    if (!img.dataset.triedPfx) {
+      img.dataset.triedPfx = 'true';
+      img.src = pfx + clean;
       return;
     }
-    if (window.location.hostname.includes('github.io')) {
-      const parts = window.location.pathname.split('/').filter(Boolean);
-      const repo = parts[0] || '';
-      const clean = cur.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
+    if (!img.dataset.triedRepo && window.location.hostname.includes('github.io')) {
+      img.dataset.triedRepo = 'true';
+      const repo = window.location.pathname.split('/').filter(Boolean)[0] || '';
       img.src = '/' + repo + '/' + clean;
       return;
     }
@@ -2561,12 +2562,7 @@ function renderDedicatedArticlePage(articleId) {
   let bodyHtml = '';
   const contentSource = (isEn && article.content_en) ? article.content_en : article.content;
   if (typeof contentSource === 'string') {
-    let s = contentSource;
-    if (isSubfolder) {
-      s = s.replace(/src="assets\//g, 'src="../../assets/');
-      s = s.replace(/poster="assets\//g, 'poster="../../assets/');
-    }
-    bodyHtml = s;
+    bodyHtml = contentSource;
   } else if (Array.isArray(contentSource)) {
     bodyHtml = contentSource.map(p => {
       if (typeof p !== 'string') return '';
@@ -2578,18 +2574,21 @@ function renderDedicatedArticlePage(articleId) {
         return `<h2 class="article-section-heading-lg" style="font-family:var(--font-editorial); font-size:1.65rem; font-weight:800; color:var(--color-brand-primary); margin:2.25rem 0 1rem 0;">${trimmed.replace('## ', '')}</h2>`;
       }
       if (trimmed.startsWith('<figure') || trimmed.startsWith('<table') || trimmed.startsWith('<div') || trimmed.startsWith('<blockquote')) {
-        if (isSubfolder) {
-          trimmed = trimmed.replace(/src="assets\//g, 'src="../../assets/');
-          trimmed = trimmed.replace(/poster="assets\//g, 'poster="../../assets/');
-        }
-        if (trimmed.includes('<img') && !trimmed.includes('onerror=')) {
-          trimmed = trimmed.replace(/<img/g, '<img onerror="handleImageError(this)"');
-        }
         return trimmed;
       }
       return `<p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">${p}</p>`;
     }).join('');
   }
+
+  // Pre-process bodyHtml: adjust asset paths for subfolders and ensure onerror handlers
+  if (isSubfolder) {
+    bodyHtml = bodyHtml
+      .replace(/(src=["'])assets\//gi, '$1../../assets/')
+      .replace(/(poster=["'])assets\//gi, '$1../../assets/')
+      .replace(/(href=["'])assets\//gi, '$1../../assets/');
+  }
+  bodyHtml = bodyHtml.replace(/<img\s+/gi, '<img onerror="handleImageError(this)" ');
+  bodyHtml = bodyHtml.replace(/onerror="handleImageError\(this\)"\s+onerror="handleImageError\(this\)"/g, 'onerror="handleImageError(this)"');
 
   const heroImgSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
     ? article.image
@@ -2673,7 +2672,7 @@ function renderDedicatedArticlePage(articleId) {
   renderRelatedArticles(article, isEn);
 
   // Initialize reading progress bar
-  initReadingProgressBar();
+  if (typeof setupReadingProgressBar === 'function') { setupReadingProgressBar(); }
 }
 window.renderDedicatedArticlePage = renderDedicatedArticlePage;
 

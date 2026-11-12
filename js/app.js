@@ -185,12 +185,21 @@ function applyLanguage(lang) {
   renderAboutUsSection();
   syncHomepageCardsWithData(lang);
 
-  // Re-render open article modal if active
+  // Re-render standalone article page if active
+  const host = document.getElementById('standaloneArticleHost');
+  if (host && typeof renderDedicatedArticlePage === 'function') {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isSub = window.location.pathname.includes('/hearticles/');
+    const articleId = isSub ? 'trending-1' : (urlParams.get('id') || 'trending-1');
+    renderDedicatedArticlePage(articleId);
+  }
+
+  // Re-render open article modal if active (legacy fallback)
   const modal = document.getElementById('articleReaderModal');
   if (modal && modal.classList.contains('active')) {
     const activeArtId = modal.dataset.articleId;
-    if (activeArtId) {
-      openArticleModal(activeArtId);
+    if (activeArtId && typeof openArticleModalLegacy === 'function') {
+      openArticleModalLegacy(activeArtId);
     }
   }
 }
@@ -2239,7 +2248,7 @@ function handleImageError(img) {
   if (window.location.hostname.includes('github.io') && !img.dataset.triedGithub) {
     img.dataset.triedGithub = 'true';
     const cleanPath = currentSrc.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
-    img.src = '/BCTT_class6group1term127/' + cleanPath;
+    const repo = window.location.pathname.split('/')[1]; img.src = '/' + repo + '/' + cleanPath;
     return;
   }
 

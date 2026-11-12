@@ -24,7 +24,7 @@
       if (cur.startsWith('assets/') && !img.dataset.triedRel) {
         img.dataset.triedRel = 'true';
         if (window.location.hostname.includes('github.io')) {
-          img.src = '/BCTT_class6group1term127/' + cur;
+          const repo = window.location.pathname.split('/')[1]; img.src = '/' + repo + '/' + cur;
           return;
         }
       }

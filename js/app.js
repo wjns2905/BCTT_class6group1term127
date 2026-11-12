@@ -33,6 +33,7 @@ function initApp() {
   updateUserAvatarState();
   initOnboarding();
   setupStickyHeader();
+  checkInitialArticleRoute();
   setupReadingProgressBar();
   setupNetworkStatus();
 }
@@ -1277,22 +1278,26 @@ function formatArticleSource(article, isEn) {
   }
 
   const url = article.sourceUrl || '#';
+  const isInternalLink = url.startsWith('/');
+  const linkLabel = isEn ? (isInternalLink ? 'Article Link:' : 'Original Source:') : (isInternalLink ? 'Đường dẫn bài báo:' : 'Nguồn trích dẫn gốc:');
+  const linkIcon = isInternalLink ? 'fa-link' : 'fa-external-link-alt';
+  const linkTarget = isInternalLink ? '' : 'target="_blank" rel="noopener noreferrer"';
 
   if (isEn) {
     return `
       <div class="article-source-citation">
-        <span class="citation-label">Original Source:</span> "<em class="citation-title">${cleanTitle}</em>", <strong>${sourceName}</strong>, by ${author}, ${formattedDate}
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="citation-url" title="Open original article in new tab">
-          <i class="fas fa-external-link-alt" style="margin-right: 0.35rem; font-size: 0.85rem;"></i>${url}
+        <span class="citation-label">${linkLabel}</span> "<em class="citation-title">${cleanTitle}</em>", <strong>${sourceName}</strong>, by ${author}, ${formattedDate}
+        <a href="${url}" ${linkTarget} class="citation-url" title="${isInternalLink ? 'Direct Article Link' : 'Open original article in new tab'}">
+          <i class="fas ${linkIcon}" style="margin-right: 0.35rem; font-size: 0.85rem;"></i>${url}
         </a>
       </div>
     `;
   } else {
     return `
       <div class="article-source-citation">
-        <span class="citation-label">Nguồn trích dẫn gốc:</span> "<em class="citation-title">${cleanTitle}</em>", <strong>${sourceName}</strong>, tác giả ${author}, ${formattedDate}
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="citation-url" title="Mở bài báo gốc trong tab mới">
-          <i class="fas fa-external-link-alt" style="margin-right: 0.35rem; font-size: 0.85rem;"></i>${url}
+        <span class="citation-label">${linkLabel}</span> "<em class="citation-title">${cleanTitle}</em>", <strong>${sourceName}</strong>, tác giả ${author}, ${formattedDate}
+        <a href="${url}" ${linkTarget} class="citation-url" title="${isInternalLink ? 'Đường dẫn trực tiếp bài báo' : 'Mở bài báo gốc trong tab mới'}">
+          <i class="fas ${linkIcon}" style="margin-right: 0.35rem; font-size: 0.85rem;"></i>${url}
         </a>
       </div>
     `;
@@ -1541,6 +1546,18 @@ function openArticleModal(articleId) {
 
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+
+  // URL Routing: update URL to /hearticles/madeuparticle for trending-1
+  try {
+    const articleUrl = (article.url || article.sourceUrl);
+    if (articleUrl && articleUrl.startsWith('/')) {
+      if (window.location.protocol === 'file:') {
+        window.location.hash = articleUrl.replace(/^\//, '');
+      } else {
+        history.pushState({ articleId: article.id }, '', articleUrl);
+      }
+    }
+  } catch (e) {}
 }
 window.openArticleModal = openArticleModal;
 
@@ -1549,6 +1566,15 @@ function closeArticleModal() {
   if (modal) {
     modal.classList.remove('active');
     document.body.style.overflow = '';
+
+    // Revert URL when closing modal
+    try {
+      if (window.location.hash.includes('madeuparticle')) {
+        history.pushState(null, '', window.location.pathname);
+      } else if (window.location.pathname.includes('/hearticles/madeuparticle')) {
+        history.pushState(null, '', 'index.html');
+      }
+    } catch (e) {}
     const body = document.getElementById('articleModalBody');
     if (body) {
       body.querySelectorAll('iframe, video').forEach(el => {
@@ -1723,15 +1749,23 @@ function adjustFontSize(delta) {
 window.adjustFontSize = adjustFontSize;
 
 function shareArticle(title) {
+  const modal = document.getElementById('articleReaderModal');
+  let targetUrl = window.location.href;
+  if (modal && modal.dataset.articleId === 'trending-1') {
+    targetUrl = (window.location.origin && window.location.origin !== 'null')
+      ? `${window.location.origin}/hearticles/madeuparticle`
+      : '/hearticles/madeuparticle';
+  }
+
   if (navigator.share) {
     navigator.share({
       title: title,
       text: `${title} - HEARTICLES. (ULIS - VNU)`,
-      url: window.location.href
+      url: targetUrl
     }).catch(() => {});
   } else {
-    navigator.clipboard.writeText(window.location.href);
-    showToast(currentLanguage === 'en' ? 'Article link copied!' : 'Đã sao chép liên kết bài viết!', 'link');
+    navigator.clipboard.writeText(targetUrl);
+    showToast(currentLanguage === 'en' ? `Article link copied: ${targetUrl}` : `Đã sao chép liên kết: ${targetUrl}`, 'link');
   }
 }
 window.shareArticle = shareArticle;
@@ -2444,3 +2478,17 @@ function voteArticleQuiz(selectedOpt) {
   }
 }
 window.voteArticleQuiz = voteArticleQuiz;
+
+
+/* ===================================================================
+   DEEP LINK ROUTE CHECKER (/hearticles/madeuparticle)
+   =================================================================== */
+function checkInitialArticleRoute() {
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  if (path.includes('madeuparticle') || hash.includes('madeuparticle')) {
+    setTimeout(() => {
+      openArticleModal('trending-1');
+    }, 150);
+  }
+}

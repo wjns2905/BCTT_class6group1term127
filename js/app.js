@@ -1304,6 +1304,22 @@ window.formatArticleSource = formatArticleSource;
 function renderModalVideoBlock(article, isEn, title) {
   if (!article.video && !article.streamUrl) return '';
 
+  // Case 0: Local MP4 video file
+  if (article.video && article.video.endsWith('.mp4')) {
+    return `
+    <div class="video-responsive-embed" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000; box-shadow: 0 4px 18px rgba(0,0,0,0.14);">
+      <video id="activeModalNativePlayer" controls playsinline poster="${article.image}" preload="metadata" style="width:100%; max-height:500px; display:block; margin:0 auto; background:#000;">
+        <source src="${article.video}" type="video/mp4">
+        ${isEn ? 'Your browser does not support HTML5 video.' : 'Trình duyệt của bạn không hỗ trợ video HTML5.'}
+      </video>
+      <div style="background:#161616; color:#E0E0E0; padding:0.65rem 1rem; font-size:0.8125rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; border-top:1px solid #282828;">
+        <span><i class="fas fa-video" style="color:var(--color-brand-accent, #80182A);"></i> ${isEn ? 'Security Camera Surveillance: Full footage recording the incident.' : 'Camera an ninh khu vực: Toàn bộ video ghi lại sự việc tử tế của người qua đường.'}</span>
+        <span style="background:rgba(255,255,255,0.12); padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">1080p MP4</span>
+      </div>
+    </div>
+    `;
+  }
+
   // Case 1: Direct native/HLS stream URL
   if (article.streamUrl) {
     setTimeout(() => {
@@ -1429,9 +1445,10 @@ function openArticleModal(articleId) {
   const isLiked = localStorage.getItem(`liked_${article.id}`) === 'true';
 
   let bodyHtml = '';
-  if (typeof article.content === 'string') {
-    bodyHtml = article.content;
-  } else if (Array.isArray(article.content)) {
+  const contentSource = (isEn && article.content_en) ? article.content_en : article.content;
+  if (typeof contentSource === 'string') {
+    bodyHtml = contentSource;
+  } else if (Array.isArray(contentSource)) {
     bodyHtml = article.content.map(p => {
       if (typeof p !== 'string') return '';
       const trimmed = p.trim();
@@ -2385,3 +2402,45 @@ function updateUserAvatarState() {
     }
   });
 }
+
+
+/* ===================================================================
+   INTERACTIVE ARTICLE QUIZ HANDLER
+   =================================================================== */
+function voteArticleQuiz(selectedOpt) {
+  const isEn = (currentLanguage === 'en');
+  const percentages = { 'A': '68%', 'B': '12%', 'C': '16%', 'D': '4%' };
+  const options = ['A', 'B', 'C', 'D'];
+
+  options.forEach(opt => {
+    const btn = document.getElementById('quizOpt_' + opt);
+    const bar = document.getElementById('quizBar_' + opt);
+    const pct = document.getElementById('quizPct_' + opt);
+
+    if (btn) {
+      btn.disabled = true;
+      btn.style.cursor = 'default';
+      if (opt === selectedOpt) {
+        btn.style.borderColor = 'var(--color-brand-primary, #54111E)';
+        btn.style.background = 'rgba(84,17,30,0.06)';
+        const textSpan = btn.querySelector('.quiz-opt-text');
+        if (textSpan) {
+          textSpan.innerHTML = textSpan.innerHTML.replace('fa-circle', 'fa-check-circle');
+        }
+      }
+    }
+    if (bar) {
+      bar.style.display = 'block';
+      setTimeout(() => { bar.style.width = percentages[opt]; }, 60);
+    }
+    if (pct) {
+      pct.style.display = 'inline';
+    }
+  });
+
+  const feedback = document.getElementById('quizFeedbackMessage');
+  if (feedback) {
+    feedback.style.display = 'block';
+  }
+}
+window.voteArticleQuiz = voteArticleQuiz;

@@ -1,0 +1,783 @@
+# -*- coding: utf-8 -*-
+"""
+Apply Full Article Routing & Image Fix:
+1. Update js/app.js with robust subfolder path resolution for hero image, body figures, video player, and related articles.
+2. Update hearticles/madeuparticle/index.html (remove <base href>, pre-render complete article layout with ../../ relative paths).
+3. Ensure article.html is clean and working.
+4. Verify syntax and zero BCTT occurrences.
+"""
+
+import os
+import re
+
+BASE_DIR = r"C:\Users\camka\OneDrive\Desktop\BCTT_class6group1term127"
+APP_JS = os.path.join(BASE_DIR, "js", "app.js")
+MADEUP_INDEX = os.path.join(BASE_DIR, "hearticles", "madeuparticle", "index.html")
+ARTICLE_HTML = os.path.join(BASE_DIR, "article.html")
+
+# ==============================================================================
+# 1. UPDATE js/app.js
+# ==============================================================================
+with open(APP_JS, "r", encoding="utf-8") as f:
+    app_js = f.read()
+
+# Replace handleImageError in app.js
+old_handle_img_regex = r"function handleImageError\(img\)\s*\{[\s\S]*?\}\s*window\.handleImageError\s*=\s*handleImageError;"
+new_handle_img = """function handleImageError(img) {
+  if (!img) return;
+  const isSub = window.location.pathname.includes('/hearticles/');
+  const pfx = isSub ? '../../' : '';
+  const cur = img.getAttribute('src') || '';
+  if (!cur) return;
+
+  if (!img.dataset.triedFix) {
+    img.dataset.triedFix = 'true';
+    if (cur.startsWith('assets/')) {
+      img.src = pfx + cur;
+      return;
+    }
+    if (window.location.hostname.includes('github.io')) {
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      const repo = parts[0] || '';
+      const clean = cur.replace(/^(\\.\\.\\/)+/, '').replace(/^\\//, '');
+      img.src = '/' + repo + '/' + clean;
+      return;
+    }
+  }
+
+  img.onerror = null;
+  img.src = pfx + 'assets/images/trending/image8.jpg';
+}
+window.handleImageError = handleImageError;"""
+
+app_js = re.sub(old_handle_img_regex, new_handle_img, app_js, count=1)
+
+# Replace renderModalVideoBlock
+old_render_video_regex = r"function renderModalVideoBlock\(article,\s*isEn,\s*title\)\s*\{[\s\S]*?\}\s*window\.renderModalVideoBlock\s*=\s*renderModalVideoBlock;"
+new_render_video = """function renderModalVideoBlock(article, isEn, title) {
+  if (!article.video && !article.streamUrl) return '';
+
+  const isSub = window.location.pathname.includes('/hearticles/');
+  const pfx = isSub ? '../../' : '';
+
+  // Case 0: Local MP4 video file
+  if (article.video && article.video.endsWith('.mp4')) {
+    const vidSrc = (article.video.startsWith('http') || article.video.startsWith('../../'))
+      ? article.video
+      : (pfx + article.video.replace(/^(\\.\\.\\/)+/, '').replace(/^\\.\\//, ''));
+    const posterSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
+      ? article.image
+      : (pfx + (article.image || '').replace(/^(\\.\\.\\/)+/, '').replace(/^\\.\\//, ''));
+
+    return `
+    <div class="video-responsive-embed" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000; box-shadow: 0 4px 18px rgba(0,0,0,0.14);">
+      <video id="activeModalNativePlayer" controls playsinline poster="${posterSrc}" preload="metadata" style="width:100%; max-height:500px; display:block; margin:0 auto; background:#000;">
+        <source src="${vidSrc}" type="video/mp4">
+        ${isEn ? 'Your browser does not support HTML5 video.' : 'Trình duyệt của bạn không hỗ trợ video HTML5.'}
+      </video>
+      <div style="background:#161616; color:#E0E0E0; padding:0.65rem 1rem; font-size:0.8125rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; border-top:1px solid #282828;">
+        <span><i class="fas fa-video" style="color:var(--color-brand-accent, #80182A);"></i> ${isEn ? 'Security Camera Surveillance: Full footage recording the incident.' : 'Camera an ninh khu vực: Toàn bộ video ghi lại sự việc tử tế của người qua đường.'}</span>
+        <span style="background:rgba(255,255,255,0.12); padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">1080p MP4</span>
+      </div>
+    </div>
+    `;
+  }
+
+  // Case 1: Direct native/HLS stream URL
+  if (article.streamUrl) {
+    setTimeout(() => {
+      attachModalHlsStream(article.streamUrl);
+    }, 80);
+    const posterSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
+      ? article.image
+      : (pfx + (article.image || '').replace(/^(\\.\\.\\/)+/, '').replace(/^\\.\\//, ''));
+    return `
+      <div class="video-responsive-embed" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000;">
+        <video id="activeModalNativePlayer" controls playsinline poster="${posterSrc}" style="width:100%; max-height:480px; display:block;"></video>
+      </div>
+    `;
+  }
+
+  // Case 2: YouTube Embed
+  if (article.video && article.video.length === 11) {
+    const posterSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
+      ? article.image
+      : (pfx + (article.image || '').replace(/^(\\.\\.\\/)+/, '').replace(/^\\.\\//, ''));
+    return `
+      <div class="video-responsive-embed" id="modalVideoEmbedSlot" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000;">
+        <div style="position:relative; cursor:pointer;" onclick="forceEmbedModalVideo('${article.video}')">
+          <img src="${posterSrc}" alt="${title}" style="width:100%; max-height:460px; object-fit:cover; display:block; filter:brightness(0.9);" onerror="handleImageError(this)">
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(0,0,0,0.35);">
+            <div style="width:68px; height:68px; border-radius:50%; background:var(--color-brand-primary, #54111E); color:#FFF; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 24px rgba(0,0,0,0.4); font-size:1.6rem; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-play" style="margin-left:4px;"></i>
+            </div>
+            <span style="color:#FFF; font-weight:700; margin-top:0.75rem; text-shadow:0 2px 4px rgba(0,0,0,0.6); font-size:0.95rem;">${isEn ? 'Play Video Dispatch' : 'Xem phóng sự video'}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  return '';
+}
+window.renderModalVideoBlock = renderModalVideoBlock;"""
+
+app_js = re.sub(old_render_video_regex, new_render_video, app_js, count=1)
+
+# Replace renderDedicatedArticlePage
+old_render_page_regex = r"function renderDedicatedArticlePage\(articleId\)\s*\{[\s\S]*?\}\s*window\.renderDedicatedArticlePage\s*=\s*renderDedicatedArticlePage;"
+new_render_page = """function renderDedicatedArticlePage(articleId) {
+  const host = document.getElementById('standaloneArticleHost');
+  if (!host || typeof ARTICLES_DATA === 'undefined') return;
+
+  const article = ARTICLES_DATA.find(a => a.id === articleId) || ARTICLES_DATA[0];
+  if (!article) return;
+
+  const isSubfolder = window.location.pathname.includes('/hearticles/');
+  const pfx = isSubfolder ? '../../' : '';
+
+  const isEn = (currentLanguage === 'en');
+  const title = (isEn && article.title_en) ? article.title_en : article.title;
+  const subtitle = (isEn && article.subtitle_en) ? article.subtitle_en : article.subtitle;
+  const readTime = isEn ? (article.readTime || '').replace('phút đọc', 'min read') : article.readTime;
+  const breadcrumbHome = isEn ? 'Home' : 'Trang chủ';
+  const breadcrumbCategory = article.categoryName || 'Trending';
+  const categoryUrl = `${pfx}${article.category}.html`;
+  const homeUrl = `${pfx}index.html`;
+
+  // Update document title
+  document.title = `Class6group1term127 - ${title}`;
+
+  // Update active nav category
+  document.querySelectorAll('.fashion-nav .nav-item').forEach(el => {
+    const href = el.getAttribute('href') || '';
+    if (href.endsWith(`${article.category}.html`)) {
+      el.classList.add('active');
+    } else if (!href.endsWith('index.html')) {
+      el.classList.remove('active');
+    }
+  });
+
+  const savedComments = JSON.parse(localStorage.getItem(`comments_${article.id}`) || '[]');
+  const isLiked = localStorage.getItem(`liked_${article.id}`) === 'true';
+
+  let bodyHtml = '';
+  const contentSource = (isEn && article.content_en) ? article.content_en : article.content;
+  if (typeof contentSource === 'string') {
+    let s = contentSource;
+    if (isSubfolder) {
+      s = s.replace(/\\bsrc="assets\\//g, 'src="../../assets/');
+      s = s.replace(/\\bposter="assets\\//g, 'poster="../../assets/');
+    }
+    bodyHtml = s;
+  } else if (Array.isArray(contentSource)) {
+    bodyHtml = contentSource.map(p => {
+      if (typeof p !== 'string') return '';
+      let trimmed = p.trim();
+      if (trimmed.startsWith('### ')) {
+        return `<h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">${trimmed.replace('### ', '')}</h3>`;
+      }
+      if (trimmed.startsWith('## ')) {
+        return `<h2 class="article-section-heading-lg" style="font-family:var(--font-editorial); font-size:1.65rem; font-weight:800; color:var(--color-brand-primary); margin:2.25rem 0 1rem 0;">${trimmed.replace('## ', '')}</h2>`;
+      }
+      if (trimmed.startsWith('<figure') || trimmed.startsWith('<table') || trimmed.startsWith('<div') || trimmed.startsWith('<blockquote')) {
+        if (isSubfolder) {
+          trimmed = trimmed.replace(/\\bsrc="assets\\//g, 'src="../../assets/');
+          trimmed = trimmed.replace(/\\bposter="assets\\//g, 'poster="../../assets/');
+        }
+        if (trimmed.includes('<img') && !trimmed.includes('onerror=')) {
+          trimmed = trimmed.replace(/<img\\b/g, '<img onerror="handleImageError(this)"');
+        }
+        return trimmed;
+      }
+      return `<p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">${p}</p>`;
+    }).join('');
+  }
+
+  const heroImgSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
+    ? article.image
+    : (pfx + (article.image || '').replace(/^(\\.\\.\\/)+/, '').replace(/^\\.\\//, ''));
+
+  host.innerHTML = `
+    <article class="article-reading-content" style="font-size: ${currentFontSize}rem;">
+      <div class="article-breadcrumb" style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1.25rem; flex-wrap:wrap;">
+        <a href="${homeUrl}" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">${breadcrumbHome}</a>
+        <span>/</span>
+        <a href="${categoryUrl}" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">${breadcrumbCategory}</a>
+        <span>/</span>
+        <span style="color:var(--color-brand-accent); font-weight:700;">${article.id}</span>
+      </div>
+
+      <h1 class="article-headline" style="font-family:var(--font-editorial); font-size:clamp(1.85rem, 4vw, 2.75rem); font-weight:900; line-height:1.25; margin-bottom:1rem; color:var(--color-text-headline); letter-spacing:-0.02em;">${title}</h1>
+      <p class="article-sapo" style="font-family:var(--font-serif); font-size:clamp(1.1rem, 2vw, 1.3rem); line-height:1.65; color:var(--color-text-muted); margin-bottom:1.75rem; font-style:italic;">${subtitle}</p>
+
+      <div class="article-author-strip" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:1.25rem; border-bottom:1px solid var(--color-border-hairline); margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+        <div class="article-author-info" style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="author-avatar-small" style="width:46px; height:46px; border-radius:50%; background:var(--color-brand-primary); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.1rem;">${(article.author || 'H').charAt(0)}</div>
+          <div>
+            <div class="author-name-text" style="font-weight:700; color:var(--color-text-headline); font-size:1rem;">${article.author}</div>
+            <div class="article-date-text" style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;"><i class="far fa-clock"></i> ${article.date}</div>
+          </div>
+        </div>
+
+        <div class="article-reading-tools" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+          <button class="tool-btn" onclick="adjustFontSize(-0.1)" title="${isEn ? 'Decrease Font' : 'Giảm cỡ chữ'}"><i class="fas fa-font"></i> A-</button>
+          <button class="tool-btn" onclick="adjustFontSize(0.1)" title="${isEn ? 'Increase Font' : 'Tăng cỡ chữ'}"><i class="fas fa-font"></i> A+</button>
+          <button class="tool-btn ${isSpeaking ? 'active' : ''}" id="btnTTS" onclick="toggleTextToSpeech('${article.id}')" title="${isEn ? 'Text to Speech' : 'Nghe đọc bài báo'}">
+            <i class="fas ${isSpeaking ? 'fa-pause' : 'fa-volume-up'}"></i> <span>${isSpeaking ? (isEn ? 'Pause' : 'Tạm dừng') : (isEn ? 'Listen' : 'Đọc bài báo')}</span>
+          </button>
+          <button class="btn-article-like ${isLiked ? 'liked' : ''}" id="likeBtn_${article.id}" onclick="toggleLikeArticle('${article.id}')" title="${isEn ? 'Like Story' : 'Thả tim bài viết'}">
+            <i class="fas fa-heart"></i> <span id="likeCount_${article.id}">${article.likes + (isLiked ? 1 : 0)}</span>
+          </button>
+          <button class="tool-btn" onclick="shareArticle('${(title || '').replace(/'/g, "\\\\'")}')" title="${isEn ? 'Share' : 'Chia sẻ'}"><i class="fas fa-share-alt"></i> <span>${isEn ? 'Share' : 'Chia sẻ'}</span></button>
+        </div>
+      </div>
+
+      <div class="article-hero-media" style="border-radius:var(--radius-lg); overflow:hidden; margin:2rem 0; box-shadow:0 6px 24px rgba(0,0,0,0.06);">
+        <img src="${heroImgSrc}" alt="${title}" style="width:100%; display:block; max-height:560px; object-fit:cover;" onerror="handleImageError(this)">
+        <div class="article-media-caption" style="font-size:0.85rem; color:var(--color-text-muted); padding:0.6rem 0.5rem; font-style:italic; line-height:1.5;">${article.imageCaption || title}</div>
+      </div>
+
+      ${renderModalVideoBlock(article, isEn, title)}
+
+      <div class="article-body-text" id="articleBodyContent" style="font-family:var(--font-body); font-size:1.15rem; line-height:1.85; color:var(--color-text-body);">
+        ${bodyHtml}
+        ${formatArticleSource(article, isEn)}
+      </div>
+
+      <!-- Comments Block -->
+      <div class="article-comments-block" style="margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--color-border-hairline);">
+        <h3 style="font-family:var(--font-editorial); font-size:1.45rem; color:var(--color-text-headline); margin-bottom:1.25rem;">
+          <i class="far fa-comments" style="color:var(--color-brand-primary);"></i> ${isEn ? 'Reader Discussion' : 'Bình luận & Thảo luận'} (<span id="commentCount">${savedComments.length}</span>)
+        </h3>
+        
+        <div class="comment-form-wrap" style="display:flex; gap:0.75rem; margin-bottom:1.5rem;">
+          <input type="text" class="comment-input-field" id="newCommentInput" placeholder="${isEn ? 'Share your reflection on this story...' : 'Chia sẻ góc nhìn nhân văn của bạn về bài viết này...'}" onkeypress="if(event.key === 'Enter') submitComment('${article.id}')" style="flex-grow:1; padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:var(--radius-full); font-size:0.95rem; outline:none;">
+          <button class="comment-submit-btn fashion-btn-pill" onclick="submitComment('${article.id}')" style="padding:0.75rem 1.5rem; background:var(--color-brand-primary); color:#FFF; font-weight:700; border:none; cursor:pointer;">${isEn ? 'Submit' : 'Gửi'}</button>
+        </div>
+
+        <div class="comments-list-container" id="commentsListContainer">
+          ${savedComments.length === 0 ? `<p style="color:var(--color-text-muted); font-size:0.9rem; font-style:italic;">${isEn ? 'Be the first to share your heartfelt thoughts on this story.' : 'Hãy là người đầu tiên chia sẻ cảm nghĩ về bài viết này.'}</p>` : ''}
+          ${savedComments.map(c => `
+            <div class="comment-item-card" style="background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-md); padding:0.85rem 1rem; margin-bottom:0.75rem; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem;">
+                <strong style="color:var(--color-brand-primary); font-size:0.9rem;">${c.author}</strong>
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">${c.time}</span>
+              </div>
+              <p style="font-size:0.9rem; color:var(--color-text-body); margin:0;">${c.text}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </article>
+  `;
+
+  // Render related articles
+  renderRelatedArticles(article, isEn);
+
+  // Initialize reading progress bar
+  initReadingProgressBar();
+}
+window.renderDedicatedArticlePage = renderDedicatedArticlePage;"""
+
+app_js = re.sub(old_render_page_regex, new_render_page, app_js, count=1)
+
+# Replace renderRelatedArticles
+old_related_regex = r"function renderRelatedArticles\(currentArt,\s*isEn\)\s*\{[\s\S]*?\}\s*window\.renderRelatedArticles\s*=\s*renderRelatedArticles;"
+new_related = """function renderRelatedArticles(currentArt, isEn) {
+  const grid = document.getElementById('relatedArticlesGrid');
+  const heading = document.getElementById('relatedSectionHeading');
+  const viewAll = document.getElementById('relatedViewAllText');
+  const catLink = document.getElementById('relatedCategoryLink');
+  if (!grid || typeof ARTICLES_DATA === 'undefined') return;
+
+  const isSub = window.location.pathname.includes('/hearticles/');
+  const pfx = isSub ? '../../' : '';
+
+  if (heading) heading.textContent = isEn ? 'More In This Category' : 'Tin cùng chuyên mục';
+  if (viewAll) viewAll.textContent = isEn ? 'View Category' : 'Xem tất cả';
+  if (catLink) catLink.href = `${pfx}${currentArt.category}.html`;
+
+  const related = ARTICLES_DATA
+    .filter(a => a.category === currentArt.category && a.id !== currentArt.id)
+    .slice(0, 3);
+
+  grid.innerHTML = related.map(item => {
+    const rTitle = (isEn && item.title_en) ? item.title_en : item.title;
+    const rExcerpt = (isEn && item.subtitle_en) ? item.subtitle_en : item.subtitle;
+    const rUrl = getArticleUrl(item.id);
+    const rImg = (item.image && (item.image.startsWith('http') || item.image.startsWith('../../')))
+      ? item.image
+      : (pfx + (item.image || '').replace(/^(\\.\\.\\/)+/, '').replace(/^\\.\\//, ''));
+
+    return `
+      <article class="fashion-article-card" onclick="window.location.href='${rUrl}'" style="cursor:pointer; background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-md); overflow:hidden; display:flex; flex-direction:column;">
+        <div style="aspect-ratio:16/10; overflow:hidden;">
+          <img src="${rImg}" alt="${rTitle}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="handleImageError(this)">
+        </div>
+        <div style="padding:1.15rem; display:flex; flex-direction:column; flex-grow:1;">
+          <span style="font-size:0.725rem; font-weight:800; color:var(--color-brand-accent); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.4rem;">${item.categoryName}</span>
+          <h4 style="font-family:var(--font-editorial); font-size:1.05rem; font-weight:800; line-height:1.35; margin:0 0 0.5rem 0; color:var(--color-text-headline);">${rTitle}</h4>
+          <p style="font-size:0.85rem; color:var(--color-text-muted); line-height:1.5; margin:0 0 1rem 0; flex-grow:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${rExcerpt}</p>
+          <span style="font-size:0.75rem; color:var(--color-brand-primary); font-weight:700;">${isEn ? 'Read Story &rarr;' : 'Đọc bài viết &rarr;'}</span>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+window.renderRelatedArticles = renderRelatedArticles;"""
+
+app_js = re.sub(old_related_regex, new_related, app_js, count=1)
+
+with open(APP_JS, "w", encoding="utf-8") as f:
+    f.write(app_js)
+
+print("SUCCESS: Updated js/app.js with robust subfolder path handling.")
+
+# ==============================================================================
+# 2. WRITE FULL hearticles/madeuparticle/index.html
+# ==============================================================================
+madeup_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Class6group1term127 - Drunk Girl Collapses on Park Bench</title>
+  <meta name="description" content="Hot Paper: Drunk Girl Collapses on Park Bench, Unexpectedly Receives 'Special' Kindness from Strangers - HEARTICLES. Magazine">
+  <link rel="canonical" href="/hearticles/madeuparticle">
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/logo/heart-logo.svg">
+  
+  <!-- Modern Minimalist Editorial Typography: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Image Fallback Handler (Pre-loaded before stylesheet) -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script>
+    function handleImageError(img) {
+      if (!img) return;
+      const cur = img.getAttribute('src') || '';
+      if (!img.dataset.triedFix) {
+        img.dataset.triedFix = 'true';
+        if (cur.startsWith('assets/')) {
+          img.src = '../../' + cur;
+          return;
+        }
+        if (window.location.hostname.includes('github.io')) {
+          const parts = window.location.pathname.split('/').filter(Boolean);
+          const repo = parts[0] || '';
+          const clean = cur.replace(/^(\\.\\.\\/)+/, '').replace(/^\\//, '');
+          img.src = '/' + repo + '/' + clean;
+          return;
+        }
+      }
+      img.onerror = null;
+      img.src = '../../assets/images/trending/image8.jpg';
+    }
+  </script>
+
+  <!-- Main Stylesheets -->
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <meta name="application-name" content="Class6group1term127">
+  <meta property="og:site_name" content="Class6group1term127">
+  <meta property="og:title" content="Drunk Girl Collapses on Park Bench, Unexpectedly Receives 'Special' Kindness from Strangers">
+  <meta property="og:image" content="../../assets/images/trending/ngoc_mai/hat_and_jacket.jpg">
+</head>
+<body data-category="trending">
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress-bar" id="readingProgressBar"></div>
+
+  <!-- Offline Status Banner -->
+  <div class="offline-indicator-banner" id="offlineBanner" data-i18n="offline_banner">
+    <i class="fas fa-wifi-slash"></i>
+    <span>Chế độ ngoại tuyến: Bạn đang đọc các bài viết đã lưu đệm. Hệ thống sẽ tự động cập nhật khi có mạng.</span>
+  </div>
+
+  <!-- Header Leaderboard Advertisement -->
+  <div class="header-ad-leaderboard-wrap">
+    <div class="container" style="display:flex; flex-direction:column; align-items:center;">
+      <span class="ad-label-strip" data-i18n="ad_label">ADVERTISEMENT</span>
+      <a href="https://www.britishcouncil.vn/thi-ielts/one-skill-retake" target="_blank" rel="noopener noreferrer" class="header-ad-link" title="British Council IELTS - One Skill Retake">
+        <img src="../../assets/images/ads/header_ad_banner.png" alt="British Council IELTS One Skill Retake Leaderboard Ad" class="header-ad-banner-img" width="1444" height="378" onerror="handleImageError(this)">
+      </a>
+    </div>
+  </div>
+
+  <!-- Brand Masthead Hero -->
+  <div class="fashion-masthead-hero">
+    <div class="container masthead-hero-inner">
+      <a href="../../index.html" class="fashion-brand-logo-masthead" aria-label="HEARTICLES. - Where News Begins with a Heartbeat">
+        <img src="../../assets/images/logo/brand_logo_updated.png" alt="HEARTICLES. - Where News Begins with a Heartbeat" class="fashion-brand-logo-fullsize" onerror="handleImageError(this)">
+      </a>
+    </div>
+  </div>
+
+  <!-- Sticky Categories Header Navigation -->
+  <header class="fashion-header">
+    <div class="container fashion-header-container">
+      <a href="../../index.html" class="fashion-mobile-brand" aria-label="HEARTICLES. - Home">HEARTICLES.</a>
+      <nav class="fashion-nav" aria-label="Thanh điều hướng tạp chí">
+        <a href="../../index.html" class="nav-item">Home</a>
+        <a href="../../trending.html" class="nav-item active">Trending</a>
+        <a href="../../society.html" class="nav-item">Society</a>
+        <a href="../../human-stories.html" class="nav-item">Human Stories</a>
+        <a href="../../mind-soul.html" class="nav-item">Mind & Soul</a>
+        <a href="../../in-depth.html" class="nav-item">In-depth</a>
+        <div class="nav-item-dropdown">
+          <a href="../../about.html" class="nav-item" style="display:inline-flex; align-items:center; gap:0.35rem;">
+            About Us <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i>
+          </a>
+          <div class="about-dropdown-menu">
+            <a href="../../about.html#mission" class="about-dropdown-item"><i class="fas fa-bullseye"></i> <span>Mission</span></a>
+            <a href="../../about.html#profiles" class="about-dropdown-item"><i class="fas fa-users"></i> <span>Profiles</span></a>
+            <a href="../../about.html#photo" class="about-dropdown-item"><i class="fas fa-camera"></i> <span>Photo</span></a>
+            <a href="../../about.html#subscribe" class="about-dropdown-item"><i class="fas fa-paper-plane"></i> <span>Subscribe</span></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="fashion-header-actions">
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+          <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+          <span class="lang-pill-divider">/</span>
+          <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+        <button class="fashion-search-btn" onclick="openSearchModal()" title="Tìm kiếm bài viết (/)" aria-label="Tìm kiếm"><i class="fas fa-search"></i></button>
+        <button class="fashion-subscribe-btn" onclick="openSubscribeModal()" title="Đăng ký nhận bản tin">Subscribe</button>
+        <button class="fashion-user-btn" id="headerUserBtn" onclick="openSignInModal()" title="Đăng nhập tài khoản" aria-label="Tài khoản"><i class="far fa-user-circle"></i></button>
+        <button class="fashion-hamburger-btn" onclick="openDrawer()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Article Content Container (Dedicated Full Page) -->
+  <main class="container" style="flex-grow:1; max-width:960px; margin:2.5rem auto 4rem auto; padding:0 1rem;">
+    <div id="standaloneArticleHost">
+      <!-- Pre-rendered for instant viewing, then hydrated by renderDedicatedArticlePage('trending-1') -->
+      <article class="article-reading-content" style="font-size: 1.05rem;">
+        <div class="article-breadcrumb" style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1.25rem; flex-wrap:wrap;">
+          <a href="../../index.html" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">Home</a>
+          <span>/</span>
+          <a href="../../trending.html" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">Trending</a>
+          <span>/</span>
+          <span style="color:var(--color-brand-accent); font-weight:700;">trending-1</span>
+        </div>
+
+        <h1 class="article-headline" style="font-family:var(--font-editorial); font-size:clamp(1.85rem, 4vw, 2.75rem); font-weight:900; line-height:1.25; margin-bottom:1rem; color:var(--color-text-headline); letter-spacing:-0.02em;">Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường</h1>
+        <p class="article-sapo" style="font-family:var(--font-serif); font-size:clamp(1.1rem, 2vw, 1.3rem); line-height:1.65; color:var(--color-text-muted); margin-bottom:1.75rem; font-style:italic;">“Trông cô ấy tội quá”- một người qua đường chia sẻ khi kể lại khoảnh khắc bắt gặp Ngọc Mãi nằm co ro ngoài công viên và quyết định để lại tiền trong chiếc mũ của cô.</p>
+
+        <div class="article-author-strip" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:1.25rem; border-bottom:1px solid var(--color-border-hairline); margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+          <div class="article-author-info" style="display:flex; align-items:center; gap:0.75rem;">
+            <div class="author-avatar-small" style="width:46px; height:46px; border-radius:50%; background:var(--color-brand-primary); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.1rem;">N</div>
+            <div>
+              <div class="author-name-text" style="font-weight:700; color:var(--color-text-headline); font-size:1rem;">Ngọc Mãi & Ban Biên tập Hearticles</div>
+              <div class="article-date-text" style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;"><i class="far fa-clock"></i> Thursday, November 12, 2026 - 21:00 (GMT+7)</div>
+            </div>
+          </div>
+
+          <div class="article-reading-tools" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            <button class="tool-btn" onclick="adjustFontSize(-0.1)" title="Giảm cỡ chữ"><i class="fas fa-font"></i> A-</button>
+            <button class="tool-btn" onclick="adjustFontSize(0.1)" title="Tăng cỡ chữ"><i class="fas fa-font"></i> A+</button>
+            <button class="tool-btn" id="btnTTS" onclick="toggleTextToSpeech('trending-1')" title="Nghe đọc bài báo">
+              <i class="fas fa-volume-up"></i> <span>Đọc bài báo</span>
+            </button>
+            <button class="btn-article-like" id="likeBtn_trending-1" onclick="toggleLikeArticle('trending-1')" title="Thả tim bài viết">
+              <i class="fas fa-heart"></i> <span id="likeCount_trending-1">1450</span>
+            </button>
+            <button class="tool-btn" onclick="shareArticle('Cô gái say rượu ngã gục trên ghế')" title="Chia sẻ"><i class="fas fa-share-alt"></i> <span>Chia sẻ</span></button>
+          </div>
+        </div>
+
+        <div class="article-hero-media" style="border-radius:var(--radius-lg); overflow:hidden; margin:2rem 0; box-shadow:0 6px 24px rgba(0,0,0,0.06);">
+          <img src="../../assets/images/trending/ngoc_mai/hat_and_jacket.jpg" alt="Cô gái say rượu ngã gục trên ghế" style="width:100%; display:block; max-height:560px; object-fit:cover;" onerror="handleImageError(this)">
+          <div class="article-media-caption" style="font-size:0.85rem; color:var(--color-text-muted); padding:0.6rem 0.5rem; font-style:italic; line-height:1.5;">Hình ảnh chiếc mũ có tiền lẻ và chiếc áo khoác đắp ấm trong câu chuyện của Ngọc Mãi. (Nguồn: Nhân vật cung cấp)</div>
+        </div>
+
+        <!-- CCTV Video Player -->
+        <div class="video-responsive-embed" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000; box-shadow: 0 4px 18px rgba(0,0,0,0.14);">
+          <video id="activeModalNativePlayer" controls playsinline poster="../../assets/images/trending/ngoc_mai/hat_and_jacket.jpg" preload="metadata" style="width:100%; max-height:500px; display:block; margin:0 auto; background:#000;">
+            <source src="../../assets/videos/cctv_ulus_park_kindness.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video HTML5.
+          </video>
+          <div style="background:#161616; color:#E0E0E0; padding:0.65rem 1rem; font-size:0.8125rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; border-top:1px solid #282828;">
+            <span><i class="fas fa-video" style="color:var(--color-brand-accent, #80182A);"></i> Camera an ninh khu vực: Toàn bộ video trích xuất ghi lại sự việc lòng tốt của người qua đường.</span>
+            <span style="background:rgba(255,255,255,0.12); padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:700;">1080p MP4</span>
+          </div>
+        </div>
+
+        <div class="article-body-text" id="articleBodyContent" style="font-family:var(--font-body); font-size:1.15rem; line-height:1.85; color:var(--color-text-body);">
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Mới đây, vào ngày 12/11, tài khoản mạng xã hội Threads có tên <strong>ngoc.forever</strong> của Ngọc Mãi (Hải Phòng) đã chia sẻ hình ảnh một chiếc mũ có nhiều đồng tiền lẻ bên trong cùng chiếc áo khoác cũ. Bài đăng mang tiêu đề <em>“Hoá ra trên đời này vẫn còn nhiều đáng yêu đến thế!”</em> nhanh chóng thu hút được sự quan tâm của cộng đồng mạng với hơn 500.000 lượt xem và hàng chục nghìn lượt tương tác.</p>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/threads_post.jpg" alt="Bài đăng từ tài khoản Threads ngoc.forever của Ngọc Mãi" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Bài đăng từ tài khoản Threads có tên ngoc.forever của Ngọc Mãi. (Nguồn: Threads)</figcaption>
+          </figure>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Trong bài viết, Ngọc Mãi kể rằng, tối 11/11, sau khi tham dự sinh nhật bạn và uống say, cô quyết định đi bộ về nhà vì khoảng cách không xa. Tuy nhiên, khi đi qua khu vực công viên Ulus, cô bất ngờ ngã xuống một chiếc ghế đá và ngủ thiếp đi.</p>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Đến rạng sáng ngày 12/11, khi tỉnh dậy, Ngọc Mãi phát hiện trong chiếc mũ không may rơi xuống đất của mình xuất hiện nhiều đồng tiền lẻ, đồng thời trên người còn có một chiếc áo khoác ấm. Bất ngờ trước những gì xảy ra, cô quyết định chia sẻ câu chuyện ấm áp lên Threads.</p>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/hat_and_jacket.jpg" alt="Hình ảnh chiếc mũ và áo khoác trong bài viết của Ngọc Mãi" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Hình ảnh chiếc mũ và áo khoác trong bài viết của Ngọc Mãi. (Nguồn: Nhân vật cung cấp)</figcaption>
+          </figure>
+
+          <h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">Những hành động tử tế được ghi lại qua camera</h3>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Theo hình ảnh trích xuất từ camera an ninh tại khu vực, sự việc được ghi nhận trong khoảng thời gian từ 22h57 đến 23h22 ngày 11/11. Ngọc Mãi xuất hiện tại khu vực ghế đá, sau đó vô tình ngã xuống và nằm co người trên ghế. Trong lúc này, chiếc mũ trên đầu cô rơi xuống đất, phần lòng mũ ngửa lên trên.</p>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Một người đi bộ ngang qua nhận thấy cô gái nằm một mình trên ghế đã dừng lại, tiến đến gần và dùng áo khoác đắp lên người cô. Sau đó, một số người khác cũng ghé lại, nhẹ nhàng đặt tiền vào trong chiếc mũ của Ngọc Mãi. Những hình ảnh này phần nào lý giải cho số tiền lẻ trong chiếc mũ và chiếc áo khoác mà cô phát hiện khi tỉnh dậy vào hôm sau.</p>
+
+          <h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">“Trông cô ấy tội quá!”</h3>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Dưới bài đăng, một tài khoản Threads mang tên <strong>phanhbui</strong> đã gây chú ý khi để lại bình luận cho biết mình đã trực tiếp chứng kiến sự việc: <em>“ô tôi hôm qua có gặp bạn này đây, đi qua thấy bạn nằm co ro mà thấy dưới mũ có mấy đồng tiền nên cũng fomo ủng hộ kkk”</em>.</p>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/comment_phanhbui.jpg" alt="Bình luận của tài khoản phanhbui trên Threads" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Một tài khoản có tên phanhbui cho biết mình là người chứng kiến sự việc. (Nguồn: Threads)</figcaption>
+          </figure>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Liên hệ với chị Phanh Bui - chủ nhân của bình luận trên và cũng là người trực tiếp để lại tiền trong chiếc mũ của Ngọc Mãi, chị cho biết bản thân dừng lại vì thấy cô gái nằm một mình trên ghế đá giữa thời tiết lạnh. Chia sẻ về hành động của mình, chị Phanh Bui cho biết:</p>
+
+          <blockquote class="article-pullquote" style="margin:2rem 0; padding:1.25rem 1.75rem; border-left:4px solid var(--color-brand-primary, #54111E); background:rgba(84,17,30,0.04); border-radius:0 10px 10px 0; font-family:var(--font-serif); font-size:1.15rem; font-style:italic; line-height:1.7; color:var(--color-text-headline);">
+            “Trời thì vừa lạnh, vừa tối mà cô gái mặc mỗi cái áo mỏng tang nằm trên ghế, trông cô ấy tội quá! Đúng lúc tôi vừa đi làm về, thấy ở dưới mũ có vài đồng tiền lẻ, tưởng cô ấy cũng là người lang thang nên bỏ tiền vào giúp đỡ.”
+            <footer style="margin-top:0.6rem; font-family:var(--font-sans); font-size:0.875rem; font-style:normal; font-weight:700; color:var(--color-brand-primary);">— Chị Phanh Bui (Người chứng kiến và giúp đỡ)</footer>
+          </blockquote>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/passerby_kindness.jpg" alt="Người qua đường để lại tiền giúp đỡ" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Nhìn thấy Ngọc Mãi co ro trên ghế và những đồng tiền lẻ trong chiếc mũ đặt bên cạnh, chị tưởng cô là người lang thang nên đã bỏ tiền vào để giúp đỡ. (Nguồn: Hearticles)</figcaption>
+          </figure>
+
+          <h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">Sự tử tế từ những người xa lạ</h3>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Chia sẻ về sự việc, Ngọc Mãi cho biết cô khá bất ngờ và cảm thấy đôi chút hối hận khi để một tình huống ngoài ý muốn dẫn đến sự hiểu lầm như vậy. Tuy nhiên, điều khiến cô cảm thấy ấm lòng và cảm động là sự quan tâm của những người xa lạ trong những ngày Hà Nội bắt đầu trở lạnh.</p>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Ngọc Mãi còn tâm sự thêm, nếu người nằm trên ghế đá hôm ấy thực sự là một người không có nơi ở ổn định, những hành động nhỏ như vậy có thể đã giúp họ có thêm một bữa ăn ấm áp. Câu chuyện vì thế không chỉ dừng lại ở một tình huống hài hước, mà còn cho chúng ta thêm niềm tin về những hành động tử tế, bình dị vẫn luôn còn hiện diện giữa cuộc sống hàng ngày.</p>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/ngoc_mai_reflection.jpg" alt="Ngọc Mãi chia sẻ cảm nghĩ" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Ngọc Mãi chia sẻ nếu người nằm trên ghế đá hôm ấy thực sự là một người lang thang, những hành động nhỏ như vậy có thể giúp họ có thêm một bữa ăn ấm áp. (Nguồn: Hearticles)</figcaption>
+          </figure>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Khép lại cuộc trò chuyện, cô không quên nhắn nhủ mọi người không nên làm theo hành động lạm dụng đồ uống có cồn của mình. Dù câu chuyện mang đến nhiều cảm xúc tích cực, việc uống say rồi tự ý đi lại một mình ở nơi công cộng vẫn tiềm ẩn những rủi ro về an toàn cá nhân.</p>
+
+          <!-- Extended Read -->
+          <div class="article-extended-box" style="margin:3rem 0; padding:1.75rem; border-radius:14px; background:linear-gradient(135deg, rgba(84,17,30,0.05) 0%, rgba(128,24,42,0.08) 100%); border:1px solid rgba(84,17,30,0.15); box-shadow:0 6px 22px rgba(84,17,30,0.05);">
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem;">
+              <span style="background:var(--color-brand-primary, #54111E); color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.65rem; border-radius:4px; letter-spacing:0.06em; text-transform:uppercase;">
+                <i class="fas fa-book-reader"></i> GÓC NHÌN CHUYÊN SÂU • EXTENDED READ
+              </span>
+            </div>
+            <h3 style="font-family:var(--font-editorial); font-size:1.35rem; font-weight:800; color:var(--color-brand-primary); margin:0 0 0.75rem 0;">
+              Một hành động nhỏ có thể tạo nên sự khác biệt
+            </h3>
+            <p style="font-size:1rem; line-height:1.75; color:var(--color-text-body); margin-bottom:1rem; text-align:justify;">
+              Không phải lúc nào sự giúp đỡ cũng cần bắt đầu từ những điều lớn lao. Đôi khi, chỉ một chiếc áo khoác được đặt lên vai người đang co ro trong đêm lạnh, một chút tiền lẻ ủng hộ hay đơn giản là việc dừng chân hỏi thăm cũng có thể mang lại sự ấm áp cho một người xa lạ. Thế nhưng, khi bắt gặp ai đó có dấu hiệu say xỉn, mệt mỏi hoặc gặp khó khăn nơi công cộng, chúng ta nên giúp đỡ như thế nào để vừa thể hiện sự quan tâm, vừa đảm bảo an toàn cho họ và chính mình?
+            </p>
+            <a href="https://vietnamnet.vn/giup-do-nguoi-khac-la-tot-nhung-ban-nhat-dinh-phai-biet-4-quy-tac-an-nay-2297310.html" target="_blank" rel="noopener noreferrer" class="fashion-btn-pill" style="display:inline-flex; align-items:center; gap:0.5rem; background:var(--color-brand-primary, #54111E); color:#FFFFFF !important; text-decoration:none; padding:0.55rem 1.25rem; font-size:0.875rem; font-weight:600; border-radius:99px; transition:all 0.2s ease;">
+              <span>Learn more → Giúp đỡ người khác là tốt nhưng bạn nhất định phải biết 4 quy tắc ẩn này</span>
+              <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
+            </a>
+          </div>
+
+          <!-- Quiz -->
+          <div class="article-quiz-container" id="articleQuizCard" style="margin:3rem 0; padding:1.75rem; border-radius:14px; background:#FFFFFF; border:1px solid var(--color-border-hairline); box-shadow:0 6px 24px rgba(0,0,0,0.06);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+              <span style="background:rgba(84,17,30,0.1); color:var(--color-brand-primary, #54111E); font-size:0.75rem; font-weight:800; padding:0.3rem 0.75rem; border-radius:4px; letter-spacing:0.06em; text-transform:uppercase;">
+                <i class="fas fa-poll-h"></i> THẢO LUẬN & TRẮC NGHIỆM TÌNH HUỐNG
+              </span>
+              <span style="font-size:0.8125rem; color:var(--color-text-muted);"><i class="far fa-chart-bar"></i> 1.240 độc giả đã tham gia</span>
+            </div>
+            <h3 style="font-family:var(--font-editorial); font-size:1.25rem; font-weight:800; color:var(--color-text-headline); line-height:1.5; margin:0 0 1.25rem 0;">
+              Nếu bắt gặp một người lạ nằm co ro trên ghế đá giữa đêm lạnh, bạn sẽ làm gì?
+            </h3>
+            <div class="quiz-options-list" style="display:flex; flex-direction:column; gap:0.65rem;">
+              <button class="quiz-option-btn" onclick="voteArticleQuiz('A')" id="quizOpt_A" style="width:100%; text-align:left; padding:0.85rem 1.15rem; border:1px solid var(--color-border-hairline); border-radius:10px; background:#FAFAFA; font-size:0.95rem; font-weight:600; color:var(--color-text-headline); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;">
+                <span class="quiz-opt-text"><i class="far fa-circle" style="margin-right:0.5rem; color:var(--color-brand-accent);"></i> A. Dừng lại hỏi thăm và kiểm tra tình trạng của họ</span>
+                <div class="quiz-bar" id="quizBar_A" style="position:absolute; inset:0; background:rgba(84,17,30,0.12); width:0%; transition:width 0.6s ease; z-index:0; display:none;"></div>
+                <span class="quiz-percent" id="quizPct_A" style="float:right; font-weight:700; color:var(--color-brand-primary); display:none; position:relative; z-index:1;">68%</span>
+              </button>
+              <button class="quiz-option-btn" onclick="voteArticleQuiz('B')" id="quizOpt_B" style="width:100%; text-align:left; padding:0.85rem 1.15rem; border:1px solid var(--color-border-hairline); border-radius:10px; background:#FAFAFA; font-size:0.95rem; font-weight:600; color:var(--color-text-headline); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;">
+                <span class="quiz-opt-text"><i class="far fa-circle" style="margin-right:0.5rem; color:var(--color-brand-accent);"></i> B. Để lại một chút tiền hoặc đồ dùng cần thiết</span>
+                <div class="quiz-bar" id="quizBar_B" style="position:absolute; inset:0; background:rgba(84,17,30,0.12); width:0%; transition:width 0.6s ease; z-index:0; display:none;"></div>
+                <span class="quiz-percent" id="quizPct_B" style="float:right; font-weight:700; color:var(--color-brand-primary); display:none; position:relative; z-index:1;">12%</span>
+              </button>
+              <button class="quiz-option-btn" onclick="voteArticleQuiz('C')" id="quizOpt_C" style="width:100%; text-align:left; padding:0.85rem 1.15rem; border:1px solid var(--color-border-hairline); border-radius:10px; background:#FAFAFA; font-size:0.95rem; font-weight:600; color:var(--color-text-headline); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;">
+                <span class="quiz-opt-text"><i class="far fa-circle" style="margin-right:0.5rem; color:var(--color-brand-accent);"></i> C. Tìm người hỗ trợ nếu họ có dấu hiệu không tỉnh táo</span>
+                <div class="quiz-bar" id="quizBar_C" style="position:absolute; inset:0; background:rgba(84,17,30,0.12); width:0%; transition:width 0.6s ease; z-index:0; display:none;"></div>
+                <span class="quiz-percent" id="quizPct_C" style="float:right; font-weight:700; color:var(--color-brand-primary); display:none; position:relative; z-index:1;">16%</span>
+              </button>
+              <button class="quiz-option-btn" onclick="voteArticleQuiz('D')" id="quizOpt_D" style="width:100%; text-align:left; padding:0.85rem 1.15rem; border:1px solid var(--color-border-hairline); border-radius:10px; background:#FAFAFA; font-size:0.95rem; font-weight:600; color:var(--color-text-headline); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;">
+                <span class="quiz-opt-text"><i class="far fa-circle" style="margin-right:0.5rem; color:var(--color-brand-accent);"></i> D. Tiếp tục di chuyển vì không biết nên xử lý thế nào</span>
+                <div class="quiz-bar" id="quizBar_D" style="position:absolute; inset:0; background:rgba(84,17,30,0.12); width:0%; transition:width 0.6s ease; z-index:0; display:none;"></div>
+                <span class="quiz-percent" id="quizPct_D" style="float:right; font-weight:700; color:var(--color-brand-primary); display:none; position:relative; z-index:1;">4%</span>
+              </button>
+            </div>
+            <div id="quizFeedbackMessage" style="display:none; margin-top:1.25rem; padding:0.85rem 1rem; border-radius:8px; background:rgba(84,17,30,0.06); color:var(--color-brand-primary); font-size:0.9rem; font-weight:600;">
+              <i class="fas fa-heart"></i> Cảm ơn bạn đã chia sẻ quan điểm! Mỗi hành động xuất phát từ sự tử tế và lòng trắc ẩn đều góp phần làm cho cuộc sống này thêm ấm áp.
+            </div>
+          </div>
+        </div>
+
+        <!-- Comments Block -->
+        <div class="article-comments-block" style="margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--color-border-hairline);">
+          <h3 style="font-family:var(--font-editorial); font-size:1.45rem; color:var(--color-text-headline); margin-bottom:1.25rem;">
+            <i class="far fa-comments" style="color:var(--color-brand-primary);"></i> Bình luận & Thảo luận (<span id="commentCount">0</span>)
+          </h3>
+          <div class="comment-form-wrap" style="display:flex; gap:0.75rem; margin-bottom:1.5rem;">
+            <input type="text" class="comment-input-field" id="newCommentInput" placeholder="Chia sẻ góc nhìn nhân văn của bạn về bài viết này..." onkeypress="if(event.key === 'Enter') submitComment('trending-1')" style="flex-grow:1; padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:var(--radius-full); font-size:0.95rem; outline:none;">
+            <button class="comment-submit-btn fashion-btn-pill" onclick="submitComment('trending-1')" style="padding:0.75rem 1.5rem; background:var(--color-brand-primary); color:#FFF; font-weight:700; border:none; cursor:pointer;">Gửi</button>
+          </div>
+          <div class="comments-list-container" id="commentsListContainer"></div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Related Articles Section -->
+    <section class="article-related-section" id="articleRelatedSection" style="margin-top:4rem; padding-top:2.5rem; border-top:1px solid var(--color-border-hairline);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h3 style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:0;">
+          <i class="fas fa-newspaper" style="margin-right:0.5rem;"></i>
+          <span id="relatedSectionHeading">Tin cùng chuyên mục</span>
+        </h3>
+        <a id="relatedCategoryLink" href="../../trending.html" style="font-size:0.875rem; font-weight:700; color:var(--color-brand-accent); text-decoration:none;">
+          <span id="relatedViewAllText">Xem tất cả</span> &rarr;
+        </a>
+      </div>
+      <div id="relatedArticlesGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem;"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="fashion-footer">
+    <div class="container">
+      <div class="footer-grid-top">
+        <div class="footer-col-brand">
+          <a href="../../index.html" class="footer-brand-logo">HEARTICLES.</a>
+          <p class="footer-brand-tagline">Where News Begins with a Heartbeat.</p>
+          <p class="footer-academic-credit">Class 6 Group 1 Term 127 • Faculty of English Language and Culture • ULIS - VNU</p>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <p class="footer-copyright">&copy; 2026 Class6group1term127 • All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search Modal -->
+  <div class="fashion-modal-backdrop" id="searchModal" onclick="closeSearchModal(event)">
+    <div class="fashion-search-modal-box" onclick="event.stopPropagation()">
+      <div class="search-input-wrap">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm bài viết..." oninput="handleInstantSearch(this.value)">
+        <button class="search-close-btn" onclick="closeSearchModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="search-results-container" id="searchResultsContainer"></div>
+    </div>
+  </div>
+
+  <!-- Subscribe Modal -->
+  <div class="fashion-modal-backdrop" id="subscribeModal" onclick="closeSubscribeModal(event)">
+    <div class="fashion-subscribe-modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close-icon" onclick="closeSubscribeModal()"><i class="fas fa-times"></i></button>
+      <h3 style="font-family:var(--font-editorial); font-size:1.6rem; margin-bottom:0.75rem; color:var(--color-brand-primary);">HEARTICLES. DISPATCH</h3>
+      <p style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Đăng ký nhận tuyển tập những câu chuyện nhân văn sâu lắng mỗi tuần.</p>
+      <form onsubmit="handleSubscribeSubmit(event)" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <input type="email" id="subscribeEmailInput" required placeholder="Nhập địa chỉ email của bạn..." style="padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:var(--radius-md); font-size:0.95rem; outline:none;">
+        <button type="submit" class="fashion-btn-pill" style="padding:0.8rem; background:var(--color-brand-primary); color:#FFF; font-weight:700; border:none; cursor:pointer;">Đăng ký ngay</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- User Sign-in Modal -->
+  <div class="fashion-modal-backdrop" id="signinModal" onclick="closeSignInModal(event)">
+    <div class="fashion-subscribe-modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close-icon" onclick="closeSignInModal()"><i class="fas fa-times"></i></button>
+      <div style="text-align:center; margin-bottom:1.25rem;">
+        <i class="far fa-user-circle" style="font-size:3rem; color:var(--color-brand-primary);"></i>
+        <h3 style="font-family:var(--font-editorial); font-size:1.5rem; margin-top:0.5rem; color:var(--color-brand-primary);" id="signinModalTitle">Đăng nhập tài khoản</h3>
+      </div>
+      <form onsubmit="handleSignInSubmit(event)" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <input type="text" id="signinUsernameInput" required placeholder="Tên độc giả / Username..." style="padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:var(--radius-md); font-size:0.95rem; outline:none;">
+        <button type="submit" class="fashion-btn-pill" style="padding:0.8rem; background:var(--color-brand-primary); color:#FFF; font-weight:700; border:none; cursor:pointer;">Xác nhận</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="fashion-drawer-backdrop" id="fashionDrawerBackdrop" onclick="closeDrawer()"></div>
+  <aside class="fashion-drawer" id="fashionDrawer">
+    <div class="drawer-header">
+      <span class="drawer-brand">HEARTICLES.</span>
+      <button class="drawer-close-btn" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="../../index.html" class="drawer-nav-item">Home</a>
+      <a href="../../trending.html" class="drawer-nav-item">Trending</a>
+      <a href="../../society.html" class="drawer-nav-item">Society</a>
+      <a href="../../human-stories.html" class="drawer-nav-item">Human Stories</a>
+      <a href="../../mind-soul.html" class="drawer-nav-item">Mind & Soul</a>
+      <a href="../../in-depth.html" class="drawer-nav-item">In-depth</a>
+      <a href="../../about.html" class="drawer-nav-item">About Us</a>
+    </nav>
+  </aside>
+
+  <!-- Core Scripts -->
+  <script src="../../js/data.js"></script>
+  <script src="../../js/translations.js"></script>
+  <script src="../../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderDedicatedArticlePage === 'function') {
+        renderDedicatedArticlePage('trending-1');
+      }
+    });
+  </script>
+</body>
+</html>
+"""
+
+with open(MADEUP_INDEX, "w", encoding="utf-8") as f:
+    f.write(madeup_html)
+
+print("SUCCESS: Rewrote hearticles/madeuparticle/index.html with full pre-rendered layout and ../../ paths.")
+
+# ==============================================================================
+# 3. VERIFY AND UPDATE article.html
+# ==============================================================================
+with open(ARTICLE_HTML, "r", encoding="utf-8") as f:
+    art_html = f.read()
+
+# Ensure handleImageError in article.html has no hardcoded repo names
+new_art_handle_img = """  <script>
+    function handleImageError(img) {
+      if (!img) return;
+      const cur = img.getAttribute('src') || '';
+      if (!img.dataset.triedFix) {
+        img.dataset.triedFix = 'true';
+        if (cur.startsWith('assets/')) {
+          if (window.location.hostname.includes('github.io')) {
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            const repo = parts[0] || '';
+            img.src = '/' + repo + '/' + cur;
+            return;
+          }
+        }
+      }
+      img.onerror = null;
+      img.src = 'assets/images/trending/image8.jpg';
+    }
+  </script>"""
+
+art_html = re.sub(r"<script>\s*function handleImageError[\s\S]*?</script>", new_art_handle_img, art_html, count=1)
+
+with open(ARTICLE_HTML, "w", encoding="utf-8") as f:
+    f.write(art_html)
+
+print("SUCCESS: Verified and cleaned article.html.")

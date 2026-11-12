@@ -1318,12 +1318,22 @@ window.formatArticleSource = formatArticleSource;
 function renderModalVideoBlock(article, isEn, title) {
   if (!article.video && !article.streamUrl) return '';
 
+  const isSub = window.location.pathname.includes('/hearticles/');
+  const pfx = isSub ? '../../' : '';
+
   // Case 0: Local MP4 video file
   if (article.video && article.video.endsWith('.mp4')) {
+    const vidSrc = (article.video.startsWith('http') || article.video.startsWith('../../'))
+      ? article.video
+      : (pfx + article.video.replace(/^(\.\.\/)+/, '').replace(/^\.\//, ''));
+    const posterSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
+      ? article.image
+      : (pfx + (article.image || '').replace(/^(\.\.\/)+/, '').replace(/^\.\//, ''));
+
     return `
     <div class="video-responsive-embed" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000; box-shadow: 0 4px 18px rgba(0,0,0,0.14);">
-      <video id="activeModalNativePlayer" controls playsinline poster="${article.image}" preload="metadata" style="width:100%; max-height:500px; display:block; margin:0 auto; background:#000;">
-        <source src="${article.video}" type="video/mp4">
+      <video id="activeModalNativePlayer" controls playsinline poster="${posterSrc}" preload="metadata" style="width:100%; max-height:500px; display:block; margin:0 auto; background:#000;">
+        <source src="${vidSrc}" type="video/mp4">
         ${isEn ? 'Your browser does not support HTML5 video.' : 'Trình duyệt của bạn không hỗ trợ video HTML5.'}
       </video>
       <div style="background:#161616; color:#E0E0E0; padding:0.65rem 1rem; font-size:0.8125rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; border-top:1px solid #282828;">
@@ -1339,74 +1349,37 @@ function renderModalVideoBlock(article, isEn, title) {
     setTimeout(() => {
       attachModalHlsStream(article.streamUrl);
     }, 80);
+    const posterSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
+      ? article.image
+      : (pfx + (article.image || '').replace(/^(\.\.\/)+/, '').replace(/^\.\//, ''));
     return `
       <div class="video-responsive-embed" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000;">
-        <video id="activeModalNativePlayer" controls playsinline poster="${article.image}" style="width:100%; max-height:480px; display:block;"></video>
+        <video id="activeModalNativePlayer" controls playsinline poster="${posterSrc}" style="width:100%; max-height:480px; display:block;"></video>
       </div>
     `;
   }
 
-  // Case 2: YouTube / External video
-  const ytMatch = (article.video || '').match(/(?:embed\/|v=|vi\/|youtu\.be\/|\/v\/)([a-zA-Z0-9_-]{11})/);
-  const ytId = ytMatch ? ytMatch[1] : '';
-  const watchUrl = ytId ? `https://www.youtube.com/watch?v=${ytId}` : article.video;
-  const isLocalFile = (window.location.protocol === 'file:');
-
-  // If running locally via file://, YouTube iframe player triggers Error 153 due to lack of HTTP origin.
-  // We provide a rich, interactive video showcase card with HD thumbnail, Play button, and direct watch / embed options.
-  if (isLocalFile && ytId) {
+  // Case 2: YouTube Embed
+  if (article.video && article.video.length === 11) {
+    const posterSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
+      ? article.image
+      : (pfx + (article.image || '').replace(/^(\.\.\/)+/, '').replace(/^\.\//, ''));
     return `
-      <div class="modal-video-card" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; border: 1px solid var(--color-border-hairline); box-shadow: 0 4px 16px rgba(0,0,0,0.06); background: var(--color-canvas);">
-        <div style="position:relative; aspect-ratio:16/9; background:#000; overflow:hidden;">
-          <img src="https://i.ytimg.com/vi/${ytId}/hqdefault.jpg" alt="${title}" style="width:100%; height:100%; object-fit:cover; opacity:0.85;" onerror="handleImageError(this)">
-          <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.45) 100%); display:flex; flex-direction:column; justify-content:space-between; padding:1.25rem;">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="background:#CC181E; color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.65rem; border-radius:4px; letter-spacing:0.06em; text-transform:uppercase;">
-                <i class="fab fa-youtube"></i> ${isEn ? 'FEATURED VIDEO REPORT' : 'PHÓNG SỰ VIDEO ĐẶC SẮC'}
-              </span>
-              <span style="background:rgba(0,0,0,0.7); color:#FFF; font-size:0.75rem; font-weight:600; padding:0.2rem 0.5rem; border-radius:4px;">
-                HD 1080p
-              </span>
+      <div class="video-responsive-embed" id="modalVideoEmbedSlot" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000;">
+        <div style="position:relative; cursor:pointer;" onclick="forceEmbedModalVideo('${article.video}')">
+          <img src="${posterSrc}" alt="${title}" style="width:100%; max-height:460px; object-fit:cover; display:block; filter:brightness(0.9);" onerror="handleImageError(this)">
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(0,0,0,0.35);">
+            <div style="width:68px; height:68px; border-radius:50%; background:var(--color-brand-primary, #54111E); color:#FFF; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 24px rgba(0,0,0,0.4); font-size:1.6rem; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+              <i class="fas fa-play" style="margin-left:4px;"></i>
             </div>
-            <div style="text-align:center;">
-              <a href="${watchUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; justify-content:center; width:64px; height:64px; border-radius:50%; background:#CC181E; color:#FFF; font-size:1.5rem; text-decoration:none; box-shadow:0 4px 18px rgba(204,24,30,0.5); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" title="${isEn ? 'Watch on YouTube' : 'Xem video trên YouTube'}">
-                <i class="fas fa-play" style="margin-left:3px;"></i>
-              </a>
-            </div>
-            <div style="color:#FFF;">
-              <div style="font-weight:700; font-size:1.05rem; text-shadow:0 2px 4px rgba(0,0,0,0.85);">${title}</div>
-            </div>
+            <span style="color:#FFF; font-weight:700; margin-top:0.75rem; text-shadow:0 2px 4px rgba(0,0,0,0.6); font-size:0.95rem;">${isEn ? 'Play Video Dispatch' : 'Xem phóng sự video'}</span>
           </div>
         </div>
-        <div style="padding:1rem 1.25rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
-          <div style="font-size:0.825rem; color:var(--color-text-muted);">
-            <i class="fas fa-info-circle"></i> ${isEn ? 'High-definition video report from verified broadcasting source' : 'Phóng sự tài liệu độ nét cao từ kênh phát sóng chính thức'}
-          </div>
-          <div style="display:flex; gap:0.5rem; align-items:center;">
-            <a href="${watchUrl}" target="_blank" rel="noopener noreferrer" class="fashion-btn-pill" style="background:#CC181E; color:#FFF; font-size:0.825rem; padding:0.45rem 1rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; font-weight:700;">
-              <i class="fab fa-youtube"></i> ${isEn ? 'Watch on YouTube ↗' : 'Xem trên YouTube ↗'}
-            </a>
-            <button onclick="forceEmbedModalVideo('${ytId}')" class="fashion-btn-pill" style="background:var(--color-bg-alt, #EEE); color:var(--color-text-headline); font-size:0.825rem; padding:0.45rem 0.85rem; border:none; cursor:pointer;">
-              ${isEn ? 'Try Embed' : 'Thử phát nhúng'}
-            </button>
-          </div>
-        </div>
-        <div id="modalVideoEmbedSlot" style="display:none;"></div>
       </div>
     `;
   }
 
-  // If running via HTTP/HTTPS (or non-file protocol)
-  return `
-    <div class="video-responsive-embed" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden;">
-      <iframe src="https://www.youtube-nocookie.com/embed/${ytId}?rel=0&modestbranding=1" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    <div style="margin-top:-1.5rem; margin-bottom:2rem; text-align:right;">
-      <a href="${watchUrl}" target="_blank" rel="noopener noreferrer" style="font-size:0.825rem; color:var(--color-brand-primary); font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;">
-        <i class="fab fa-youtube"></i> ${isEn ? 'Open in YouTube ↗' : 'Mở trên YouTube ↗'}
-      </a>
-    </div>
-  `;
+  return '';
 }
 window.renderModalVideoBlock = renderModalVideoBlock;
 
@@ -2234,27 +2207,28 @@ function showPollResults() {
    =================================================================== */
 function handleImageError(img) {
   if (!img) return;
-  const currentSrc = img.getAttribute('src') || '';
-  if (!currentSrc) return;
+  const isSub = window.location.pathname.includes('/hearticles/');
+  const pfx = isSub ? '../../' : '';
+  const cur = img.getAttribute('src') || '';
+  if (!cur) return;
 
-  // Level 1: If in subfolder, try ../../ prefix
-  if (currentSrc.startsWith('assets/') && !img.dataset.triedSubfolder) {
-    img.dataset.triedSubfolder = 'true';
-    img.src = '../../' + currentSrc;
-    return;
+  if (!img.dataset.triedFix) {
+    img.dataset.triedFix = 'true';
+    if (cur.startsWith('assets/')) {
+      img.src = pfx + cur;
+      return;
+    }
+    if (window.location.hostname.includes('github.io')) {
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      const repo = parts[0] || '';
+      const clean = cur.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
+      img.src = '/' + repo + '/' + clean;
+      return;
+    }
   }
 
-  // Level 2: If on GitHub Pages, try full repository path
-  if (window.location.hostname.includes('github.io') && !img.dataset.triedGithub) {
-    img.dataset.triedGithub = 'true';
-    const cleanPath = currentSrc.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
-    const repo = window.location.pathname.split('/')[1]; img.src = '/' + repo + '/' + cleanPath;
-    return;
-  }
-
-  // Level 3: Fallback image
   img.onerror = null;
-  img.src = img.src.includes('ngoc_mai') ? 'assets/images/trending/image8.jpg' : 'assets/images/trending/image8.jpg';
+  img.src = pfx + 'assets/images/trending/image8.jpg';
 }
 window.handleImageError = handleImageError;
 
@@ -2556,22 +2530,27 @@ function renderDedicatedArticlePage(articleId) {
   const article = ARTICLES_DATA.find(a => a.id === articleId) || ARTICLES_DATA[0];
   if (!article) return;
 
+  const isSubfolder = window.location.pathname.includes('/hearticles/');
+  const pfx = isSubfolder ? '../../' : '';
+
   const isEn = (currentLanguage === 'en');
   const title = (isEn && article.title_en) ? article.title_en : article.title;
   const subtitle = (isEn && article.subtitle_en) ? article.subtitle_en : article.subtitle;
   const readTime = isEn ? (article.readTime || '').replace('phút đọc', 'min read') : article.readTime;
   const breadcrumbHome = isEn ? 'Home' : 'Trang chủ';
   const breadcrumbCategory = article.categoryName || 'Trending';
-  const categoryUrl = `${article.category}.html`;
+  const categoryUrl = `${pfx}${article.category}.html`;
+  const homeUrl = `${pfx}index.html`;
 
   // Update document title
   document.title = `Class6group1term127 - ${title}`;
 
   // Update active nav category
   document.querySelectorAll('.fashion-nav .nav-item').forEach(el => {
-    if (el.getAttribute('href') === categoryUrl) {
+    const href = el.getAttribute('href') || '';
+    if (href.endsWith(`${article.category}.html`)) {
       el.classList.add('active');
-    } else if (el.getAttribute('href') !== 'index.html') {
+    } else if (!href.endsWith('index.html')) {
       el.classList.remove('active');
     }
   });
@@ -2582,7 +2561,12 @@ function renderDedicatedArticlePage(articleId) {
   let bodyHtml = '';
   const contentSource = (isEn && article.content_en) ? article.content_en : article.content;
   if (typeof contentSource === 'string') {
-    bodyHtml = contentSource;
+    let s = contentSource;
+    if (isSubfolder) {
+      s = s.replace(/src="assets\//g, 'src="../../assets/');
+      s = s.replace(/poster="assets\//g, 'poster="../../assets/');
+    }
+    bodyHtml = s;
   } else if (Array.isArray(contentSource)) {
     bodyHtml = contentSource.map(p => {
       if (typeof p !== 'string') return '';
@@ -2594,8 +2578,12 @@ function renderDedicatedArticlePage(articleId) {
         return `<h2 class="article-section-heading-lg" style="font-family:var(--font-editorial); font-size:1.65rem; font-weight:800; color:var(--color-brand-primary); margin:2.25rem 0 1rem 0;">${trimmed.replace('## ', '')}</h2>`;
       }
       if (trimmed.startsWith('<figure') || trimmed.startsWith('<table') || trimmed.startsWith('<div') || trimmed.startsWith('<blockquote')) {
+        if (isSubfolder) {
+          trimmed = trimmed.replace(/src="assets\//g, 'src="../../assets/');
+          trimmed = trimmed.replace(/poster="assets\//g, 'poster="../../assets/');
+        }
         if (trimmed.includes('<img') && !trimmed.includes('onerror=')) {
-          trimmed = trimmed.replace(/<img\b/g, '<img onerror="handleImageError(this)"');
+          trimmed = trimmed.replace(/<img/g, '<img onerror="handleImageError(this)"');
         }
         return trimmed;
       }
@@ -2603,10 +2591,14 @@ function renderDedicatedArticlePage(articleId) {
     }).join('');
   }
 
+  const heroImgSrc = (article.image && (article.image.startsWith('http') || article.image.startsWith('../../')))
+    ? article.image
+    : (pfx + (article.image || '').replace(/^(\.\.\/)+/, '').replace(/^\.\//, ''));
+
   host.innerHTML = `
     <article class="article-reading-content" style="font-size: ${currentFontSize}rem;">
       <div class="article-breadcrumb" style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1.25rem; flex-wrap:wrap;">
-        <a href="index.html" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">${breadcrumbHome}</a>
+        <a href="${homeUrl}" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">${breadcrumbHome}</a>
         <span>/</span>
         <a href="${categoryUrl}" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">${breadcrumbCategory}</a>
         <span>/</span>
@@ -2618,7 +2610,7 @@ function renderDedicatedArticlePage(articleId) {
 
       <div class="article-author-strip" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:1.25rem; border-bottom:1px solid var(--color-border-hairline); margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
         <div class="article-author-info" style="display:flex; align-items:center; gap:0.75rem;">
-          <div class="author-avatar-small" style="width:46px; height:46px; border-radius:50%; background:var(--color-brand-primary); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.1rem;">${article.author.charAt(0)}</div>
+          <div class="author-avatar-small" style="width:46px; height:46px; border-radius:50%; background:var(--color-brand-primary); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.1rem;">${(article.author || 'H').charAt(0)}</div>
           <div>
             <div class="author-name-text" style="font-weight:700; color:var(--color-text-headline); font-size:1rem;">${article.author}</div>
             <div class="article-date-text" style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;"><i class="far fa-clock"></i> ${article.date}</div>
@@ -2634,12 +2626,12 @@ function renderDedicatedArticlePage(articleId) {
           <button class="btn-article-like ${isLiked ? 'liked' : ''}" id="likeBtn_${article.id}" onclick="toggleLikeArticle('${article.id}')" title="${isEn ? 'Like Story' : 'Thả tim bài viết'}">
             <i class="fas fa-heart"></i> <span id="likeCount_${article.id}">${article.likes + (isLiked ? 1 : 0)}</span>
           </button>
-          <button class="tool-btn" onclick="shareArticle('${title.replace(/'/g, "\\'")}')" title="${isEn ? 'Share' : 'Chia sẻ'}"><i class="fas fa-share-alt"></i> <span>${isEn ? 'Share' : 'Chia sẻ'}</span></button>
+          <button class="tool-btn" onclick="shareArticle('${(title || '').replace(/'/g, "\'")}')" title="${isEn ? 'Share' : 'Chia sẻ'}"><i class="fas fa-share-alt"></i> <span>${isEn ? 'Share' : 'Chia sẻ'}</span></button>
         </div>
       </div>
 
       <div class="article-hero-media" style="border-radius:var(--radius-lg); overflow:hidden; margin:2rem 0; box-shadow:0 6px 24px rgba(0,0,0,0.06);">
-        <img src="${article.image}" alt="${title}" style="width:100%; display:block; max-height:560px; object-fit:cover;" onerror="handleImageError(this)">
+        <img src="${heroImgSrc}" alt="${title}" style="width:100%; display:block; max-height:560px; object-fit:cover;" onerror="handleImageError(this)">
         <div class="article-media-caption" style="font-size:0.85rem; color:var(--color-text-muted); padding:0.6rem 0.5rem; font-style:italic; line-height:1.5;">${article.imageCaption || title}</div>
       </div>
 
@@ -2679,6 +2671,9 @@ function renderDedicatedArticlePage(articleId) {
 
   // Render related articles
   renderRelatedArticles(article, isEn);
+
+  // Initialize reading progress bar
+  initReadingProgressBar();
 }
 window.renderDedicatedArticlePage = renderDedicatedArticlePage;
 
@@ -2689,9 +2684,12 @@ function renderRelatedArticles(currentArt, isEn) {
   const catLink = document.getElementById('relatedCategoryLink');
   if (!grid || typeof ARTICLES_DATA === 'undefined') return;
 
+  const isSub = window.location.pathname.includes('/hearticles/');
+  const pfx = isSub ? '../../' : '';
+
   if (heading) heading.textContent = isEn ? 'More In This Category' : 'Tin cùng chuyên mục';
   if (viewAll) viewAll.textContent = isEn ? 'View Category' : 'Xem tất cả';
-  if (catLink) catLink.href = `${currentArt.category}.html`;
+  if (catLink) catLink.href = `${pfx}${currentArt.category}.html`;
 
   const related = ARTICLES_DATA
     .filter(a => a.category === currentArt.category && a.id !== currentArt.id)
@@ -2701,10 +2699,14 @@ function renderRelatedArticles(currentArt, isEn) {
     const rTitle = (isEn && item.title_en) ? item.title_en : item.title;
     const rExcerpt = (isEn && item.subtitle_en) ? item.subtitle_en : item.subtitle;
     const rUrl = getArticleUrl(item.id);
+    const rImg = (item.image && (item.image.startsWith('http') || item.image.startsWith('../../')))
+      ? item.image
+      : (pfx + (item.image || '').replace(/^(\.\.\/)+/, '').replace(/^\.\//, ''));
+
     return `
       <article class="fashion-article-card" onclick="window.location.href='${rUrl}'" style="cursor:pointer; background:#FFFFFF; border:1px solid var(--color-border-hairline); border-radius:var(--radius-md); overflow:hidden; display:flex; flex-direction:column;">
         <div style="aspect-ratio:16/10; overflow:hidden;">
-          <img src="${item.image}" alt="${rTitle}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="handleImageError(this)">
+          <img src="${rImg}" alt="${rTitle}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="handleImageError(this)">
         </div>
         <div style="padding:1.15rem; display:flex; flex-direction:column; flex-grow:1;">
           <span style="font-size:0.725rem; font-weight:800; color:var(--color-brand-accent); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.4rem;">${item.categoryName}</span>

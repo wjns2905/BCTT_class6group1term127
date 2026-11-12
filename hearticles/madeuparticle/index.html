@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="../../">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Class6group1term127 - Drunk Girl Collapses on Park Bench</title>
@@ -20,6 +21,15 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script>
     function handleImageError(img) {
+      if (!img) return;
+      const currentSrc = img.getAttribute('src') || '';
+      if (!img.dataset.triedFallback) {
+        img.dataset.triedFallback = 'true';
+        if (currentSrc.startsWith('assets/')) {
+          img.src = '../../' + currentSrc;
+          return;
+        }
+      }
       img.onerror = null;
       img.src = '../../assets/images/trending/ngoc_mai/hat_and_jacket.jpg';
     }

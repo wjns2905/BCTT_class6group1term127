@@ -1454,9 +1454,9 @@ function openArticleModal(articleId) {
   if (typeof contentSource === 'string') {
     bodyHtml = contentSource;
   } else if (Array.isArray(contentSource)) {
-    bodyHtml = article.content.map(p => {
+    bodyHtml = contentSource.map(p => {
       if (typeof p !== 'string') return '';
-      const trimmed = p.trim();
+      let trimmed = p.trim();
       if (trimmed.startsWith('### ')) {
         return `<h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.35rem; font-weight:800; color:var(--color-brand-primary); margin:1.75rem 0 0.75rem 0;">${trimmed.replace('### ', '')}</h3>`;
       }
@@ -1464,6 +1464,9 @@ function openArticleModal(articleId) {
         return `<h2 class="article-section-heading-lg" style="font-family:var(--font-editorial); font-size:1.55rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">${trimmed.replace('## ', '')}</h2>`;
       }
       if (trimmed.startsWith('<figure') || trimmed.startsWith('<table') || trimmed.startsWith('<div') || trimmed.startsWith('<blockquote')) {
+        if (trimmed.includes('<img') && !trimmed.includes('onerror=')) {
+          trimmed = trimmed.replace(/<img\b/g, '<img onerror="handleImageError(this)"');
+        }
         return trimmed;
       }
       return `<p style="margin-bottom:1.15rem; line-height:1.8; text-align:justify;">${p}</p>`;
@@ -1547,14 +1550,16 @@ function openArticleModal(articleId) {
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 
-  // URL Routing: update URL to /hearticles/madeuparticle for trending-1
+  // URL Routing: update URL to /hearticles/madeuparticle for trending-1 safely
   try {
     const articleUrl = (article.url || article.sourceUrl);
-    if (articleUrl && articleUrl.startsWith('/')) {
-      if (window.location.protocol === 'file:') {
-        window.location.hash = articleUrl.replace(/^\//, '');
+    if (articleUrl && articleUrl.includes('madeuparticle')) {
+      // Use clean hash routing on web hosts to NEVER disrupt base image asset resolution
+      const isGH = window.location.hostname.includes('github.io');
+      if (window.location.protocol === 'file:' || isGH) {
+        window.location.hash = 'hearticles/madeuparticle';
       } else {
-        history.pushState({ articleId: article.id }, '', articleUrl);
+        history.pushState({ articleId: article.id }, '', '/hearticles/madeuparticle');
       }
     }
   } catch (e) {}
@@ -2202,10 +2207,31 @@ function showPollResults() {
    IMAGE ERROR HANDLER
    =================================================================== */
 function handleImageError(img) {
+  if (!img) return;
+  const currentSrc = img.getAttribute('src') || '';
+  if (!currentSrc) return;
+
+  // Level 1: If in subfolder, try ../../ prefix
+  if (currentSrc.startsWith('assets/') && !img.dataset.triedSubfolder) {
+    img.dataset.triedSubfolder = 'true';
+    img.src = '../../' + currentSrc;
+    return;
+  }
+
+  // Level 2: If on GitHub Pages, try full repository path
+  if (window.location.hostname.includes('github.io') && !img.dataset.triedGithub) {
+    img.dataset.triedGithub = 'true';
+    const cleanPath = currentSrc.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
+    img.src = '/BCTT_class6group1term127/' + cleanPath;
+    return;
+  }
+
+  // Level 3: Fallback image
   img.onerror = null;
-  img.src = 'assets/images/trending/image8.jpg';
+  img.src = img.src.includes('ngoc_mai') ? 'assets/images/trending/image8.jpg' : 'assets/images/trending/image8.jpg';
 }
 window.handleImageError = handleImageError;
+
 
 /* ===================================================================
    GLOBAL EVENT LISTENERS (Keyboard shortcuts: /, ESC, ?, T)

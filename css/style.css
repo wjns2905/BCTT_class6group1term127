@@ -7115,3 +7115,16 @@ button, a, input, select, textarea {
     font-size: 1.15rem !important;
   }
 }
+
+/* ===================================================================
+   SAFETY FALLBACK: ENSURE NO UNSTYLED MODALS SIT IN NORMAL FLOW
+   =================================================================== */
+.fashion-modal-backdrop,
+.fashion-drawer-backdrop,
+.fashion-drawer,
+.search-modal:not(.active),
+.onboard-modal-backdrop:not(.active),
+.signin-modal-backdrop:not(.active),
+.drawer-backdrop:not(.active) {
+  display: none !important;
+}

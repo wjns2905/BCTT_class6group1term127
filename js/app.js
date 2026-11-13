@@ -2629,12 +2629,14 @@ function renderDedicatedArticlePage(articleId) {
         </div>
       </div>
 
+      ${(article.id === 'trending-1') ? '' : `
       <div class="article-hero-media" style="border-radius:var(--radius-lg); overflow:hidden; margin:2rem 0; box-shadow:0 6px 24px rgba(0,0,0,0.06);">
         <img src="${heroImgSrc}" alt="${title}" style="width:100%; display:block; max-height:560px; object-fit:cover;" onerror="handleImageError(this)">
         <div class="article-media-caption" style="font-size:0.85rem; color:var(--color-text-muted); padding:0.6rem 0.5rem; font-style:italic; line-height:1.5;">${article.imageCaption || title}</div>
       </div>
 
       ${renderModalVideoBlock(article, isEn, title)}
+      `}
 
       <div class="article-body-text" id="articleBodyContent" style="font-family:var(--font-body); font-size:1.15rem; line-height:1.85; color:var(--color-text-body);">
         ${bodyHtml}

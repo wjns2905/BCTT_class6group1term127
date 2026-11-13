@@ -43,7 +43,7 @@ const I18N_TRANSLATIONS = {
     
     // 3. Top Focal Cluster (Home)
     focal_badge: '<i class="fas fa-fire"></i> TIÊU ĐIỂM THỊNH HÀNH • BÀI NÓNG SỐ 1',
-    focal_lead_title: "Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
+    focal_lead_title: "[Made-up article] Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
     focal_lead_sapo: "Đại biểu Quốc hội đề xuất các giải pháp đột phá nhằm phát huy thế mạnh vùng, tăng cường kết nối hạ tầng giao thông và thúc đẩy kinh tế - xã hội các tỉnh miền núi, biên giới phía Bắc.",
     focal_lead_author: '<i class="far fa-user"></i> Ngọc Mãi & Ban Biên tập Hearticles',
     focal_lead_meta: '<i class="far fa-clock"></i> 5 phút đọc • Threads & Hearticles',
@@ -196,7 +196,7 @@ const I18N_TRANSLATIONS = {
     dock_menu: "Menu",
 
     cat_feat_trending_kicker: "TIÊU ĐIỂM BÁO NÓNG · TOP 1 THỊNH HÀNH",
-    cat_feat_trending_title: "Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
+    cat_feat_trending_title: "[Made-up article] Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
     cat_feat_trending_excerpt: "Hình ảnh đôi quang gánh trĩu nặng nhịp sống mưu sinh, vẻ đẹp cần lao mộc mạc và ký ức rêu phong trên từng ngõ nhỏ di sản được khắc họa xúc động qua lăng kính phóng sự VnExpress.",
     cat_feat_society_kicker: "TIÊU ĐIỂM DÂN SINH · THE GUARDIAN",
     cat_feat_society_title: "Cost of Living Crisis: Sáng kiến cộng đồng bảo toàn phẩm giá người nhận",
@@ -337,7 +337,7 @@ const I18N_TRANSLATIONS = {
     
     // 3. Top Focal Cluster (Home)
     focal_badge: '<i class="fas fa-fire"></i> TRENDING SPOTLIGHT • TOP 1 VIRAL STORY',
-    focal_lead_title: "Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
+    focal_lead_title: "[Made-up article] Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
     focal_lead_sapo: "National Assembly deputies proposed breakthrough measures to capitalise on regional strengths, strengthen transport connectivity, and accelerate socio-economic development in midland, mountainous, and northern border areas.",
     focal_lead_author: '<i class="far fa-user"></i> Ngọc Mãi & Ban Biên tập Hearticles',
     focal_lead_meta: '<i class="far fa-clock"></i> 5 min read • Nhan Dan Daily',
@@ -472,7 +472,7 @@ const I18N_TRANSLATIONS = {
     sidebar_topics: '<i class="fas fa-tags"></i> FEATURED TOPICS',
     btn_read_full: "Read Full Story &rarr;",
     cat_feat_trending_kicker: "HOT PAPER · TOP 1 TRENDING SPOTLIGHT",
-    cat_feat_trending_title: "Drunk Girl Collapses on Park Bench, Unexpectedly Receives 'Special' Kindness from Strangers",
+    cat_feat_trending_title: "[Made-up article] Drunk Girl Collapses on Park Bench, Unexpectedly Receives 'Special' Kindness from Strangers",
     cat_feat_trending_excerpt: "'She looked so pitiful,' a passerby recalled discovering Ngoc Mai curled up on a park bench and deciding to leave small change in her fallen cap.",
     cat_feat_society_kicker: "COMMUNITY SPOTLIGHT · THE GUARDIAN",
     cat_feat_society_title: "Cost of Living Crisis: Community Pantries Preserving Dignity",

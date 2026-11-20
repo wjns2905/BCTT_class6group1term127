@@ -1411,11 +1411,13 @@ function attachModalHlsStream(streamUrl) {
 window.attachModalHlsStream = attachModalHlsStream;
 
 function getArticleUrl(articleId) {
-  if (articleId === 'trending-1') {
-    const isSub = window.location.pathname.includes('/hearticles/');
-    return isSub ? 'index.html' : 'hearticles/madeuparticle/index.html';
-  }
   const isSub = window.location.pathname.includes('/hearticles/');
+  if (articleId === 'trending-1') {
+    return isSub ? '../madeuparticle/index.html' : 'hearticles/madeuparticle/index.html';
+  }
+  if (articleId === 'trending-practice') {
+    return isSub ? '../practice/index.html' : 'hearticles/practice/index.html';
+  }
   const prefix = isSub ? '../../' : '';
   return `${prefix}article.html?id=${encodeURIComponent(articleId)}`;
 }

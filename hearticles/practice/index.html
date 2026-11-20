@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Class6group1term127 - Bài tập thực hành quay chụp</title>
+  <meta name="description" content="Bài tập thực hành quay chụp: Phân tích 5 lỗi nhiếp ảnh cơ bản &amp; Video thực hành - Class 6 Group 1 - HEARTICLES. Magazine">
+  <link rel="canonical" href="/hearticles/practice">
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/logo/heart-logo.svg">
+  
+  <!-- Modern Minimalist Editorial Typography: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Image Fallback Handler (Pre-loaded before stylesheet) -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script>
+    function handleImageError(img) {
+      if (!img) return;
+      const cur = img.getAttribute('src') || img.src || '';
+      if (!cur) return;
+      const idx = cur.indexOf('assets/');
+      if (idx !== -1) {
+        const clean = cur.slice(idx);
+        if (!img.dataset.triedPfx) {
+          img.dataset.triedPfx = 'true';
+          img.src = '../../' + clean;
+          return;
+        }
+        if (!img.dataset.triedRepo && window.location.hostname.includes('github.io')) {
+          img.dataset.triedRepo = 'true';
+          const repo = window.location.pathname.split('/').filter(Boolean)[0] || '';
+          img.src = '/' + repo + '/' + clean;
+          return;
+        }
+      }
+      img.onerror = null;
+      img.src = '../../assets/images/trending/image8.jpg';
+    }
+  </script>
+
+  <!-- Main Stylesheets -->
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <meta name="application-name" content="Class6group1term127">
+  <meta property="og:site_name" content="Class6group1term127">
+  <meta property="og:title" content="Bài tập thực hành quay chụp: Phân tích 5 lỗi nhiếp ảnh cơ bản &amp; Video thực hành">
+  <meta property="og:image" content="../../assets/images/trending/practice/fixed_2_sharp_focus.jpg">
+</head>
+<body data-category="trending">
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress-bar" id="readingProgressBar"></div>
+
+  <!-- Offline Status Banner -->
+  <div class="offline-indicator-banner" id="offlineBanner" data-i18n="offline_banner">
+    <i class="fas fa-wifi-slash"></i>
+    <span>Chế độ ngoại tuyến: Bạn đang đọc các bài viết đã lưu đệm. Hệ thống sẽ tự động cập nhật khi có mạng.</span>
+  </div>
+
+  <!-- Header Leaderboard Advertisement -->
+  <div class="header-ad-leaderboard-wrap">
+    <div class="container" style="display:flex; flex-direction:column; align-items:center;">
+      <span class="ad-label-strip" data-i18n="ad_label">ADVERTISEMENT</span>
+      <a href="https://www.britishcouncil.vn/thi-ielts/one-skill-retake" target="_blank" rel="noopener noreferrer" class="header-ad-link" title="British Council IELTS - One Skill Retake">
+        <img src="../../assets/images/ads/header_ad_banner.png" alt="British Council IELTS One Skill Retake Leaderboard Ad" class="header-ad-banner-img" width="1444" height="378" onerror="handleImageError(this)">
+      </a>
+    </div>
+  </div>
+
+  <!-- Brand Masthead Hero -->
+  <div class="fashion-masthead-hero">
+    <div class="container masthead-hero-inner">
+      <a href="../../index.html" class="fashion-brand-logo-masthead" aria-label="HEARTICLES. - Where News Begins with a Heartbeat">
+        <img src="../../assets/images/logo/brand_logo_updated.png" alt="HEARTICLES. - Where News Begins with a Heartbeat" class="fashion-brand-logo-fullsize" onerror="handleImageError(this)">
+      </a>
+    </div>
+  </div>
+
+  <!-- Sticky Categories Header Navigation -->
+  <header class="fashion-header">
+    <div class="container fashion-header-container">
+      <a href="../../index.html" class="fashion-mobile-brand" aria-label="HEARTICLES. - Home">HEARTICLES.</a>
+      <nav class="fashion-nav" aria-label="Thanh điều hướng tạp chí">
+        <a href="../../index.html" class="nav-item">Home</a>
+        <a href="../../trending.html" class="nav-item active">Trending</a>
+        <a href="../../society.html" class="nav-item">Society</a>
+        <a href="../../human-stories.html" class="nav-item">Human Stories</a>
+        <a href="../../mind-soul.html" class="nav-item">Mind & Soul</a>
+        <a href="../../in-depth.html" class="nav-item">In-depth</a>
+        <div class="nav-item-dropdown">
+          <a href="../../about.html" class="nav-item" style="display:inline-flex; align-items:center; gap:0.35rem;">
+            About Us <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i>
+          </a>
+          <div class="about-dropdown-menu">
+            <a href="../../about.html#mission" class="about-dropdown-item"><i class="fas fa-bullseye"></i> <span>Mission</span></a>
+            <a href="../../about.html#profiles" class="about-dropdown-item"><i class="fas fa-users"></i> <span>Profiles</span></a>
+            <a href="../../about.html#photo" class="about-dropdown-item"><i class="fas fa-camera"></i> <span>Photo</span></a>
+            <a href="../../about.html#subscribe" class="about-dropdown-item"><i class="fas fa-paper-plane"></i> <span>Subscribe</span></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="fashion-header-actions">
+        <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+          <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+          <span class="lang-pill-divider">/</span>
+          <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+        <button class="fashion-search-btn" onclick="openSearchModal()" title="Tìm kiếm bài viết (/)" aria-label="Tìm kiếm"><i class="fas fa-search"></i></button>
+        <button class="fashion-subscribe-btn" onclick="openSubscribeModal()" title="Đăng ký nhận bản tin">Subscribe</button>
+        <button class="fashion-user-btn" id="headerUserBtn" onclick="openSignInModal()" title="Đăng nhập tài khoản" aria-label="Tài khoản"><i class="far fa-user-circle"></i></button>
+        <button class="fashion-hamburger-btn" onclick="openDrawer()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Article Content Container (Dedicated Full Page) -->
+  <main class="container" style="flex-grow:1; max-width:960px; margin:2.5rem auto 4rem auto; padding:0 1rem;">
+    <div id="standaloneArticleHost">
+      <!-- Pre-rendered for instant viewing, then hydrated by renderDedicatedArticlePage('trending-practice') -->
+      <article class="article-reading-content" style="font-size: 1.05rem;">
+        <div class="article-breadcrumb" style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1.25rem; flex-wrap:wrap;">
+          <a href="../../index.html" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">Home</a>
+          <span>/</span>
+          <a href="../../trending.html" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">Trending</a>
+          <span>/</span>
+          <span style="color:var(--color-brand-accent); font-weight:700;">trending-practice</span>
+        </div>
+
+        <h1 class="article-headline" style="font-family:var(--font-editorial); font-size:clamp(1.85rem, 4vw, 2.75rem); font-weight:900; line-height:1.25; margin-bottom:1rem; color:var(--color-text-headline); letter-spacing:-0.02em;">Bài tập thực hành quay chụp: Phân tích 5 lỗi nhiếp ảnh cơ bản &amp; Video thực hành</h1>
+        <p class="article-sapo" style="font-family:var(--font-serif); font-size:clamp(1.1rem, 2vw, 1.3rem); line-height:1.65; color:var(--color-text-muted); margin-bottom:1.75rem; font-style:italic;">Tổng hợp bài tập thực hành quay chụp của Class 6 Group 1: So sánh trực quan Before / After các lỗi chụp ảnh thường gặp và khung video thực hành tác nghiệp.</p>
+
+        <div class="article-author-strip" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:1.25rem; border-bottom:1px solid var(--color-border-hairline); margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+          <div class="article-author-info" style="display:flex; align-items:center; gap:0.75rem;">
+            <div class="author-avatar-small" style="width:46px; height:46px; border-radius:50%; background:var(--color-brand-primary); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.1rem;">G</div>
+            <div>
+              <div class="author-name-text" style="font-weight:700; color:var(--color-text-headline); font-size:1rem;">Class 6 Group 1</div>
+              <div class="article-date-text" style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;"><i class="far fa-clock"></i> Thursday, November 19, 2026 - 15:30 (GMT+7)</div>
+            </div>
+          </div>
+
+          <div class="article-reading-tools" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            <button class="tool-btn" onclick="adjustFontSize(-0.1)" title="Giảm cỡ chữ"><i class="fas fa-font"></i> A-</button>
+            <button class="tool-btn" onclick="adjustFontSize(0.1)" title="Tăng cỡ chữ"><i class="fas fa-font"></i> A+</button>
+            <button class="tool-btn" id="btnTTS" onclick="toggleTextToSpeech('trending-practice')" title="Nghe đọc bài báo">
+              <i class="fas fa-volume-up"></i> <span>Đọc bài báo</span>
+            </button>
+            <button class="btn-article-like" id="likeBtn_trending-practice" onclick="toggleLikeArticle('trending-practice')" title="Thả tim bài viết">
+              <i class="fas fa-heart"></i> <span id="likeCount_trending-practice">1890</span>
+            </button>
+            <button class="tool-btn" onclick="shareArticle('Bài tập thực hành quay chụp - Class 6 Group 1')" title="Chia sẻ"><i class="fas fa-share-alt"></i> <span>Chia sẻ</span></button>
+          </div>
+        </div>
+
+
+
+        <div class="article-body-text" id="articleBodyContent" style="font-family:var(--font-body); font-size:1.15rem; line-height:1.85; color:var(--color-text-body);">
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Mới đây, vào ngày 12/11, tài khoản mạng xã hội Threads có tên <strong>ngoc.forever</strong> của Ngọc Mãi (Hải Phòng) đã chia sẻ hình ảnh một chiếc mũ có nhiều đồng tiền lẻ bên trong cùng chiếc áo khoác cũ. Bài đăng mang tiêu đề <em>“Hoá ra trên đời này vẫn còn nhiều đáng yêu đến thế!”</em> nhanh chóng thu hút được sự quan tâm của cộng đồng mạng với hơn 500.000 lượt xem và hàng chục nghìn lượt tương tác.</p>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/threads_post.jpg" alt="Bài đăng từ tài khoản Threads ngoc.forever của Ngọc Mãi" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Bài đăng từ tài khoản Threads có tên ngoc.forever của Ngọc Mãi. (Nguồn: Threads)</figcaption>
+          </figure>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Trong bài viết, Ngọc Mãi kể rằng, tối 11/11, sau khi tham dự sinh nhật bạn và uống say, cô quyết định đi bộ về nhà vì khoảng cách không xa. Tuy nhiên, khi đi qua khu vực công viên Ulus, cô bất ngờ ngã xuống một chiếc ghế đá và ngủ thiếp đi.</p>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Đến rạng sáng ngày 12/11, khi tỉnh dậy, Ngọc Mãi phát hiện trong chiếc mũ không may rơi xuống đất của mình xuất hiện nhiều đồng tiền lẻ, đồng thời trên người còn có một chiếc áo khoác ấm. Bất ngờ trước những gì xảy ra, cô quyết định chia sẻ câu chuyện ấm áp lên Threads.</p>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/hat_and_jacket.jpg" alt="Hình ảnh chiếc mũ và áo khoác trong bài viết của Ngọc Mãi" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Hình ảnh chiếc mũ và áo khoác trong bài viết của Ngọc Mãi. (Nguồn: Nhân vật cung cấp)</figcaption>
+          </figure>
+
+          <h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">Những hành động tử tế được ghi lại qua camera</h3>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Theo hình ảnh trích xuất từ camera an ninh tại khu vực, sự việc được ghi nhận trong khoảng thời gian từ 22h57 đến 23h22 ngày 11/11. Ngọc Mãi xuất hiện tại khu vực ghế đá, sau đó vô tình ngã xuống và nằm co người trên ghế. Trong lúc này, chiếc mũ trên đầu cô rơi xuống đất, phần lòng mũ ngửa lên trên.</p>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Một người đi bộ ngang qua nhận thấy cô gái nằm một mình trên ghế đã dừng lại, tiến đến gần và dùng áo khoác đắp lên người cô. Sau đó, một số người khác cũng ghé lại, nhẹ nhàng đặt tiền vào trong chiếc mũ của Ngọc Mãi. Những hình ảnh này phần nào lý giải cho số tiền lẻ trong chiếc mũ và chiếc áo khoác mà cô phát hiện khi tỉnh dậy vào hôm sau.</p>
+
+          <h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">“Trông cô ấy tội quá!”</h3>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Dưới bài đăng, một tài khoản Threads mang tên <strong>phanhbui</strong> đã gây chú ý khi để lại bình luận cho biết mình đã trực tiếp chứng kiến sự việc: <em>“ô tôi hôm qua có gặp bạn này đây, đi qua thấy bạn nằm co ro mà thấy dưới mũ có mấy đồng tiền nên cũng fomo ủng hộ kkk”</em>.</p>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/comment_phanhbui.jpg" alt="Bình luận của tài khoản phanhbui trên Threads" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Một tài khoản có tên phanhbui cho biết mình là người chứng kiến sự việc. (Nguồn: Threads)</figcaption>
+          </figure>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Liên hệ với chị Phanh Bui - chủ nhân của bình luận trên và cũng là người trực tiếp để lại tiền trong chiếc mũ của Ngọc Mãi, chị cho biết bản thân dừng lại vì thấy cô gái nằm một mình trên ghế đá giữa thời tiết lạnh. Chia sẻ về hành động của mình, chị Phanh Bui cho biết:</p>
+
+          <blockquote class="article-pullquote" style="margin:2rem 0; padding:1.25rem 1.75rem; border-left:4px solid var(--color-brand-primary, #54111E); background:rgba(84,17,30,0.04); border-radius:0 10px 10px 0; font-family:var(--font-serif); font-size:1.15rem; font-style:italic; line-height:1.7; color:var(--color-text-headline);">
+            “Trời thì vừa lạnh, vừa tối mà cô gái mặc mỗi cái áo mỏng tang nằm trên ghế, trông cô ấy tội quá! Đúng lúc tôi vừa đi làm về, thấy ở dưới mũ có vài đồng tiền lẻ, tưởng cô ấy cũng là người lang thang nên bỏ tiền vào giúp đỡ.”
+            <footer style="margin-top:0.6rem; font-family:var(--font-sans); font-size:0.875rem; font-style:normal; font-weight:700; color:var(--color-brand-primary);">— Chị Phanh Bui (Người chứng kiến và giúp đỡ)</footer>
+          </blockquote>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/passerby_kindness.jpg" alt="Người qua đường để lại tiền giúp đỡ" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Nhìn thấy Ngọc Mãi co ro trên ghế và những đồng tiền lẻ trong chiếc mũ đặt bên cạnh, chị tưởng cô là người lang thang nên đã bỏ tiền vào để giúp đỡ. (Nguồn: Hearticles)</figcaption>
+          </figure>
+
+          <h3 class="article-section-heading" style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:2rem 0 0.85rem 0;">Sự tử tế từ những người xa lạ</h3>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Chia sẻ về sự việc, Ngọc Mãi cho biết cô khá bất ngờ và cảm thấy đôi chút hối hận khi để một tình huống ngoài ý muốn dẫn đến sự hiểu lầm như vậy. Tuy nhiên, điều khiến cô cảm thấy ấm lòng và cảm động là sự quan tâm của những người xa lạ trong những ngày Hà Nội bắt đầu trở lạnh.</p>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Ngọc Mãi còn tâm sự thêm, nếu người nằm trên ghế đá hôm ấy thực sự là một người không có nơi ở ổn định, những hành động nhỏ như vậy có thể đã giúp họ có thêm một bữa ăn ấm áp. Câu chuyện vì thế không chỉ dừng lại ở một tình huống hài hước, mà còn cho chúng ta thêm niềm tin về những hành động tử tế, bình dị vẫn luôn còn hiện diện giữa cuộc sống hàng ngày.</p>
+
+          <figure class="article-body-figure" style="margin:2rem 0; text-align:center;">
+            <img src="../../assets/images/trending/ngoc_mai/ngoc_mai_reflection.jpg" alt="Ngọc Mãi chia sẻ cảm nghĩ" style="max-width:100%; height:auto; max-height:550px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.08); display:block; margin:0 auto;" onerror="handleImageError(this)">
+            <figcaption class="article-body-figcaption" style="font-family:var(--font-sans); font-size:0.875rem; color:var(--color-text-muted); margin-top:0.65rem; font-style:italic; line-height:1.5;">Ngọc Mãi chia sẻ nếu người nằm trên ghế đá hôm ấy thực sự là một người lang thang, những hành động nhỏ như vậy có thể giúp họ có thêm một bữa ăn ấm áp. (Nguồn: Hearticles)</figcaption>
+          </figure>
+
+          <p style="margin-bottom:1.25rem; line-height:1.85; text-align:justify; font-size:1.15rem; color:var(--color-text-body);">Khép lại cuộc trò chuyện, cô không quên nhắn nhủ mọi người không nên làm theo hành động lạm dụng đồ uống có cồn của mình. Dù câu chuyện mang đến nhiều cảm xúc tích cực, việc uống say rồi tự ý đi lại một mình ở nơi công cộng vẫn tiềm ẩn những rủi ro về an toàn cá nhân.</p>
+
+          <!-- Extended Read -->
+          <div class="article-extended-box" style="margin:3rem 0; padding:1.75rem; border-radius:14px; background:linear-gradient(135deg, rgba(84,17,30,0.05) 0%, rgba(128,24,42,0.08) 100%); border:1px solid rgba(84,17,30,0.15); box-shadow:0 6px 22px rgba(84,17,30,0.05);">
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem;">
+              <span style="background:var(--color-brand-primary, #54111E); color:#FFF; font-size:0.75rem; font-weight:800; padding:0.25rem 0.65rem; border-radius:4px; letter-spacing:0.06em; text-transform:uppercase;">
+                <i class="fas fa-book-reader"></i> GÓC NHÌN CHUYÊN SÂU • EXTENDED READ
+              </span>
+            </div>
+            <h3 style="font-family:var(--font-editorial); font-size:1.35rem; font-weight:800; color:var(--color-brand-primary); margin:0 0 0.75rem 0;">
+              Một hành động nhỏ có thể tạo nên sự khác biệt
+            </h3>
+            <p style="font-size:1rem; line-height:1.75; color:var(--color-text-body); margin-bottom:1rem; text-align:justify;">
+              Không phải lúc nào sự giúp đỡ cũng cần bắt đầu từ những điều lớn lao. Đôi khi, chỉ một chiếc áo khoác được đặt lên vai người đang co ro trong đêm lạnh, một chút tiền lẻ ủng hộ hay đơn giản là việc dừng chân hỏi thăm cũng có thể mang lại sự ấm áp cho một người xa lạ. Thế nhưng, khi bắt gặp ai đó có dấu hiệu say xỉn, mệt mỏi hoặc gặp khó khăn nơi công cộng, chúng ta nên giúp đỡ như thế nào để vừa thể hiện sự quan tâm, vừa đảm bảo an toàn cho họ và chính mình?
+            </p>
+            <a href="https://vietnamnet.vn/giup-do-nguoi-khac-la-tot-nhung-ban-nhat-dinh-phai-biet-4-quy-tac-an-nay-2297310.html" target="_blank" rel="noopener noreferrer" class="fashion-btn-pill" style="display:inline-flex; align-items:center; gap:0.5rem; background:var(--color-brand-primary, #54111E); color:#FFFFFF !important; text-decoration:none; padding:0.55rem 1.25rem; font-size:0.875rem; font-weight:600; border-radius:99px; transition:all 0.2s ease;">
+              <span>Learn more → Giúp đỡ người khác là tốt nhưng bạn nhất định phải biết 4 quy tắc ẩn này</span>
+              <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
+            </a>
+          </div>
+
+          <!-- Quiz -->
+          <div class="article-quiz-container" id="articleQuizCard" style="margin:3rem 0; padding:1.75rem; border-radius:14px; background:#FFFFFF; border:1px solid var(--color-border-hairline); box-shadow:0 6px 24px rgba(0,0,0,0.06);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+              <span style="background:rgba(84,17,30,0.1); color:var(--color-brand-primary, #54111E); font-size:0.75rem; font-weight:800; padding:0.3rem 0.75rem; border-radius:4px; letter-spacing:0.06em; text-transform:uppercase;">
+                <i class="fas fa-poll-h"></i> THẢO LUẬN & TRẮC NGHIỆM TÌNH HUỐNG
+              </span>
+              <span style="font-size:0.8125rem; color:var(--color-text-muted);"><i class="far fa-chart-bar"></i> 1.240 độc giả đã tham gia</span>
+            </div>
+            <h3 style="font-family:var(--font-editorial); font-size:1.25rem; font-weight:800; color:var(--color-text-headline); line-height:1.5; margin:0 0 1.25rem 0;">
+              Nếu bắt gặp một người lạ nằm co ro trên ghế đá giữa đêm lạnh, bạn sẽ làm gì?
+            </h3>
+            <div class="quiz-options-list" style="display:flex; flex-direction:column; gap:0.65rem;">
+              <button class="quiz-option-btn" onclick="voteArticleQuiz('A')" id="quizOpt_A" style="width:100%; text-align:left; padding:0.85rem 1.15rem; border:1px solid var(--color-border-hairline); border-radius:10px; background:#FAFAFA; font-size:0.95rem; font-weight:600; color:var(--color-text-headline); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;">
+                <span class="quiz-opt-text"><i class="far fa-circle" style="margin-right:0.5rem; color:var(--color-brand-accent);"></i> A. Dừng lại hỏi thăm và kiểm tra tình trạng của họ</span>
+                <div class="quiz-bar" id="quizBar_A" style="position:absolute; inset:0; background:rgba(84,17,30,0.12); width:0%; transition:width 0.6s ease; z-index:0; display:none;"></div>
+                <span class="quiz-percent" id="quizPct_A" style="float:right; font-weight:700; color:var(--color-brand-primary); display:none; position:relative; z-index:1;">68%</span>
+              </button>
+              <button class="quiz-option-btn" onclick="voteArticleQuiz('B')" id="quizOpt_B" style="width:100%; text-align:left; padding:0.85rem 1.15rem; border:1px solid var(--color-border-hairline); border-radius:10px; background:#FAFAFA; font-size:0.95rem; font-weight:600; color:var(--color-text-headline); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;">
+                <span class="quiz-opt-text"><i class="far fa-circle" style="margin-right:0.5rem; color:var(--color-brand-accent);"></i> B. Để lại một chút tiền hoặc đồ dùng cần thiết</span>
+                <div class="quiz-bar" id="quizBar_B" style="position:absolute; inset:0; background:rgba(84,17,30,0.12); width:0%; transition:width 0.6s ease; z-index:0; display:none;"></div>
+                <span class="quiz-percent" id="quizPct_B" style="float:right; font-weight:700; color:var(--color-brand-primary); display:none; position:relative; z-index:1;">12%</span>
+              </button>
+              <button class="quiz-option-btn" onclick="voteArticleQuiz('C')" id="quizOpt_C" style="width:100%; text-align:left; padding:0.85rem 1.15rem; border:1px solid var(--color-border-hairline); border-radius:10px; background:#FAFAFA; font-size:0.95rem; font-weight:600; color:var(--color-text-headline); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;">
+                <span class="quiz-opt-text"><i class="far fa-circle" style="margin-right:0.5rem; color:var(--color-brand-accent);"></i> C. Tìm người hỗ trợ nếu họ có dấu hiệu không tỉnh táo</span>
+                <div class="quiz-bar" id="quizBar_C" style="position:absolute; inset:0; background:rgba(84,17,30,0.12); width:0%; transition:width 0.6s ease; z-index:0; display:none;"></div>
+                <span class="quiz-percent" id="quizPct_C" style="float:right; font-weight:700; color:var(--color-brand-primary); display:none; position:relative; z-index:1;">16%</span>
+              </button>
+              <button class="quiz-option-btn" onclick="voteArticleQuiz('D')" id="quizOpt_D" style="width:100%; text-align:left; padding:0.85rem 1.15rem; border:1px solid var(--color-border-hairline); border-radius:10px; background:#FAFAFA; font-size:0.95rem; font-weight:600; color:var(--color-text-headline); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden;">
+                <span class="quiz-opt-text"><i class="far fa-circle" style="margin-right:0.5rem; color:var(--color-brand-accent);"></i> D. Tiếp tục di chuyển vì không biết nên xử lý thế nào</span>
+                <div class="quiz-bar" id="quizBar_D" style="position:absolute; inset:0; background:rgba(84,17,30,0.12); width:0%; transition:width 0.6s ease; z-index:0; display:none;"></div>
+                <span class="quiz-percent" id="quizPct_D" style="float:right; font-weight:700; color:var(--color-brand-primary); display:none; position:relative; z-index:1;">4%</span>
+              </button>
+            </div>
+            <div id="quizFeedbackMessage" style="display:none; margin-top:1.25rem; padding:0.85rem 1rem; border-radius:8px; background:rgba(84,17,30,0.06); color:var(--color-brand-primary); font-size:0.9rem; font-weight:600;">
+              <i class="fas fa-heart"></i> Cảm ơn bạn đã chia sẻ quan điểm! Mỗi hành động xuất phát từ sự tử tế và lòng trắc ẩn đều góp phần làm cho cuộc sống này thêm ấm áp.
+            </div>
+          </div>
+        </div>
+
+        <!-- Comments Block -->
+        <div class="article-comments-block" style="margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--color-border-hairline);">
+          <h3 style="font-family:var(--font-editorial); font-size:1.45rem; color:var(--color-text-headline); margin-bottom:1.25rem;">
+            <i class="far fa-comments" style="color:var(--color-brand-primary);"></i> Bình luận & Thảo luận (<span id="commentCount">0</span>)
+          </h3>
+          <div class="comment-form-wrap" style="display:flex; gap:0.75rem; margin-bottom:1.5rem;">
+            <input type="text" class="comment-input-field" id="newCommentInput" placeholder="Chia sẻ góc nhìn nhân văn của bạn về bài viết này..." onkeypress="if(event.key === 'Enter') submitComment('trending-practice')" style="flex-grow:1; padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:var(--radius-full); font-size:0.95rem; outline:none;">
+            <button class="comment-submit-btn fashion-btn-pill" onclick="submitComment('trending-practice')" style="padding:0.75rem 1.5rem; background:var(--color-brand-primary); color:#FFF; font-weight:700; border:none; cursor:pointer;">Gửi</button>
+          </div>
+          <div class="comments-list-container" id="commentsListContainer"></div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Related Articles Section -->
+    <section class="article-related-section" id="articleRelatedSection" style="margin-top:4rem; padding-top:2.5rem; border-top:1px solid var(--color-border-hairline);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h3 style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary); margin:0;">
+          <i class="fas fa-newspaper" style="margin-right:0.5rem;"></i>
+          <span id="relatedSectionHeading">Tin cùng chuyên mục</span>
+        </h3>
+        <a id="relatedCategoryLink" href="../../trending.html" style="font-size:0.875rem; font-weight:700; color:var(--color-brand-accent); text-decoration:none;">
+          <span id="relatedViewAllText">Xem tất cả</span> &rarr;
+        </a>
+      </div>
+      <div id="relatedArticlesGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem;"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="fashion-footer">
+    <div class="container">
+      <div class="fashion-footer-container">
+        <div class="fashion-footer-brand">
+          <a href="../../index.html" class="fashion-footer-logo-link" aria-label="HEARTICLES. - Trang chủ">
+            <img src="../../assets/images/logo/brand_logo_updated.png" alt="HEARTICLES." class="fashion-footer-logo-img" onerror="handleImageError(this)">
+          </a>
+          <p class="fashion-footer-desc" data-i18n="footer_desc">An independent news outlet based in Hanoi, Vietnam.</p>
+          <div class="fashion-footer-socials" style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.85rem; align-items:center;">
+            <a href="https://www.facebook.com/people/Hearticles/61595901793120/" target="_blank" rel="noopener noreferrer" class="social-pill-btn fb" title="Facebook - HEARTICLES">
+              <i class="fab fa-facebook"></i> <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/hearticles.news/" target="_blank" rel="noopener noreferrer" class="social-pill-btn ig" title="Instagram - @hearticles.news">
+              <i class="fab fa-instagram"></i> <span>Instagram</span>
+            </a>
+            <a href="https://x.com/hearticles_news" target="_blank" rel="noopener noreferrer" class="social-pill-btn tw" title="X (Twitter) - @hearticles_news">
+              <i class="fab fa-x-twitter"></i> <span>X (Twitter)</span>
+            </a>
+          </div>
+          <p style="font-size:0.875rem; color:var(--color-brand-primary); font-weight:700; margin-top:0.75rem;">
+            <a href="mailto:class6group1term127@gmail.com" style="color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem;">
+              <i class="fas fa-envelope"></i> Email: <strong>class6group1term127@gmail.com</strong>
+            </a>
+          </p>
+        </div>
+        <div class="fashion-footer-slogan-wrap">
+          <svg class="fashion-slogan-heart" viewBox="0 0 80 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 22 C35 12, 22 8, 14 16 C4 26, 6 42, 40 64 C74 42, 76 26, 66 16 C58 8, 45 12, 40 22 Z" stroke="#54111E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(84, 17, 30, 0.04)"/>
+            <path d="M26 40 L33 40 L36 32 L40 48 L44 34 L47 40 L54 40" stroke="#7D1728" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="fashion-slogan-text">Stories that speak to the heart.</span>
+        </div>
+      </div>
+      <div class="fashion-footer-bottom">
+        <span data-i18n="footer_copy">&copy; 2026 HEARTICLES. All rights reserved. • An independent news outlet based in Hanoi, Vietnam.</span>
+        <span data-i18n="footer_model">Mô hình tòa soạn Báo Nhân Dân điện tử (nhandan.vn) kết hợp tiêu chuẩn Nielsen Norman UX.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- OFFCANVAS DRAWER MENU -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+  <aside class="offcanvas-drawer" id="offcanvasDrawer" aria-label="Navigation Menu">
+    <div class="drawer-header">
+      <div class="brand-title" style="color:#FFF; font-family:var(--font-editorial); font-size:1.6rem; font-weight:900; letter-spacing:-0.03em;">
+        HEARTICLES<span style="color:var(--color-brand-accent);">.</span>
+      </div>
+      <button onclick="closeDrawer()" style="color:#FFF; font-size:1.5rem;" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Drawer Language Selector Row -->
+    <div class="drawer-lang-row" style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; margin-bottom:1rem; background:rgba(255,255,255,0.06); border-radius:8px;">
+      <span style="font-size:0.875rem; color:#E2D8D4; font-weight:600;"><i class="fas fa-globe" style="margin-right:0.4rem; color:var(--color-brand-accent);"></i> Language:</span>
+      <div class="lang-switch-pill" role="group" aria-label="Language Selector">
+        <button class="lang-pill-btn" data-lang="vi" onclick="setLanguage('vi')">VI</button>
+        <span class="lang-pill-divider">/</span>
+        <button class="lang-pill-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+      </div>
+    </div>
+
+    <nav class="drawer-links-list">
+      <a href="../../index.html" class="drawer-link" data-i18n="nav_home"><i class="fas fa-home"></i> Home</a>
+      <a href="../../trending.html" class="drawer-link active" data-i18n="nav_trending"><i class="fas fa-fire"></i> Trending</a>
+      <a href="../../society.html" class="drawer-link" data-i18n="nav_society"><i class="fas fa-globe-asia"></i> Society</a>
+      <a href="../../human-stories.html" class="drawer-link" data-i18n="nav_human_stories"><i class="fas fa-heart"></i> Human Stories</a>
+      <a href="../../mind-soul.html" class="drawer-link" data-i18n="nav_mind_soul"><i class="fas fa-spa"></i> Mind &amp; Soul</a>
+      <a href="../../in-depth.html" class="drawer-link" data-i18n="nav_indepth"><i class="fas fa-feather-alt"></i> In-depth</a>
+      <a href="javascript:void(0)" class="drawer-link" onclick="closeDrawer(); openSignInModal();" data-i18n="btn_signin"><i class="far fa-user-circle"></i> Đăng nhập / Sign In</a>
+      <a href="../../about.html" class="drawer-link" data-i18n="nav_about"><i class="fas fa-info-circle"></i> About us</a>
+    </nav>
+    <div style="margin-top:auto; padding-top:1.5rem; border-top:1px solid #332B25;">
+      <p style="font-size:0.8125rem; color:#E2D8D4; font-weight:600;">Faculty of English Language and Culture • ULIS - VNU • Lớp 6 - Nhóm 1 - Khóa 127:</p>
+      <a href="mailto:class6group1term127@gmail.com" style="font-size:0.925rem; color:#FFFFFF; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-top:0.35rem;">
+        <i class="fas fa-envelope" style="color:var(--color-brand-accent);"></i> class6group1term127@gmail.com
+      </a>
+    </div>
+  </aside>
+
+  <!-- SIGN IN MODAL -->
+  <div class="signin-modal-backdrop" id="signInModal" onclick="if(event.target === this) closeSignInModal()">
+    <div class="signin-modal-card">
+      <button onclick="closeSignInModal()" style="position:absolute; top:1.25rem; right:1.25rem; font-size:1.25rem; color:var(--color-text-muted); cursor:pointer; background:none; border:none;" aria-label="Đóng"><i class="fas fa-times"></i></button>
+      <div style="text-align:center; margin-bottom:1.5rem;">
+        <div style="width:58px; height:58px; border-radius:50%; background:rgba(84,17,30,0.08); color:var(--color-brand-primary); font-size:1.85rem; display:inline-flex; align-items:center; justify-content:center; margin-bottom:0.75rem;">
+          <i class="far fa-user-circle"></i>
+        </div>
+        <h3 style="font-family:var(--font-editorial); font-size:1.45rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="signin_modal_title">Đăng Nhập Độc Giả</h3>
+        <p style="font-size:0.85rem; color:var(--color-text-muted); margin-top:0.35rem;" data-i18n="signin_modal_desc">Access your reading history, saved bookmarks, and personalized notifications.</p>
+      </div>
+      <form onsubmit="handleSignInSubmit(event)" style="display:flex; flex-direction:column; gap:0.9rem;">
+        <div>
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--color-text-body); margin-bottom:0.3rem;" data-i18n="signin_email_label">Email hoặc Tên đăng nhập</label>
+          <input type="text" id="signinEmailInput" required value="reader.ulis@vnu.edu.vn" placeholder="name@domain.com" style="width:100%; padding:0.65rem 0.9rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--color-text-body); margin-bottom:0.3rem;" data-i18n="signin_password_label">Mật khẩu</label>
+          <input type="password" required value="••••••••" placeholder="Nhập mật khẩu..." style="width:100%; padding:0.65rem 0.9rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+        </div>
+        <button type="submit" class="fashion-btn-pill" style="padding:0.75rem; margin-top:0.5rem; width:100%; font-size:0.95rem; font-weight:700;" data-i18n="btn_signin">
+          Đăng Nhập
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SEARCH MODAL -->
+  <div class="search-modal" id="searchModal" onclick="if(event.target === this) closeSearchModal()">
+    <div class="search-modal-box">
+      <div class="search-input-wrap">
+        <i class="fas fa-search" style="color:var(--color-brand-primary); font-size:1.25rem;"></i>
+        <input type="text" class="search-input-field" id="searchInput" placeholder="Tìm kiếm bài viết, tác giả, chuyên mục..." data-i18n-placeholder="search_placeholder" oninput="handleSearchInput(this.value)">
+        <button onclick="closeSearchModal()" style="font-size:1.25rem; color:var(--color-text-muted);"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="search-results-list" id="searchResults">
+        <p style="color:var(--color-text-body); font-size:0.95rem; font-weight:500;" data-i18n="search_hint">Search across 100 original verified articles...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBSCRIBE MODAL -->
+  <div class="onboard-modal-backdrop" id="subscribeModal" onclick="if(event.target === this) closeSubscribeModal()">
+    <div class="onboard-card" style="text-align:center;">
+      <button onclick="closeSubscribeModal()" style="position:absolute; top:1.25rem; right:1.25rem; font-size:1.25rem; color:var(--color-text-muted); cursor:pointer; background:none; border:none;" aria-label="Đóng"><i class="fas fa-times"></i></button>
+      <div style="font-size:2.5rem; color:var(--color-brand-primary); margin-bottom:0.5rem;"><i class="fas fa-envelope-open-text"></i></div>
+      <h3 style="font-family:var(--font-editorial); font-size:1.5rem; font-weight:800; color:var(--color-brand-primary);" data-i18n="subscribe_modal_title">Subscribe to HEARTICLES.</h3>
+      <p style="font-size:0.875rem; color:var(--color-text-body); margin:0.75rem 0 1.25rem 0;" data-i18n="subscribe_modal_desc">Receive curated weekly human-interest journalism directly in your inbox every Sunday morning.</p>
+      <form onsubmit="handleSubscribeSubmit(event)" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <input type="email" id="subscribeEmailInput" required placeholder="name@example.com" style="padding:0.75rem 1rem; border:1px solid var(--color-border-hairline); border-radius:8px; font-size:0.9rem; outline:none; box-sizing:border-box;">
+        <button type="submit" id="subscribeSubmitBtn" class="fashion-btn-pill" style="padding:0.75rem; cursor:pointer; font-weight:700;" data-i18n="btn_subscribe">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script src="../../js/data.js"></script>
+  <script src="../../js/translations.js"></script>
+  <script src="../../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderDedicatedArticlePage === 'function') {
+        renderDedicatedArticlePage('trending-practice');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -43,13 +43,13 @@ const I18N_TRANSLATIONS = {
     
     // 3. Top Focal Cluster (Home)
     focal_badge: '<i class="fas fa-fire"></i> TIÊU ĐIỂM THỊNH HÀNH • BÀI NÓNG SỐ 1',
-    focal_lead_title: "[Made-up article] Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
-    focal_lead_sapo: "Đại biểu Quốc hội đề xuất các giải pháp đột phá nhằm phát huy thế mạnh vùng, tăng cường kết nối hạ tầng giao thông và thúc đẩy kinh tế - xã hội các tỉnh miền núi, biên giới phía Bắc.",
-    focal_lead_author: '<i class="far fa-user"></i> Ngọc Mãi & Ban Biên tập Hearticles',
-    focal_lead_meta: '<i class="far fa-clock"></i> 5 phút đọc • Threads & Hearticles',
-    focal_related_1: "Chiến dịch 500 ngày đêm ADN: Trả lại danh tính cho gần 800 hài cốt liệt sĩ",
+    focal_lead_title: "Bài tập thực hành quay chụp: Phân tích 5 lỗi nhiếp ảnh cơ bản & Video thực hành",
+    focal_lead_sapo: "Tổng hợp bài tập thực hành quay chụp của Class 6 Group 1: So sánh trực quan Before / After các lỗi chụp ảnh thường gặp và khung video thực hành tác nghiệp.",
+    focal_lead_author: '<i class="far fa-user"></i> Class 6 Group 1',
+    focal_lead_meta: '<i class="far fa-clock"></i> 5 phút đọc • Class 6 Group 1',
+    focal_related_1: "[Made-up article] Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
     focal_related_2: "Trí tuệ nhân tạo trong báo chí hiện đại: Tăng tốc quy trình nhưng giữ trọn đạo đức nhân văn",
-    focal_related_3: "Ánh sáng điện lưới về bản xa: Hơn 1.500 đồng bào dân tộc thiểu số bước vào kỷ nguyên mới",
+    focal_related_3: "Chiến dịch 500 ngày đêm ADN: Trả lại danh tính cho gần 800 hài cốt liệt sĩ",
     related_coverage_title: "BÀI VIẾT LIÊN QUAN • RELATED COVERAGE",
     
     // Sub-Lead
@@ -196,8 +196,8 @@ const I18N_TRANSLATIONS = {
     dock_menu: "Menu",
 
     cat_feat_trending_kicker: "TIÊU ĐIỂM BÁO NÓNG · TOP 1 THỊNH HÀNH",
-    cat_feat_trending_title: "[Made-up article] Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
-    cat_feat_trending_excerpt: "Hình ảnh đôi quang gánh trĩu nặng nhịp sống mưu sinh, vẻ đẹp cần lao mộc mạc và ký ức rêu phong trên từng ngõ nhỏ di sản được khắc họa xúc động qua lăng kính phóng sự VnExpress.",
+    cat_feat_trending_title: "Bài tập thực hành quay chụp: Phân tích 5 lỗi nhiếp ảnh cơ bản & Video thực hành",
+    cat_feat_trending_excerpt: "Tổng hợp bài tập thực hành quay chụp của Class 6 Group 1: So sánh trực quan Before / After các lỗi chụp ảnh thường gặp và khung video thực hành tác nghiệp.",
     cat_feat_society_kicker: "TIÊU ĐIỂM DÂN SINH · THE GUARDIAN",
     cat_feat_society_title: "Cost of Living Crisis: Sáng kiến cộng đồng bảo toàn phẩm giá người nhận",
     cat_feat_society_excerpt: "Mô hình siêu thị cộng đồng The Vale Pantry tại Dorset (Anh) không chỉ cung cấp thực phẩm giá rẻ mà trao quyền tự chủ và phẩm giá cho các gia đình khó khăn giữa khủng hoảng chi phí sinh hoạt.",
@@ -337,13 +337,13 @@ const I18N_TRANSLATIONS = {
     
     // 3. Top Focal Cluster (Home)
     focal_badge: '<i class="fas fa-fire"></i> TRENDING SPOTLIGHT • TOP 1 VIRAL STORY',
-    focal_lead_title: "[Made-up article] Cô gái say rượu ngã gục trên ghế, bất ngờ nhận được sự giúp đỡ “đặc biệt” từ người qua đường",
-    focal_lead_sapo: "National Assembly deputies proposed breakthrough measures to capitalise on regional strengths, strengthen transport connectivity, and accelerate socio-economic development in midland, mountainous, and northern border areas.",
-    focal_lead_author: '<i class="far fa-user"></i> Ngọc Mãi & Ban Biên tập Hearticles',
-    focal_lead_meta: '<i class="far fa-clock"></i> 5 min read • Nhan Dan Daily',
-    focal_related_1: "500-day-and-night campaign: DNA testing results returned for nearly 800 fallen soldiers",
+    focal_lead_title: "Photo & Video Practical Workshop: Analyzing 5 Common Photography Errors & Practice Video",
+    focal_lead_sapo: "Class 6 Group 1 practical workshop: Side-by-side visual comparisons of 5 common photography errors and practice video workspace.",
+    focal_lead_author: '<i class="far fa-user"></i> Class 6 Group 1',
+    focal_lead_meta: '<i class="far fa-clock"></i> 5 min read • Class 6 Group 1',
+    focal_related_1: "[Made-up article] Drunk Girl Collapses on Park Bench, Unexpectedly Receives 'Special' Kindness from Strangers",
     focal_related_2: "AI in modern journalism: Enhancing reporting speed while preserving human empathy and ethics",
-    focal_related_3: "Grid power brings light to remote villages: Over 1,500 ethnic minorities enter new era",
+    focal_related_3: "500-day-and-night campaign: DNA testing results returned for nearly 800 fallen soldiers",
     related_coverage_title: "RELATED COVERAGE",
     
     // Sub-Lead
@@ -472,8 +472,8 @@ const I18N_TRANSLATIONS = {
     sidebar_topics: '<i class="fas fa-tags"></i> FEATURED TOPICS',
     btn_read_full: "Read Full Story &rarr;",
     cat_feat_trending_kicker: "HOT PAPER · TOP 1 TRENDING SPOTLIGHT",
-    cat_feat_trending_title: "[Made-up article] Drunk Girl Collapses on Park Bench, Unexpectedly Receives 'Special' Kindness from Strangers",
-    cat_feat_trending_excerpt: "'She looked so pitiful,' a passerby recalled discovering Ngoc Mai curled up on a park bench and deciding to leave small change in her fallen cap.",
+    cat_feat_trending_title: "Photo & Video Practical Workshop: Analyzing 5 Common Photography Errors & Practice Video",
+    cat_feat_trending_excerpt: "Class 6 Group 1 practical workshop: Side-by-side visual comparisons of 5 common photography errors and practice video workspace.",
     cat_feat_society_kicker: "COMMUNITY SPOTLIGHT · THE GUARDIAN",
     cat_feat_society_title: "Cost of Living Crisis: Community Pantries Preserving Dignity",
     cat_feat_society_excerpt: "The Vale Pantry in Dorset provides affordable groceries while empowering families to choose with autonomy and dignity amid Britain\'s cost-of-living hardships.",

@@ -583,5 +583,13 @@ const I18N_TRANSLATIONS = {
     tag_french_villas: "French Colonial Villas",
     tag_mekong_climate: "Mekong Climate Action",
     tag_do_paper: "Traditional Do Paper",
-}
+    cat_heading_trending: "TRENDING.",
+    cat_heading_society: "SOCIETY.",
+    cat_heading_human: "HUMAN STORIES.",
+    cat_heading_mind: "MIND & SOUL.",
+    cat_heading_indepth: "IN-DEPTH.",
+    breadcrumb_home: "Home",
+    dock_search: "Search",
+    dock_menu: "Menu"
+  }
 };

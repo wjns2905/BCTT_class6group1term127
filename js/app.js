@@ -27,7 +27,7 @@ function initApp() {
   renderFashionJournal('all');
   renderCategoryPageArticles();
   renderAboutUsSection();
-  syncHomepageCardsWithData(lang);
+  syncHomepageCardsWithData(currentLanguage);
   setupPoll();
   setupHeartTapWidget();
   updateUserAvatarState();
@@ -189,8 +189,16 @@ function applyLanguage(lang) {
   const host = document.getElementById('standaloneArticleHost');
   if (host && typeof renderDedicatedArticlePage === 'function') {
     const urlParams = new URLSearchParams(window.location.search);
-    const isSub = window.location.pathname.includes('/hearticles/');
-    const articleId = isSub ? 'trending-1' : (urlParams.get('id') || 'trending-1');
+    let articleId = urlParams.get('id');
+    if (!articleId) {
+      if (window.location.pathname.includes('/practice/')) {
+        articleId = 'trending-practice';
+      } else if (window.location.pathname.includes('/madeuparticle/')) {
+        articleId = 'trending-1';
+      } else {
+        articleId = 'trending-practice';
+      }
+    }
     renderDedicatedArticlePage(articleId);
   }
 
@@ -815,17 +823,19 @@ function renderFashionJournal(categoryKey) {
     const title = (isEn && item.title_en) ? item.title_en : item.title;
     const excerpt = (isEn && item.subtitle_en) ? item.subtitle_en : item.subtitle;
     const readTime = isEn ? (item.readTime || '').replace('phút đọc', 'min read') : item.readTime;
+    const author = (isEn && item.author_en) ? item.author_en : (isEn ? (item.author || '').replace(/Ban Biên tập/gi, 'Editorial Team') : item.author);
+    const catName = isEn ? (item.categoryName_en || item.category || 'Trending').toUpperCase() : (item.categoryName || 'Trending').toUpperCase();
     return `
     <article class="fashion-article-card" onclick="openArticleModal('${item.id}')">
       <div class="fashion-card-media">
         <img src="${item.image}" alt="${title}" class="fashion-card-img" loading="lazy" onerror="handleImageError(this)">
-        <span class="fashion-card-category-tag">${item.categoryName}</span>
+        <span class="fashion-card-category-tag">${catName}</span>
       </div>
       <div class="fashion-card-body">
         <h3 class="fashion-card-title">${title}</h3>
         <p class="fashion-card-excerpt">${excerpt}</p>
         <div class="fashion-card-footer">
-          <span class="fashion-card-byline"><i class="far fa-user"></i> ${item.author.split('•')[0].trim()}</span>
+          <span class="fashion-card-byline"><i class="far fa-user"></i> ${author.split('•')[0].trim()}</span>
           <div class="fashion-card-stats">
             <span><i class="far fa-clock"></i> ${readTime}</span>
             <span><i class="far fa-heart"></i> ${item.likes}</span>
@@ -864,17 +874,19 @@ function renderCategoryPageArticles() {
         const title = (isEn && item.title_en) ? item.title_en : item.title;
         const excerpt = (isEn && item.subtitle_en) ? item.subtitle_en : item.subtitle;
         const readTime = isEn ? (item.readTime || '').replace('phút đọc', 'min read') : item.readTime;
+        const author = (isEn && item.author_en) ? item.author_en : (isEn ? (item.author || '').replace(/Ban Biên tập/gi, 'Editorial Team') : item.author);
+        const catName = isEn ? (item.categoryName_en || item.category || 'Trending').toUpperCase() : (item.categoryName || 'Trending').toUpperCase();
         return `
         <article class="category-stream-row" onclick="openArticleModal('${item.id}')">
           <div class="category-stream-thumb-wrap">
             <img src="${item.image}" alt="${title}" class="category-stream-thumb" loading="lazy" onerror="handleImageError(this)">
           </div>
           <div class="category-stream-body">
-            <span style="font-size:0.725rem; font-weight:800; color:var(--color-brand-accent); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.3rem; display:block;">${item.categoryName}</span>
+            <span style="font-size:0.725rem; font-weight:800; color:var(--color-brand-accent); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.3rem; display:block;">${catName}</span>
             <h3 class="category-stream-title">${title}</h3>
             <p class="category-stream-excerpt">${excerpt}</p>
             <div class="category-stream-footer">
-              <span><i class="far fa-user"></i> ${item.author.split('•')[0].trim()}</span>
+              <span><i class="far fa-user"></i> ${author.split('•')[0].trim()}</span>
               <span><i class="far fa-clock"></i> ${readTime}</span>
               <span><i class="far fa-heart"></i> ${item.likes}</span>
             </div>
@@ -888,17 +900,19 @@ function renderCategoryPageArticles() {
       const title = (isEn && item.title_en) ? item.title_en : item.title;
       const excerpt = (isEn && item.subtitle_en) ? item.subtitle_en : item.subtitle;
       const readTime = isEn ? (item.readTime || '').replace('phút đọc', 'min read') : item.readTime;
+      const author = (isEn && item.author_en) ? item.author_en : (isEn ? (item.author || '').replace(/Ban Biên tập/gi, 'Editorial Team') : item.author);
+      const catName = isEn ? (item.categoryName_en || item.category || 'Trending').toUpperCase() : (item.categoryName || 'Trending').toUpperCase();
       return `
       <article class="fashion-article-card" onclick="openArticleModal('${item.id}')">
         <div class="fashion-card-media">
           <img src="${item.image}" alt="${title}" class="fashion-card-img" loading="lazy" onerror="handleImageError(this)">
-          <span class="fashion-card-category-tag">${item.categoryName}</span>
+          <span class="fashion-card-category-tag">${catName}</span>
         </div>
         <div class="fashion-card-body">
           <h3 class="fashion-card-title">${title}</h3>
           <p class="fashion-card-excerpt">${excerpt}</p>
           <div class="fashion-card-footer">
-            <span class="fashion-card-byline"><i class="far fa-user"></i> ${item.author.split('•')[0].trim()}</span>
+            <span class="fashion-card-byline"><i class="far fa-user"></i> ${author.split('•')[0].trim()}</span>
             <div class="fashion-card-stats">
               <span><i class="far fa-clock"></i> ${readTime}</span>
               <span><i class="far fa-heart"></i> ${item.likes}</span>
@@ -918,12 +932,13 @@ function renderCategoryPageArticles() {
 
     topReadContainer.innerHTML = topArticles.map((art, idx) => {
       const artTitle = (isEn && art.title_en) ? art.title_en : art.title;
+      const catName = isEn ? (art.categoryName_en || art.category || 'Trending').toUpperCase() : (art.categoryName || 'Trending').toUpperCase();
       const readLabel = isEn ? 'reads' : 'lượt đọc';
       return `
       <div class="top-read-item" onclick="openArticleModal('${art.id}')">
         <span class="top-read-num">${idx + 1}</span>
         <div>
-          <span style="font-size:0.6875rem; font-weight:800; color:var(--color-brand-accent); text-transform:uppercase; display:block; margin-bottom:0.15rem;">${art.categoryName}</span>
+          <span style="font-size:0.6875rem; font-weight:800; color:var(--color-brand-accent); text-transform:uppercase; display:block; margin-bottom:0.15rem;">${catName}</span>
           <h4 class="top-read-headline">${artTitle}</h4>
           <span style="font-size:0.75rem; color:var(--color-text-muted); font-weight:600;"><i class="far fa-eye"></i> ${art.views || '12.4K'} ${readLabel}</span>
         </div>
@@ -1260,11 +1275,14 @@ function formatArticleSource(article, isEn) {
   const cleanTitle = rawTitle.replace(/^["'“”‘’]|["'“”‘’]$/g, '').trim();
 
   // Clean author name
-  let author = (article.author || '').split('•')[0].trim();
+  let author = (isEn && article.author_en) ? article.author_en : (article.author || '').split('•')[0].trim();
   if (author.endsWith(' & NDO')) author = author.replace(' & NDO', '');
   if (!author) author = isEn ? 'Editorial Staff' : 'Ban biên tập';
+  if (isEn) author = author.replace(/Ban Biên tập/gi, 'Editorial Team');
 
-  const sourceName = article.sourceName || (isEn ? 'HEARTICLES. Editorial' : 'Tòa soạn HEARTICLES.');
+  const sourceName = (isEn && article.sourceName_en) 
+    ? article.sourceName_en 
+    : (article.sourceName || (isEn ? 'HEARTICLES. Editorial' : 'Tòa soạn HEARTICLES.'));
 
   // Date formatting
   let rawDate = (article.date || '').split(' - ')[0].trim();
@@ -2539,9 +2557,27 @@ function renderDedicatedArticlePage(articleId) {
   const isEn = (currentLanguage === 'en');
   const title = (isEn && article.title_en) ? article.title_en : article.title;
   const subtitle = (isEn && article.subtitle_en) ? article.subtitle_en : article.subtitle;
+  const author = (isEn && article.author_en) ? article.author_en : (isEn ? (article.author || '').replace(/Ban Biên tập/gi, 'Editorial Team') : article.author);
+  const caption = (isEn && article.imageCaption_en) ? article.imageCaption_en : (article.imageCaption || title);
   const readTime = isEn ? (article.readTime || '').replace('phút đọc', 'min read') : article.readTime;
   const breadcrumbHome = isEn ? 'Home' : 'Trang chủ';
-  const breadcrumbCategory = article.categoryName || 'Trending';
+  const categoryMapEn = {
+    'trending': 'Trending',
+    'society': 'Society',
+    'human-stories': 'Human Stories',
+    'mind-soul': 'Mind & Soul',
+    'in-depth': 'In-depth'
+  };
+  const categoryMapVi = {
+    'trending': 'Thịnh hành',
+    'society': 'Xã hội',
+    'human-stories': 'Câu chuyện nhân văn',
+    'mind-soul': 'Tâm hồn & Trí tuệ',
+    'in-depth': 'Chuyên sâu'
+  };
+  const breadcrumbCategory = isEn 
+    ? (categoryMapEn[article.category] || article.categoryName_en || article.categoryName || 'Trending') 
+    : (categoryMapVi[article.category] || article.categoryName || 'Thịnh hành');
   const categoryUrl = `${pfx}${article.category}.html`;
   const homeUrl = `${pfx}index.html`;
 
@@ -2611,9 +2647,9 @@ function renderDedicatedArticlePage(articleId) {
 
       <div class="article-author-strip" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:1.25rem; border-bottom:1px solid var(--color-border-hairline); margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
         <div class="article-author-info" style="display:flex; align-items:center; gap:0.75rem;">
-          <div class="author-avatar-small" style="width:46px; height:46px; border-radius:50%; background:var(--color-brand-primary); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.1rem;">${(article.author || 'H').charAt(0)}</div>
+          <div class="author-avatar-small" style="width:46px; height:46px; border-radius:50%; background:var(--color-brand-primary); color:#FFF; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.1rem;">${(author || 'H').charAt(0)}</div>
           <div>
-            <div class="author-name-text" style="font-weight:700; color:var(--color-text-headline); font-size:1rem;">${article.author}</div>
+            <div class="author-name-text" style="font-weight:700; color:var(--color-text-headline); font-size:1rem;">${author}</div>
             <div class="article-date-text" style="font-size:0.8rem; color:var(--color-text-muted); margin-top:2px;"><i class="far fa-clock"></i> ${article.date}</div>
           </div>
         </div>
@@ -2634,7 +2670,7 @@ function renderDedicatedArticlePage(articleId) {
       ${(article.id === 'trending-1') ? '' : `
       <div class="article-hero-media" style="border-radius:var(--radius-lg); overflow:hidden; margin:2rem 0; box-shadow:0 6px 24px rgba(0,0,0,0.06);">
         <img src="${heroImgSrc}" alt="${title}" style="width:100%; display:block; max-height:560px; object-fit:cover;" onerror="handleImageError(this)">
-        <div class="article-media-caption" style="font-size:0.85rem; color:var(--color-text-muted); padding:0.6rem 0.5rem; font-style:italic; line-height:1.5;">${article.imageCaption || title}</div>
+        <div class="article-media-caption" style="font-size:0.85rem; color:var(--color-text-muted); padding:0.6rem 0.5rem; font-style:italic; line-height:1.5;">${caption}</div>
       </div>
 
       ${renderModalVideoBlock(article, isEn, title)}
@@ -2701,6 +2737,7 @@ function renderRelatedArticles(currentArt, isEn) {
   grid.innerHTML = related.map(item => {
     const rTitle = (isEn && item.title_en) ? item.title_en : item.title;
     const rExcerpt = (isEn && item.subtitle_en) ? item.subtitle_en : item.subtitle;
+    const rCat = isEn ? (item.categoryName_en || item.category || 'Trending').toUpperCase() : (item.categoryName || 'Trending').toUpperCase();
     const rUrl = getArticleUrl(item.id);
     const rImg = (item.image && (item.image.startsWith('http') || item.image.startsWith('../../')))
       ? item.image
@@ -2712,7 +2749,7 @@ function renderRelatedArticles(currentArt, isEn) {
           <img src="${rImg}" alt="${rTitle}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="handleImageError(this)">
         </div>
         <div style="padding:1.15rem; display:flex; flex-direction:column; flex-grow:1;">
-          <span style="font-size:0.725rem; font-weight:800; color:var(--color-brand-accent); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.4rem;">${item.categoryName}</span>
+          <span style="font-size:0.725rem; font-weight:800; color:var(--color-brand-accent); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.4rem;">${rCat}</span>
           <h4 style="font-family:var(--font-editorial); font-size:1.05rem; font-weight:800; line-height:1.35; margin:0 0 0.5rem 0; color:var(--color-text-headline);">${rTitle}</h4>
           <p style="font-size:0.85rem; color:var(--color-text-muted); line-height:1.5; margin:0 0 1rem 0; flex-grow:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${rExcerpt}</p>
           <span style="font-size:0.75rem; color:var(--color-brand-primary); font-weight:700;">${isEn ? 'Read Story &rarr;' : 'Đọc bài viết &rarr;'}</span>

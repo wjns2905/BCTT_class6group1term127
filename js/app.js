@@ -1462,9 +1462,25 @@ function getArticleUrl(articleId) {
 window.getArticleUrl = getArticleUrl;
 
 function openArticleModal(articleId) {
+  const path = window.location.pathname.toLowerCase();
+
+  // Guard: If we are already on this article's dedicated page, DO NOT reload/redirect!
+  if (articleId === 'trending-practice' && (path.includes('photoandvideopractice') || path.includes('practice'))) {
+    return;
+  }
+  if (articleId === 'trending-1' && path.includes('madeuparticle')) {
+    return;
+  }
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('id') === articleId) {
+    return;
+  }
+
   // Direct navigation: each article has its own dedicated link/page!
   const targetUrl = getArticleUrl(articleId);
-  window.location.href = targetUrl;
+  if (targetUrl) {
+    window.location.href = targetUrl;
+  }
 }
 window.openArticleModal = openArticleModal;
 
@@ -1996,24 +2012,43 @@ function renderOnboardStep(step) {
 function setupStickyHeader() {
   const header = document.querySelector('.fashion-header');
   if (!header) return;
+  let isTicking = false;
   const onScroll = () => {
-    if (window.scrollY > 15) {
-      header.classList.add('is-scrolled');
-    } else {
-      header.classList.remove('is-scrolled');
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 20) {
+          header.classList.add('is-scrolled');
+        } else {
+          header.classList.remove('is-scrolled');
+        }
+        isTicking = false;
+      });
+      isTicking = true;
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }
 
+let isReadingProgressInit = false;
 function setupReadingProgressBar() {
+  if (isReadingProgressInit) return;
+  const bar = document.getElementById('readingProgressBar');
+  if (!bar) return;
+  isReadingProgressInit = true;
+
+  let isTicking = false;
   window.addEventListener('scroll', () => {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    if (total > 0) {
-      const progress = (window.scrollY / total) * 100;
-      const bar = document.getElementById('readingProgressBar');
-      if (bar) bar.style.width = `${progress}%`;
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        if (total > 0) {
+          const progress = Math.min(100, Math.max(0, (window.scrollY / total) * 100));
+          bar.style.width = `${progress}%`;
+        }
+        isTicking = false;
+      });
+      isTicking = true;
     }
   }, { passive: true });
 }
@@ -2553,15 +2588,20 @@ window.voteArticleQuiz = voteArticleQuiz;
 function checkInitialArticleRoute() {
   const path = window.location.pathname.toLowerCase();
   const hash = window.location.hash.toLowerCase();
-  if (path.includes('madeuparticle') || hash.includes('madeuparticle')) {
-    setTimeout(() => {
-      openArticleModal('trending-1');
-    }, 150);
+
+  // If already on ANY dedicated article page in /hearticles/, NEVER auto-redirect!
+  if (path.includes('/hearticles/')) {
+    return;
   }
-  if (path.includes('photoandvideopractice') || hash.includes('photoandvideopractice') || path.includes('practice') || hash.includes('practice')) {
-    setTimeout(() => {
-      openArticleModal('trending-practice');
-    }, 150);
+
+  // Only handle hash-based deep links on homepage or main category pages
+  if (hash.includes('madeuparticle')) {
+    openArticleModal('trending-1');
+    return;
+  }
+  if (hash.includes('photoandvideopractice') || hash.includes('practice')) {
+    openArticleModal('trending-practice');
+    return;
   }
 }
 
@@ -2575,6 +2615,12 @@ function renderDedicatedArticlePage(articleId) {
 
   const article = ARTICLES_DATA.find(a => a.id === articleId) || ARTICLES_DATA[0];
   if (!article) return;
+
+  const renderKey = `${article.id}_${currentLanguage}_${currentFontSize}`;
+  if (host.dataset.renderedKey === renderKey) {
+    return;
+  }
+  host.dataset.renderedKey = renderKey;
 
   const isSubfolder = window.location.pathname.includes('/hearticles/');
   const pfx = isSubfolder ? '../../' : '';

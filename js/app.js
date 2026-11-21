@@ -1362,6 +1362,26 @@ function renderModalVideoBlock(article, isEn, title) {
     `;
   }
 
+  // Case 0.5: Google Drive video preview embed
+  if (article.video && article.video.includes('drive.google.com')) {
+    const embedUrl = article.video.includes('/preview') 
+      ? article.video 
+      : article.video.replace(/\/view.*$/, '/preview');
+    return `
+    <div class="video-responsive-embed" style="margin-bottom: 2rem; border-radius: 12px; overflow:hidden; background:#000; box-shadow: 0 4px 18px rgba(0,0,0,0.14);">
+      <div style="position:relative; padding-top:56.25%; width:100%; height:0; overflow:hidden; background:#000;">
+        <iframe src="${embedUrl}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allow="autoplay; fullscreen" allowfullscreen title="${title}"></iframe>
+      </div>
+      <div style="background:#161616; color:#E0E0E0; padding:0.65rem 1rem; font-size:0.8125rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; border-top:1px solid #282828;">
+        <span><i class="fas fa-video" style="color:var(--color-brand-accent, #80182A);"></i> ${isEn ? 'Practice Video: Field photography and video techniques by Group 1.' : 'Video thực hành tác nghiệp: Phóng sự và kỹ thuật quay chụp thực địa của Group 1.'}</span>
+        <a href="${article.video.replace('/preview', '/view?usp=sharing')}" target="_blank" rel="noopener noreferrer" style="color:#FFF; text-decoration:none; background:var(--color-brand-primary, #54111E); padding:3px 10px; border-radius:4px; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:0.35rem;">
+          <i class="fab fa-google-drive"></i> <span>Google Drive HD</span>
+        </a>
+      </div>
+    </div>
+    `;
+  }
+
   // Case 1: Direct native/HLS stream URL
   if (article.streamUrl) {
     setTimeout(() => {
@@ -2673,7 +2693,7 @@ function renderDedicatedArticlePage(articleId) {
         <div class="article-media-caption" style="font-size:0.85rem; color:var(--color-text-muted); padding:0.6rem 0.5rem; font-style:italic; line-height:1.5;">${caption}</div>
       </div>
 
-      ${renderModalVideoBlock(article, isEn, title)}
+      ${(article.id === 'trending-practice') ? '' : renderModalVideoBlock(article, isEn, title)}
       `}
 
       <div class="article-body-text" id="articleBodyContent" style="font-family:var(--font-body); font-size:1.15rem; line-height:1.85; color:var(--color-text-body);">

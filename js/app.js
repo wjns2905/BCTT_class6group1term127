@@ -1305,10 +1305,10 @@ function formatArticleSource(article, isEn) {
   }
 
   const url = article.sourceUrl || '#';
-  const isInternalLink = url.startsWith('/');
+  const isInternalLink = url.startsWith('/') || url.includes('wixstudio.com') || url.includes('hearticles');
   const linkLabel = isEn ? (isInternalLink ? 'Article Link:' : 'Original Source:') : (isInternalLink ? 'Đường dẫn bài báo:' : 'Nguồn trích dẫn gốc:');
   const linkIcon = isInternalLink ? 'fa-link' : 'fa-external-link-alt';
-  const linkTarget = isInternalLink ? '' : 'target="_blank" rel="noopener noreferrer"';
+  const linkTarget = url.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : '';
 
   if (isEn) {
     return `

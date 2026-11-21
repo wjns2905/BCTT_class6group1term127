@@ -18,7 +18,7 @@ const ARTICLES_DATA = [
     "readTime": "5 min read",
     "sourceName": "Class 6 Group 1 & Hearticles",
     "sourceName_en": "Class 6 Group 1 & Hearticles",
-    "sourceUrl": "/hearticles/photoandvideopractice",
+    "sourceUrl": "https://class6group1term12.wixstudio.com/hearticles/photoandvideopractice",
     "image": "assets/images/trending/practice/fixed_2_sharp_focus.jpg",
     "imageCaption": "Thực hành nhiếp ảnh thực địa: Lấy nét chuẩn xác và bố cục hài hòa trong khuôn viên trường. (Ảnh: Group 1)",
     "imageCaption_en": "Field photography practice: Accurate focus and harmonious composition in university courtyard. (Photo: Group 1)",

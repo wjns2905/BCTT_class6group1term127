@@ -191,7 +191,7 @@ function applyLanguage(lang) {
     const urlParams = new URLSearchParams(window.location.search);
     let articleId = urlParams.get('id');
     if (!articleId) {
-      if (window.location.pathname.includes('/practice/')) {
+      if (window.location.pathname.includes('/photoandvideopractice/') || window.location.pathname.includes('/practice/')) {
         articleId = 'trending-practice';
       } else if (window.location.pathname.includes('/madeuparticle/')) {
         articleId = 'trending-1';
@@ -1454,7 +1454,7 @@ function getArticleUrl(articleId) {
     return isSub ? '../madeuparticle/index.html' : 'hearticles/madeuparticle/index.html';
   }
   if (articleId === 'trending-practice') {
-    return isSub ? '../practice/index.html' : 'hearticles/practice/index.html';
+    return isSub ? '../photoandvideopractice/index.html' : 'hearticles/photoandvideopractice/index.html';
   }
   const prefix = isSub ? '../../' : '';
   return `${prefix}article.html?id=${encodeURIComponent(articleId)}`;
@@ -2558,6 +2558,11 @@ function checkInitialArticleRoute() {
       openArticleModal('trending-1');
     }, 150);
   }
+  if (path.includes('photoandvideopractice') || hash.includes('photoandvideopractice') || path.includes('practice') || hash.includes('practice')) {
+    setTimeout(() => {
+      openArticleModal('trending-practice');
+    }, 150);
+  }
 }
 
 
@@ -2659,7 +2664,7 @@ function renderDedicatedArticlePage(articleId) {
         <span>/</span>
         <a href="${categoryUrl}" style="color:var(--color-brand-primary); font-weight:600; text-decoration:none;">${breadcrumbCategory}</a>
         <span>/</span>
-        <span style="color:var(--color-brand-accent); font-weight:700;">${article.id}</span>
+        <span style="color:var(--color-brand-accent); font-weight:700;">${article.url || article.canonicalUrl || article.id}</span>
       </div>
 
       <h1 class="article-headline" style="font-family:var(--font-editorial); font-size:clamp(1.85rem, 4vw, 2.75rem); font-weight:900; line-height:1.25; margin-bottom:1rem; color:var(--color-text-headline); letter-spacing:-0.02em;">${title}</h1>

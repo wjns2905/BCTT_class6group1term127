@@ -18,7 +18,7 @@ const ARTICLES_DATA = [
     "readTime": "5 min read",
     "sourceName": "Class 6 Group 1 & Hearticles",
     "sourceName_en": "Class 6 Group 1 & Hearticles",
-    "sourceUrl": "hearticles/practice",
+    "sourceUrl": "/hearticles/photoandvideopractice",
     "image": "assets/images/trending/practice/fixed_2_sharp_focus.jpg",
     "imageCaption": "Thực hành nhiếp ảnh thực địa: Lấy nét chuẩn xác và bố cục hài hòa trong khuôn viên trường. (Ảnh: Group 1)",
     "imageCaption_en": "Field photography practice: Accurate focus and harmonious composition in university courtyard. (Photo: Group 1)",
@@ -64,7 +64,10 @@ const ARTICLES_DATA = [
       "Below is the practical video showcase produced by Class 6 Group 1. The documentary footage recording field reporting workflows, subject interviews, and technical camera operations has been integrated below for instructors and readers to view directly:",
       "<div class=\"practice-video-player-block\" style=\"margin:2.5rem 0; border-radius:14px; overflow:hidden; background:#0B0B0D; border:1px solid #2B2A2D; box-shadow:0 10px 32px rgba(0,0,0,0.3);\"><div style=\"position:relative; padding-top:56.25%; width:100%; height:0; overflow:hidden; background:#000;\"><iframe src=\"https://drive.google.com/file/d/1fXB1VEwtQkfKTZaX0ADWB1vEqlAcJqtV/preview\" style=\"position:absolute; top:0; left:0; width:100%; height:100%; border:none;\" allow=\"autoplay; fullscreen\" allowfullscreen title=\"Practical Video Showcase - Class 6 Group 1\"></iframe></div><div style=\"background:#161518; color:#E0D9D5; padding:0.85rem 1.25rem; font-size:0.85rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; border-top:1px solid #2B2A2D;\"><div style=\"display:flex; align-items:center; gap:0.6rem;\"><span style=\"background:var(--color-brand-primary, #54111E); color:#FFF; font-size:0.75rem; font-weight:800; padding:3px 8px; border-radius:4px; letter-spacing:0.04em;\">FULL HD</span><span><strong>Production:</strong> Field Photography &amp; Video Techniques Showcase &bull; Class 6 Group 1</span></div><div style=\"display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;\"><a href=\"https://drive.google.com/file/d/1fXB1VEwtQkfKTZaX0ADWB1vEqlAcJqtV/view?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:#FFF; background:var(--color-brand-primary, #54111E); padding:6px 14px; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; transition:background 0.2s;\"><i class=\"fab fa-google-drive\"></i> <span>Open on Google Drive</span></a><a href=\"https://drive.google.com/drive/folders/15mcrGgFvw_XzrrJKMrJ0EqxGCQnJkP2a\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:#E0D9D5; background:rgba(255,255,255,0.08); padding:6px 14px; border-radius:6px; font-size:0.8rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; transition:background 0.2s;\"><i class=\"fas fa-folder-open\"></i> <span>Drive Folder</span></a></div></div></div>",
       "This practical workshop empowers students to not only master technical camera parameters but also build rigorous foundations for high-standard journalistic storytelling."
-    ]
+    ],
+    "canonicalUrl": "/hearticles/photoandvideopractice",
+    "url": "/hearticles/photoandvideopractice",
+    "slug": "hearticles/photoandvideopractice"
   },
   {
     "id": "trending-1",
